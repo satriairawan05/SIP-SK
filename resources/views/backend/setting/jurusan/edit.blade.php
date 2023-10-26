@@ -67,7 +67,7 @@
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
                             <a href="{{ route('jurusan.index') }}" class="btn btn-sm btn-info mx-2"><i
-                                    class="fa fa-reply-all"></i></a>
+                                    class="fas fa-reply-all"></i></a>
                             <button type="submit" class="btn btn-sm btn-success">Submit</button>
                         </div>
                     </div>

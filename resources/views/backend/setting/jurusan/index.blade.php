@@ -52,11 +52,12 @@
                                 <td>{{ $jr->jurusan_code ?? '-' }}</td>
                                 <td>
                                     <a href="{{ route('jurusan.edit', $jr->jurusan_id) }}" class="btn btn-sm btn-info"><i
-                                            class="fa fa-edit"></i></a>
+                                            class="fas fa-edit"></i></a>
                                     <form action="{{ route('jurusan.destroy', $jr->jurusan_id) }}" method="post"
                                         class="d-inline">
+                                        @csrf
                                         @method('delete')
-                                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>

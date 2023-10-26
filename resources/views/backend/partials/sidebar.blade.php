@@ -43,6 +43,7 @@
             data-parent="#accordionSidebar">
             <div class="collapse-inner rounded bg-white py-2">
                 <h6 class="collapse-header">SK Organisasi</h6>
+                <a class="collapse-item" href="#">Organisasi</a>
                 <a class="collapse-item" href="#">Kop Surat</a>
                 <a class="collapse-item" href="#">Surat Keputusan</a>
             </div>

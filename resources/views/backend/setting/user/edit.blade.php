@@ -24,7 +24,7 @@
                             is-invalid
                         @enderror"
                                 name="name" id="name" value="{{ old('name', $user->name) }}"
-                                placeholder="Enter name" required>
+                                placeholder="Enter name ex: Budi" required>
                             @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -70,7 +70,7 @@
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
                             <a href="{{ route('user.index') }}" class="btn btn-sm btn-info mx-2"><i
-                                    class="fa fa-reply-all"></i></a>
+                                    class="fas fa-reply-all"></i></a>
                             <button type="submit" class="btn btn-sm btn-success">Submit</button>
                         </div>
                     </div>

@@ -56,11 +56,12 @@
                                 <td>{{ $r->prodi_jenjang }}</td>
                                 <td>
                                     <a href="{{ route('prodi.edit', $r->prodi_id) }}" class="btn btn-sm btn-info"><i
-                                            class="fa fa-edit"></i></a>
+                                            class="fas fa-edit"></i></a>
                                     <form action="{{ route('prodi.destroy', $r->prodi_id) }}" method="post"
                                         class="d-inline">
+                                        @csrf
                                         @method('delete')
-                                        <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>

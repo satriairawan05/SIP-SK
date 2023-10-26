@@ -52,10 +52,11 @@
                                 <td>Admin</td>
                                 <td>
                                     <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-info"><i
-                                            class="fa fa-user-edit"></i></a>
+                                            class="fas fa-user-edit"></i></a>
                                     <form action="{{ route('user.destroy', $user->id) }}" method="post" class="d-inline">
+                                        @csrf
                                         @method('delete')
-                                        <button class="btn btn-sm btn-danger"><i class="fa fa-user-minus"></i></button>
+                                        <button class="btn btn-sm btn-danger"><i class="fas fa-user-minus"></i></button>
                                     </form>
                                 </td>
                             </tr>

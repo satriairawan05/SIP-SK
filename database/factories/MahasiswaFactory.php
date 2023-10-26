@@ -17,9 +17,9 @@ class MahasiswaFactory extends Factory
     public function definition(): array
     {
         return [
-            'mhs_nama' => $this->faker->name('M'),
+            'mhs_nama' => $this->faker->name(),
             'mhs_nim' => $this->faker->numerify('H#########'),
-            'mhs_prodi' => $this->faker->randomElement(['Teknologi Rekayasa Perangkat Lunak', 'Teknologi Geomatika']),
+            'mhs_prodi' => $this->faker->randomElement(['Teknologi Rekayasa Perangkat Lunak', 'Teknologi Rekayasa Geomatika & Survey']),
             'mhs_jurusan' => $this->faker->randomElement(['Teknik Informatika']),
             'mhs_jenjang' => $this->faker->randomElement(['D3', 'D4']),
             'mhs_semester' => $this->faker->randomElement(['1', '2', '3', '4', '5', '6', '7', '8']),

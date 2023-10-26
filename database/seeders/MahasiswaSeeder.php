@@ -25,5 +25,7 @@ class MahasiswaSeeder extends Seeder
             'mhs_no_hp' => '082253332802',
             'password' => bcrypt('H181600607')
         ]);
+
+        Mahasiswa::factory(49)->create();
     }
 }
