@@ -48,20 +48,21 @@ class ProdiController extends Controller
         $validated = Validator::make($request->all(), [
             'prodi_name' => ['required', 'string'],
             'prodi_alias' => ['required', 'string'],
-            'jurusan_id' => ['required']
+            'jurusan_id' => ['required', 'string'],
         ]);
 
         if (!$validated->fails()) {
             Prodi::create([
-                'prodi_name' => $request->input('name'),
-                'prodi_alias' => $request->input('alias'),
+                'prodi_name' => $request->input('prodi_name'),
+                'prodi_alias' => $request->input('prodi_alias'),
                 'jurusan_id' => $request->input('jurusan_id'),
-                'prodi_code' => $request->input('code') ? $request->input('code') : null,
+                'prodi_code' => $request->input('prodi_code') ?? null,
+                'prodi_jenjang' => $request->input('prodi_jenjang') ?? null,
             ]);
 
-            return redirect('prodi')->with('success', 'Added Prodi Successfully');
+            return redirect()->to(route('prodi.index'))->with('success', 'Added Successfully');
         } else {
-            return redirect('dashboard')->with('failed', 'You not have authority');
+            return redirect()->to(route('prodi.index'))->with('failed', 'You not have authority');
         }
     }
 
@@ -93,20 +94,21 @@ class ProdiController extends Controller
         $validated = Validator::make($request->all(), [
             'prodi_name' => ['required', 'string'],
             'prodi_alias' => ['required', 'string'],
-            'jurusan_id' => ['required']
+            'jurusan_id' => ['required', 'string']
         ]);
 
         if (!$validated->fails()) {
             Prodi::where('prodi_id', $prodi->prodi_id)->update([
-                'prodi_name' => $request->input('name'),
-                'prodi_alias' => $request->input('alias'),
+                'prodi_name' => $request->input('prodi_name'),
+                'prodi_alias' => $request->input('prodi_alias'),
                 'jurusan_id' => $request->input('jurusan_id'),
-                'prodi_code' => $request->input('code') ? $request->input('code') : null,
+                'prodi_code' => $request->input('prodi_code') ?? null,
+                'prodi_jenjang' => $request->input('prodi_jenjang') ?? null,
             ]);
 
-            return redirect('prodi')->with('success', 'Updated Prodi Successfully');
+            return redirect()->to(route('prodi.index'))->with('success', 'Updated Successfully');
         } else {
-            return redirect('dashboard')->with('failed', 'You not have authority');
+            return redirect()->to(route('prodi.index'))->with('failed', 'You not have authority');
         }
     }
 
@@ -115,6 +117,23 @@ class ProdiController extends Controller
      */
     public function destroy(Prodi $prodi)
     {
-        //
+        Prodi::destroy($prodi->prodi_id);
+
+        return redirect()->back()->with('success', 'Deleted Successfully!');
+    }
+
+    /**
+     * Find Jurusanfrom storage.
+     */
+    public function findJurusan(Request $request)
+    {
+        $data = Prodi::where('jurusan_id', $request->input('jurusan_id'))->get();
+
+        $response = [
+            'status' => \Illuminate\Http\Response::HTTP_OK,
+            'data' => $data
+        ];
+
+        return response()->json($response);
     }
 }

@@ -50,14 +50,14 @@ class JurusanController extends Controller
 
         if (!$validated->fails()) {
             Jurusan::create([
-                'jurusan_name' => $request->input('name'),
-                'jurusan_alias' => $request->input('alias'),
-                'jurusan_code' => $request->input('code') ? $request->input('code') : null,
+                'jurusan_name' => $request->input('jurusan_name'),
+                'jurusan_alias' => $request->input('jurusan_alias'),
+                'jurusan_code' => $request->input('jurusan_code') ? $request->input('jurusan_code') : null,
             ]);
 
-            return redirect('jurusan')->with('success', 'Added Jurusan Successfully');
+            return redirect()->to(route('jurusan.index'))->with('success', 'Added Successfully');
         } else {
-            return redirect('dashboard')->with('failed', 'You not have authority');
+            return redirect()->to(route('jurusan.index'))->with('failed', 'You not have authority');
         }
     }
 
@@ -92,14 +92,14 @@ class JurusanController extends Controller
 
         if (!$validated->fails()) {
             Jurusan::where('jurusan_id', $jurusan->jurusan_id)->udate([
-                'jurusan_name' => $request->input('name'),
-                'jurusan_alias' => $request->input('alias'),
-                'jurusan_code' => $request->input('code') ? $request->input('code') : null,
+                'jurusan_name' => $request->input('jurusan_name'),
+                'jurusan_alias' => $request->input('jurusan_alias'),
+                'jurusan_code' => $request->input('jurusan_code') ? $request->input('jurusan_code') : null,
             ]);
 
-            return redirect('jurusan')->with('success', 'Updated Jurusan Successfully');
+            return redirect()->to(route('jurusan.index'))->with('success', 'Updated Successfully');
         } else {
-            return redirect('dashboard')->with('failed', 'You not have authority');
+            return redirect()->to(route('jurusan.index'))->with('failed', 'You not have authority');
         }
     }
 
@@ -110,6 +110,6 @@ class JurusanController extends Controller
     {
         Jurusan::destroy($jurusan->jurusan_id);
 
-        return redirect('jurusan')->with('success', 'Deleted Jurusan Successfully');
+        return redirect()->back()->with('success', 'Deleted Successfully');
     }
 }

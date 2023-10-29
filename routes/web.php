@@ -28,6 +28,9 @@ Route::middleware('guest')->group(function () {
 
         // Dashboard Mahasiswa
         Route::get('/', fn () => view('backend.home'))->name('home');
+
+        // Organisasi
+        Route::resource('organisasi', \App\Http\Controllers\Backend\OrganisasiController::class);
     });
 });
 
@@ -47,11 +50,15 @@ Route::prefix('admin')->middleware('guest')->group(function () {
         // User
         Route::resource('user', \App\Http\Controllers\Backend\UserController::class);
 
+        // Organisasi
+        Route::resource('organisasi', \App\Http\Controllers\Backend\OrganisasiController::class);
+
         // Jurusan
         Route::resource('jurusan', \App\Http\Controllers\Backend\JurusanController::class);
 
         // Prodi
         Route::resource('prodi', \App\Http\Controllers\Backend\ProdiController::class);
+        Route::get('prodi/{jurusan}', [\App\Http\Controllers\Backend\ProdiController::class, 'findJurusan'])->name('prodi.findJurusan');
 
         // Mahasiswa
         Route::resource('mahasiswa', \App\Http\Controllers\Backend\MahasiswaController::class);

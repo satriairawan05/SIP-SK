@@ -6,11 +6,13 @@
 <script src="{{ asset('ruang-admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('ruang-admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <!-- Page level custom scripts -->
+<script src="{{ asset('ruang-admin/js/time.min.js') }}"></script>
 <script>
     $(document).ready(function() {
         $('#dataTable').DataTable(); // ID From dataTable
         $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
+
 </script>
 
 </body>

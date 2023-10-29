@@ -78,6 +78,8 @@ class MahasiswaController extends Controller
                 'mhs_jenjang' => $jenjang,
                 'password' => bcrypt($request->input('mhs_nim')),
             ]);
+
+            return redirect()->to(route('mahasiswa.index'))->with('success', 'Added Successfully!');
         } else {
             return redirect()->back()->with('failed', $validated->getMessageBag());
         }
@@ -143,6 +145,8 @@ class MahasiswaController extends Controller
                 'mhs_jenjang' => $jenjang,
                 'password' => bcrypt($request->input('mhs_nim')),
             ]);
+
+            return redirect()->to(route('mahasiswa.index'))->with('success', 'Udated Successfully!');
         } else {
             return redirect()->back()->with('failed', $validated->getMessageBag());
         }

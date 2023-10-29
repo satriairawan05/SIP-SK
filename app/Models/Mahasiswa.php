@@ -9,10 +9,9 @@ class Mahasiswa extends Authenticatable
 {
     use HasFactory;
 
-
     protected $guard = 'mahasiswa';
 
-    protected $guarded = ['mhs_id'];
+    protected $guarded = 'mhs_id';
 
     protected $table = 'mahasiswas';
 
