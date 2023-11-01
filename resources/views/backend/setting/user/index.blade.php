@@ -51,7 +51,7 @@
                                 <td>{{ $user->email }}</td>
                                 <td>Admin</td>
                                 <td>
-                                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-info"><i
+                                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-warning"><i
                                             class="fas fa-user-edit"></i></a>
                                     <form action="{{ route('user.destroy', $user->id) }}" method="post" class="d-inline">
                                         @csrf

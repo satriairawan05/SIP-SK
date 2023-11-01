@@ -12,9 +12,7 @@
                 </button>
                 <ul class="navbar-nav ml-auto">
                     <div class="nav-item text-white d-flex mt-4">
-                        <div id="jam"></div>:
-                        <div id="menit"></div>:
-                        <div id="detik"></div>
+                        <i class="fas fa-clock" style="margin-top: 3px;"></i>&nbsp;<div id="waktu"></div>
                     </div>
                     <div class="topbar-divider d-none d-sm-block"></div>
                     <li class="nav-item dropdown no-arrow">
@@ -22,11 +20,11 @@
                             @if (auth()->guard('admin')->check())
                             <img class="img-profile rounded-circle" src="{{ asset('ruang-admin/img/profile.png') }}" style="max-width: 60px">
                             @else
-                            @if (auth()->guard('mahasiswa')->user()->mhs_jk === 'Laki-Laki')
-                            <img class="img-profile rounded-circle" src="{{ asset('ruang-admin/img/boy.png') }}" style="max-width: 60px">
-                            @else
-                            <img class="img-profile rounded-circle" src="{{ asset('ruang-admin/img/girl.png') }}" style="max-width: 60px">
-                            @endif
+                                @if (auth()->guard('mahasiswa')->user()->mhs_jk === 'Laki-Laki')
+                                <img class="img-profile rounded-circle" src="{{ asset('ruang-admin/img/boy.png') }}" style="max-width: 60px">
+                                @else
+                                <img class="img-profile rounded-circle" src="{{ asset('ruang-admin/img/girl.png') }}" style="max-width: 60px">
+                                @endif
                             @endif
                             <span class="d-none d-lg-inline small ml-2 text-white">{{ auth()->guard('admin')->check()? auth()->user()->name: auth()->guard('mahasiswa')->user()->mhs_nama }}</span>
                         </a>
@@ -34,14 +32,6 @@
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Settings
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Activity Log
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">

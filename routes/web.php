@@ -31,6 +31,9 @@ Route::middleware('guest')->group(function () {
 
         // Organisasi
         Route::resource('organisasi', \App\Http\Controllers\Backend\OrganisasiController::class);
+
+        // Kegiatan
+        Route::resource('kegiatan',\App\Http\Controllers\Backend\KegiatanController::class);
     });
 });
 
@@ -62,5 +65,11 @@ Route::prefix('admin')->middleware('guest')->group(function () {
 
         // Mahasiswa
         Route::resource('mahasiswa', \App\Http\Controllers\Backend\MahasiswaController::class);
+
+        // Organisasi
+        Route::resource('organisasi', \App\Http\Controllers\Backend\OrganisasiController::class);
+
+        // Kegiatan
+        Route::resource('kegiatan',\App\Http\Controllers\Backend\KegiatanController::class);
     });
 });

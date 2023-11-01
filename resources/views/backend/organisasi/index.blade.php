@@ -30,35 +30,39 @@
                 </div>
             @endif
             <div class="card-header d-flex justify-content-end">
-                <a href="{{ route('jurusan.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                <a href="{{ route('organisasi.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
             <div class="card-body">
                 <table class="align-items-center table-flush table" id="dataTable">
                     <thead class="thead-light">
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Alias</th>
-                            <th>Code</th>
+                            <th>Nama</th>
+                            <th>Status</th>
+                            <th>Periode</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($jurusan as $jr)
+                        @foreach ($organisasi as $org)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $jr->jurusan_name }}</td>
-                                <td>{{ $jr->jurusan_alias }}</td>
-                                <td>{{ $jr->jurusan_code ?? '-' }}</td>
+                                <td>{{ $org->organisasi_nama }}</td>
+                                <td>{{ $org->organisasi_status }}</td>
+                                <td>{{ $org->organisasi_periode }}</td>
                                 <td>
-                                    <a href="{{ route('jurusan.edit', $jr->jurusan_id) }}" class="btn btn-sm btn-warning"><i
-                                            class="fas fa-edit"></i></a>
-                                    <form action="{{ route('jurusan.destroy', $jr->jurusan_id) }}" method="post"
+                                    {{-- Edit --}}
+                                    <a href="{{ route('organisasi.edit', $org->organisasi_id) }}"
+                                        class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                    {{-- Edit --}}
+                                    {{-- Delete --}}
+                                    <form action="{{ route('organisasi.destroy', $org->organisasi_id) }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
+                                    {{-- Delete --}}
                                 </td>
                             </tr>
                         @endforeach
