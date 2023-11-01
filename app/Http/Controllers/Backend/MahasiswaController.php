@@ -159,6 +159,6 @@ class MahasiswaController extends Controller
     {
         Mahasiswa::destroy($mahasiswa->mhs_id);
 
-        return redirect()->back()->with('success', 'Deleted Mahasiswa Successfully!');
+        return redirect()->back()->with('success', 'Deleted Successfully!');
     }
 }

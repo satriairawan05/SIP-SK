@@ -49,10 +49,8 @@
                                 <td>{{ $kgt->organisasi_nama }}</td>
                                 <td>Rp. {{ \App\Helper\Helper::rupiah($kgt->kegiatan_anggaran) }}</td>
                                 <td>
-                                    <a href="{{ route('kegiatan.edit', $kgt->kegiatan_id) }}"
-                                        class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                                    <form action="{{ route('kegiatan.destroy', $kgt->kegiatan_id) }}" method="post"
-                                        class="d-inline">
+                                    <a href="{{ route('kegiatan.edit', $kgt->kegiatan_id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                    <form action="{{ route('kegiatan.destroy', $kgt->kegiatan_id) }}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>

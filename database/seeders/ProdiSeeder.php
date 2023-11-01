@@ -15,7 +15,7 @@ class ProdiSeeder extends Seeder
     {
         Prodi::create([
             'jurusan_id' => 1,
-            'prodi_name' => 'Teknologi Rekayasa Perangkat Lunak',
+            'prodi_nama' => 'Teknologi Rekayasa Perangkat Lunak',
             'prodi_alias' => 'TRPL',
             'prodi_code' => 'TRPL',
             'prodi_jenjang' => 'D4',
@@ -23,7 +23,7 @@ class ProdiSeeder extends Seeder
 
         Prodi::create([
             'jurusan_id' => 1,
-            'prodi_name' => 'Teknologi Rekayasa Geomatika & Survey',
+            'prodi_nama' => 'Teknologi Rekayasa Geomatika & Survey',
             'prodi_alias' => 'TRGS',
             'prodi_code' => 'TRGS',
             'prodi_jenjang' => 'D3',

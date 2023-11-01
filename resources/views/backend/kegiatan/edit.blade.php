@@ -44,7 +44,7 @@
                         @enderror"
                                 name="kegiatan_anggaran" id="kegiatan_anggaran"
                                 value="{{ old('kegiatan_anggaran', $kegiatan->kegiatan_anggaran) }}"
-                                placeholder="Enter name" required>
+                                placeholder="Enter Anggaran" required>
                             @error('kegiatan_anggaran')
                                 <div class="invalid-feedback">
                                     {{ $message }}

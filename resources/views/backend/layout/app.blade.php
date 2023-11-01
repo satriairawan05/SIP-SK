@@ -11,7 +11,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <ul class="navbar-nav ml-auto">
-                    <div class="nav-item text-white d-flex mt-4">
+                    <div class="nav-item text-white d-flex flex-col mt-4">
                         <i class="fas fa-clock" style="margin-top: 3px;"></i>&nbsp;<div id="waktu"></div>
                     </div>
                     <div class="topbar-divider d-none d-sm-block"></div>

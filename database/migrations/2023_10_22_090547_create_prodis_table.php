@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('prodis', function (Blueprint $table) {
             $table->increments('prodi_id');
             $table->foreignId('jurusan_id');
-            $table->string('prodi_name')->nullable();
+            $table->string('prodi_nama')->nullable();
             $table->string('prodi_alias')->nullable();
             $table->string('prodi_code')->nullable();
             $table->string('prodi_jenjang')->nullable();

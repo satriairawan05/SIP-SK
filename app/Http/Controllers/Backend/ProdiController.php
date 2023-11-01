@@ -46,14 +46,14 @@ class ProdiController extends Controller
     public function store(Request $request)
     {
         $validated = Validator::make($request->all(), [
-            'prodi_name' => ['required', 'string'],
+            'prodi_nama' => ['required', 'string'],
             'prodi_alias' => ['required', 'string'],
             'jurusan_id' => ['required', 'string'],
         ]);
 
         if (!$validated->fails()) {
             Prodi::create([
-                'prodi_name' => $request->input('prodi_name'),
+                'prodi_nama' => $request->input('prodi_name'),
                 'prodi_alias' => $request->input('prodi_alias'),
                 'jurusan_id' => $request->input('jurusan_id'),
                 'prodi_code' => $request->input('prodi_code') ?? null,
@@ -92,7 +92,7 @@ class ProdiController extends Controller
     public function update(Request $request, Prodi $prodi)
     {
         $validated = Validator::make($request->all(), [
-            'prodi_name' => ['required', 'string'],
+            'prodi_nama' => ['required', 'string'],
             'prodi_alias' => ['required', 'string'],
             'jurusan_id' => ['required', 'string']
         ]);

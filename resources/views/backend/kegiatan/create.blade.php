@@ -42,7 +42,7 @@
                             is-invalid
                         @enderror"
                                 name="kegiatan_anggaran" id="kegiatan_anggaran" value="{{ old('kegiatan_anggaran') }}"
-                                placeholder="Enter name" required>
+                                placeholder="Enter Anggaran" required>
                             @error('kegiatan_anggaran')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -51,11 +51,12 @@
                         </div>
                     </div>
                     <div class="row">
-                    <div class="col-12 d-flex justify-content-center">
-                        <a href="{{ route('kegiatan.index') }}" class="btn btn-sm btn-info mx-2"><i class="fas fa-reply-all"></i></a>
-                        <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                        <div class="col-12 d-flex justify-content-center">
+                            <a href="{{ route('kegiatan.index') }}" class="btn btn-sm btn-info mx-2"><i
+                                    class="fas fa-reply-all"></i></a>
+                            <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                        </div>
                     </div>
-                </div>
                 </form>
             </div>
         </div>

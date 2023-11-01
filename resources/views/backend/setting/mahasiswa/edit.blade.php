@@ -166,4 +166,34 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+        const mhsJurusan = document.getElementById('mhs_jurusan');
+        const mhsProdi = document.getElementById('mhs_prodi');
+
+        // Mengatur header default untuk setiap permintaan AJAX dengan token CSRF
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": csrfToken,
+            },
+        });
+
+        // Contoh permintaan AJAX
+        $.ajax({
+            url: '/prodi/' + mhsJurusan.value,
+            type: 'GET',
+            data: {
+                // Data yang ingin Anda kirim
+                _token: csrfToken
+            },
+            success: function(response) {
+                // Tanggapan dari permintaan AJAX berhasil
+
+            },
+            error: function(xhr, status, error) {
+                // Penanganan kesalahan permintaan AJAX
+            }
+        });
+    </script>
 @endsection
