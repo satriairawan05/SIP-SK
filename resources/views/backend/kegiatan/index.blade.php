@@ -39,6 +39,7 @@
                             <th>#</th>
                             <th>Organisasi</th>
                             <th>Anggaran Tahunan</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +48,16 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $kgt->organisasi_nama }}</td>
                                 <td>Rp. {{ \App\Helper\Helper::rupiah($kgt->kegiatan_anggaran) }}</td>
+                                <td>
+                                    <a href="{{ route('kegiatan.edit', $kgt->kegiatan_id) }}"
+                                        class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                    <form action="{{ route('kegiatan.destroy', $kgt->kegiatan_id) }}" method="post"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
