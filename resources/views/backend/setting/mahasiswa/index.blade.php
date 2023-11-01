@@ -40,10 +40,9 @@
                             <th>Name</th>
                             <th>Nim</th>
                             <th>Jurusan</th>
-                            <th>Prodi</th>
+                            <th>Program Studi</th>
                             <th>Jenjang/Semester</th>
                             <th>Jenis Kelamin</th>
-                            <th>Alamat</th>
                             <th>No HP</th>
                             <th>Action</th>
                         </tr>
@@ -58,10 +57,9 @@
                                 <td>{{ $mhs->mhs_prodi }}</td>
                                 <td>{{ $mhs->mhs_jenjang }}/{{ $mhs->mhs_semester }}</td>
                                 <td>{{ $mhs->mhs_jk }}</td>
-                                <td>{{ $mhs->mhs_alamat }}</td>
                                 <td>{{ $mhs->mhs_no_hp }}</td>
                                 <td>
-                                    <a href="{{ route('mahasiswa.edit', $mhs->mhs_id) }}" class="btn btn-sm btn-info"><i
+                                    <a href="{{ route('mahasiswa.edit', $mhs->mhs_id) }}" class="btn btn-sm btn-warning"><i
                                             class="fas fa-edit"></i></a>
                                     <form action="{{ route('mahasiswa.destroy', $mhs->mhs_id) }}" method="post"
                                         class="d-inline">

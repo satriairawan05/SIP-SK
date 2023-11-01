@@ -30,36 +30,23 @@
                 </div>
             @endif
             <div class="card-header d-flex justify-content-end">
-                <a href="{{ route('jurusan.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                <a href="{{ route('kegiatan.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
             <div class="card-body">
                 <table class="align-items-center table-flush table" id="dataTable">
                     <thead class="thead-light">
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Alias</th>
-                            <th>Code</th>
-                            <th>Action</th>
+                            <th>Organisasi</th>
+                            <th>Anggaran Tahunan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($jurusan as $jr)
+                        @foreach ($kegiatan as $kgt)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $jr->jurusan_name }}</td>
-                                <td>{{ $jr->jurusan_alias }}</td>
-                                <td>{{ $jr->jurusan_code ?? '-' }}</td>
-                                <td>
-                                    <a href="{{ route('jurusan.edit', $jr->jurusan_id) }}" class="btn btn-sm btn-warning"><i
-                                            class="fas fa-edit"></i></a>
-                                    <form action="{{ route('jurusan.destroy', $jr->jurusan_id) }}" method="post"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </td>
+                                <td>{{ $kgt->organisasi_nama }}</td>
+                                <td>Rp. {{ \App\Helper\Helper::rupiah($kgt->kegiatan_anggaran) }}</td>
                             </tr>
                         @endforeach
                     </tbody>

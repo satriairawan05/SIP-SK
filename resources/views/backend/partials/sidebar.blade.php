@@ -39,7 +39,7 @@
         <div id="collapseOrganisasi" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
             <div class="collapse-inner rounded bg-white py-2">
                 <h6 class="collapse-header">SK Organisasi</h6>
-                <a class="collapse-item" href="#">Organisasi</a>
+                <a class="collapse-item" href="{{ route('organisasi.index') }}">Organisasi</a>
                 <a class="collapse-item" href="#">Surat Keputusan</a>
             </div>
         </div>
@@ -52,7 +52,7 @@
         <div id="collapseKegiatan" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
             <div class="collapse-inner rounded bg-white py-2">
                 <h6 class="collapse-header">SK Kegiatan</h6>
-                <a class="collapse-item" href="#">Kegiatan</a>
+                <a class="collapse-item" href="{{ route('kegiatan.index') }}">Kegiatan</a>
                 <a class="collapse-item" href="#">Surat Keputusan</a>
             </div>
         </div>
@@ -78,8 +78,8 @@
                 <h6 class="collapse-header">Setting</h6>
                 <a class="collapse-item" href="{{ route('user.index') }}">User</a>
                 <a class="collapse-item" href="{{ route('mahasiswa.index') }}">Mahasiswa</a>
-                <a class="collapse-item" href="{{ route('jurusan.index') }}">Jurusan</a>
                 <a class="collapse-item" href="{{ route('prodi.index') }}">Program Studi</a>
+                <a class="collapse-item" href="{{ route('jurusan.index') }}">Jurusan</a>
             </div>
         </div>
     </li>

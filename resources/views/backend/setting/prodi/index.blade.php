@@ -55,7 +55,7 @@
                                 <td>{{ $r->prodi_code ?? '-' }}</td>
                                 <td>{{ $r->prodi_jenjang }}</td>
                                 <td>
-                                    <a href="{{ route('prodi.edit', $r->prodi_id) }}" class="btn btn-sm btn-info"><i
+                                    <a href="{{ route('prodi.edit', $r->prodi_id) }}" class="btn btn-sm btn-warning"><i
                                             class="fas fa-edit"></i></a>
                                     <form action="{{ route('prodi.destroy', $r->prodi_id) }}" method="post"
                                         class="d-inline">

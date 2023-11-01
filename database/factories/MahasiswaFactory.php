@@ -17,15 +17,15 @@ class MahasiswaFactory extends Factory
     public function definition(): array
     {
         return [
-            'mhs_nama' => $this->faker->name(),
-            'mhs_nim' => $this->faker->numerify('H#########'),
-            'mhs_prodi' => $this->faker->randomElement(['Teknologi Rekayasa Perangkat Lunak', 'Teknologi Rekayasa Geomatika & Survey']),
-            'mhs_jurusan' => $this->faker->randomElement(['Teknik Informatika']),
-            'mhs_jenjang' => $this->faker->randomElement(['D3', 'D4']),
-            'mhs_semester' => $this->faker->randomElement(['1', '2', '3', '4', '5', '6', '7', '8']),
-            'mhs_jk' => $this->faker->randomElement(['Laki-Laki', 'Perempuan']),
-            'mhs_alamat' => $this->faker->streetAddress(),
-            'mhs_no_hp' => $this->faker->numerify('+62###########'),
+            'mhs_nama' => fake()->name(),
+            'mhs_nim' => fake()->numerify('H#########'),
+            'mhs_prodi' => fake()->randomElement(['Teknologi Rekayasa Perangkat Lunak', 'Teknologi Rekayasa Geomatika & Survey']),
+            'mhs_jurusan' => fake()->randomElement(['Teknik Informatika']),
+            'mhs_jenjang' => fake()->randomElement(['D3', 'D4']),
+            'mhs_semester' => fake()->randomElement(['1', '2', '3', '4', '5', '6', '7', '8']),
+            'mhs_jk' => fake()->randomElement(['Laki-Laki', 'Perempuan']),
+            'mhs_alamat' => fake()->streetAddress(),
+            'mhs_no_hp' => fake()->numerify('+62###########'),
             'password' => bcrypt('1234')
         ];
     }
