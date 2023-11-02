@@ -58,7 +58,7 @@ class UserController extends Controller
 
             return redirect('user')->with('success', 'Added Account Successfully');
         } else {
-            return redirect('dashboard')->with('failed', 'You not have authority');
+            return redirect('dashboard')->with('failed', $validated->getMessageBag());
         }
     }
 
@@ -101,7 +101,7 @@ class UserController extends Controller
 
             return redirect('user')->with('success', 'Updated Account Successfully');
         } else {
-            return redirect('dashboard')->with('failed', 'You not have authority');
+            return redirect('dashboard')->with('failed', $validated->getMessageBag());
         }
     }
 

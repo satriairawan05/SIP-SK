@@ -57,7 +57,7 @@ class JurusanController extends Controller
 
             return redirect()->to(route('jurusan.index'))->with('success', 'Added Successfully');
         } else {
-            return redirect()->to(route('jurusan.index'))->with('failed', 'You not have authority');
+            return redirect()->to(route('jurusan.index'))->with('failed', $validated->getMessageBag());
         }
     }
 
@@ -99,7 +99,7 @@ class JurusanController extends Controller
 
             return redirect()->to(route('jurusan.index'))->with('success', 'Updated Successfully');
         } else {
-            return redirect()->to(route('jurusan.index'))->with('failed', 'You not have authority');
+            return redirect()->to(route('jurusan.index'))->with('failed', $validated->getMessageBag());
         }
     }
 

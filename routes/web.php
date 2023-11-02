@@ -71,5 +71,8 @@ Route::prefix('admin')->middleware('guest')->group(function () {
 
         // Kegiatan
         Route::resource('kegiatan',\App\Http\Controllers\Backend\KegiatanController::class);
+
+        // Jenis Surat
+        Route::resource('jenis_surat',\App\Http\Controllers\Backend\JenisSuratController::class);
     });
 });

@@ -30,34 +30,30 @@
                 </div>
             @endif
             <div class="card-header d-flex justify-content-end">
-                <a href="{{ route('prodi.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                <a href="{{ route('jenis_surat.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
             <div class="card-body">
                 <table class="align-items-center table-flush table" id="dataTable">
                     <thead class="thead-light">
                         <tr>
                             <th>#</th>
-                            <th>Jurusan</th>
-                            <th>Name</th>
-                            <th>Alias</th>
-                            <th>Code</th>
-                            <th>Jenjang</th>
+                            <th>Jenis Surat</th>
+                            <th>Kode</th>
+                            <th>Nomor</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($prodi as $r)
+                        @foreach ($surat as $s)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $r->jurusan_nama }}</td>
-                                <td>{{ $r->prodi_nama }}</td>
-                                <td>{{ $r->prodi_alias }}</td>
-                                <td>{{ $r->prodi_code ?? '-' }}</td>
-                                <td>{{ $r->prodi_jenjang }}</td>
+                                <td>{{ $s->js_jenis }}</td>
+                                <td>{{ $s->js_kode }}</td>
+                                <td>{{ $s->js_nomor }}</td>
                                 <td>
-                                    <a href="{{ route('prodi.edit', $r->prodi_id) }}" class="btn btn-sm btn-warning"><i
+                                    <a href="{{ route('jenis_surat.edit', $s->js_id) }}" class="btn btn-sm btn-warning"><i
                                             class="fas fa-edit"></i></a>
-                                    <form action="{{ route('prodi.destroy', $r->prodi_id) }}" method="post"
+                                    <form action="{{ route('jenis_surat.destroy', $s->js_id) }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         @method('delete')

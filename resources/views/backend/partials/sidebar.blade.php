@@ -80,6 +80,7 @@
                 <a class="collapse-item" href="{{ route('mahasiswa.index') }}">Mahasiswa</a>
                 <a class="collapse-item" href="{{ route('prodi.index') }}">Program Studi</a>
                 <a class="collapse-item" href="{{ route('jurusan.index') }}">Jurusan</a>
+                <a class="collapse-item" href="{{ route('jenis_surat.index') }}">Jenis Surat</a>
             </div>
         </div>
     </li>

@@ -47,7 +47,7 @@
                         @foreach ($jurusan as $jr)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $jr->jurusan_name }}</td>
+                                <td>{{ $jr->jurusan_nama }}</td>
                                 <td>{{ $jr->jurusan_alias }}</td>
                                 <td>{{ $jr->jurusan_code ?? '-' }}</td>
                                 <td>

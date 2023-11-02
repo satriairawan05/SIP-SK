@@ -62,7 +62,7 @@ class ProdiController extends Controller
 
             return redirect()->to(route('prodi.index'))->with('success', 'Added Successfully');
         } else {
-            return redirect()->to(route('prodi.index'))->with('failed', 'You not have authority');
+            return redirect()->to(route('prodi.index'))->with('failed', $validated->getMessageBag());
         }
     }
 
@@ -108,7 +108,7 @@ class ProdiController extends Controller
 
             return redirect()->to(route('prodi.index'))->with('success', 'Updated Successfully');
         } else {
-            return redirect()->to(route('prodi.index'))->with('failed', 'You not have authority');
+            return redirect()->to(route('prodi.index'))->with('failed', $validated->getMessageBag());
         }
     }
 
