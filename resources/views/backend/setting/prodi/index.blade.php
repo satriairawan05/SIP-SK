@@ -49,8 +49,8 @@
                         @foreach ($prodi as $r)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $r->jurusan_name }}</td>
-                                <td>{{ $r->prodi_name }}</td>
+                                <td>{{ $r->jurusan_nama }}</td>
+                                <td>{{ $r->prodi_nama }}</td>
                                 <td>{{ $r->prodi_alias }}</td>
                                 <td>{{ $r->prodi_code ?? '-' }}</td>
                                 <td>{{ $r->prodi_jenjang }}</td>
