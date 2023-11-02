@@ -44,13 +44,13 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $validated = Validator::make($request->all(), [
-            'jurusan_name' => ['required', 'string'],
+            'jurusan_nama' => ['required', 'string'],
             'jurusan_alias' => ['required', 'string'],
         ]);
 
         if (!$validated->fails()) {
             Jurusan::create([
-                'jurusan_name' => $request->input('jurusan_name'),
+                'jurusan_nama' => $request->input('jurusan_nama'),
                 'jurusan_alias' => $request->input('jurusan_alias'),
                 'jurusan_code' => $request->input('jurusan_code') ? $request->input('jurusan_code') : null,
             ]);
@@ -86,13 +86,13 @@ class JurusanController extends Controller
     public function update(Request $request, Jurusan $jurusan)
     {
         $validated = Validator::make($request->all(), [
-            'jurusan_name' => ['required', 'string'],
+            'jurusan_nama' => ['required', 'string'],
             'jurusan_alias' => ['required', 'string'],
         ]);
 
         if (!$validated->fails()) {
             Jurusan::where('jurusan_id', $jurusan->jurusan_id)->udate([
-                'jurusan_name' => $request->input('jurusan_name'),
+                'jurusan_nama' => $request->input('jurusan_name'),
                 'jurusan_alias' => $request->input('jurusan_alias'),
                 'jurusan_code' => $request->input('jurusan_code') ? $request->input('jurusan_code') : null,
             ]);

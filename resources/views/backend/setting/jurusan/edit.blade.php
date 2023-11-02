@@ -18,10 +18,10 @@
                 @method('put')
                 <div class="row">
                     <div class="form-group col-12">
-                        <label for="jurusan_name">Name <sup class="text-danger">*</sup></label>
-                        <input type="text" class="form-control form-control-sm @error('jurusan_name')
+                        <label for="jurusan_nama">Name <sup class="text-danger">*</sup></label>
+                        <input type="text" class="form-control form-control-sm @error('jurusan_nama')
                             is-invalid
-                        @enderror" name="jurusan_name" id="jurusan_name" value="{{ old('jurusan_name', $jurusan->jurusan_name) }}" placeholder="Enter name" required>
+                        @enderror" name="jurusan_nama" id="jurusan_nama" value="{{ old('jurusan_nama', $jurusan->jurusan_nama) }}" placeholder="Enter name" required>
                         @error('jurusan_name')
                         <div class="invalid-feedback">
                             {{ $message }}

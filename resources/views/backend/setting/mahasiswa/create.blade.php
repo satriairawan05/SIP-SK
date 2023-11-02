@@ -50,12 +50,12 @@
                             <label for="mhs_jurusan">Jurusan <sup class="text-danger">*</sup></label>
                             <select name="mhs_jurusan" class="form-control form-control-sm" id="mhs_jurusan">
                                 @foreach ($jurusan as $j)
-                                    @if (old('mhs_jurusan') == $j->jurusan_name)
-                                        <option value="{{ $j->jurusan_name }}" name="mhs_jurusan" selected>
-                                            {{ $j->jurusan_name }}</option>
+                                    @if (old('mhs_jurusan') == $j->jurusan_nama)
+                                        <option value="{{ $j->jurusan_nama }}" name="mhs_jurusan" selected>
+                                            {{ $j->jurusan_nama }}</option>
                                     @else
-                                        <option value="{{ $j->jurusan_name }}" name="mhs_jurusan">
-                                            {{ $j->jurusan_name }}</option>
+                                        <option value="{{ $j->jurusan_nama }}" name="mhs_jurusan">
+                                            {{ $j->jurusan_nama }}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -70,12 +70,12 @@
                             <select name="mhs_prodi" class="form-control form-control-sm"
                                 id="mhs_prodi">
                                 @foreach ($prodi as $p)
-                                    @if (old('mhs_prodi') == $p->prodi_name)
-                                        <option value="{{ $p->prodi_name }}" name="mhs_prodi" selected>
+                                    @if (old('mhs_prodi') == $p->prodi_nama)
+                                        <option value="{{ $p->prodi_nama }}" name="mhs_prodi" selected>
                                             {{ $p->prodi_name }}</option>
                                     @else
-                                        <option value="{{ $p->prodi_name }}" name="mhs_prodi">
-                                            {{ $p->prodi_name }}</option>
+                                        <option value="{{ $p->prodi_nama }}" name="mhs_prodi">
+                                            {{ $p->prodi_nama }}</option>
                                     @endif
                                 @endforeach
                             </select>

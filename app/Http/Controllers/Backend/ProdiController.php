@@ -53,7 +53,7 @@ class ProdiController extends Controller
 
         if (!$validated->fails()) {
             Prodi::create([
-                'prodi_nama' => $request->input('prodi_name'),
+                'prodi_nama' => $request->input('prodi_nama'),
                 'prodi_alias' => $request->input('prodi_alias'),
                 'jurusan_id' => $request->input('jurusan_id'),
                 'prodi_code' => $request->input('prodi_code') ?? null,
@@ -99,7 +99,7 @@ class ProdiController extends Controller
 
         if (!$validated->fails()) {
             Prodi::where('prodi_id', $prodi->prodi_id)->update([
-                'prodi_name' => $request->input('prodi_name'),
+                'prodi_nama' => $request->input('prodi_nama'),
                 'prodi_alias' => $request->input('prodi_alias'),
                 'jurusan_id' => $request->input('jurusan_id'),
                 'prodi_code' => $request->input('prodi_code') ?? null,

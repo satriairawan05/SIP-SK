@@ -19,12 +19,12 @@
                         <div class="form-group col-6">
                             <label for="prodi_name">Name <sup class="text-danger">*</sup></label>
                             <input type="text"
-                                class="form-control form-control-sm @error('prodi_name')
+                                class="form-control form-control-sm @error('prodi_nama')
                             is-invalid
                         @enderror"
-                                name="prodi_name" id="prodi_name" value="{{ old('prodi_name', $prodi->prodi_name) }}"
+                                name="prodi_nama" id="prodi_nama" value="{{ old('prodi_nama', $prodi->prodi_nama) }}"
                                 placeholder="Enter name" required>
-                            @error('prodi_name')
+                            @error('prodi_nama')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -82,10 +82,10 @@
                                 @foreach ($jurusan as $j)
                                     @if (old('jurusan_id', $prodi->jurusan_id) == $j->jurusan_id)
                                         <option value="{{ $j->jurusan_id }}" name="jurusan_id" selected>
-                                            {{ $j->jurusan_name }}</option>
+                                            {{ $j->jurusan_nama }}</option>
                                     @else
                                         <option value="{{ $j->jurusan_id }}" name="jurusan_id">
-                                            {{ $j->jurusan_name }}</option>
+                                            {{ $j->jurusan_nama }}</option>
                                     @endif
                                 @endforeach
                             </select>
