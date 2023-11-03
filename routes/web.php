@@ -74,5 +74,13 @@ Route::prefix('admin')->middleware('guest')->group(function () {
 
         // Jenis Surat
         Route::resource('jenis_surat',\App\Http\Controllers\Backend\JenisSuratController::class);
+
+        Route::get('surat_keputusan/kegiatan/document', function(){
+            return view('backend.surat_kegiatan.document');
+        });
+
+        Route::get('surat_keputusan/organisasi/document', function(){
+            return view('backend.surat_organisasi.document');
+        });
     });
 });
