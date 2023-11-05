@@ -15,6 +15,8 @@
     <link href="{{ asset('ruang-admin/css/ruang-admin.min.css') }}" rel="stylesheet">
     <link href="{{ asset('ruang-admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('ruang-admin/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('ruang-admin/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"
+        rel="stylesheet">
 </head>
 
 <body id="page-top">

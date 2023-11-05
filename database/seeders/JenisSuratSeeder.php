@@ -15,14 +15,14 @@ class JenisSuratSeeder extends Seeder
     {
         JenisSurat::create([
             'js_jenis' => 'Surat Keputusan Organisasi',
-            'js_kode' => 'SKO',
+            'js_kode' => 'PL21',
             'js_nomor' => '01',
             'js_ordinal' => '0',
         ]);
 
         JenisSurat::create([
             'js_jenis' => 'Surat Keputusan Kegiatan',
-            'js_kode' => 'SKK',
+            'js_kode' => 'PL21',
             'js_nomor' => '02',
             'js_ordinal' => '0',
         ]);

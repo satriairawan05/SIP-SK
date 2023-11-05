@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             \Database\Seeders\UserSeeder::class,
             \Database\Seeders\JurusanSeeder::class,
             \Database\Seeders\ProdiSeeder::class,
-            \Database\Seeders\KegiatanSeeder::class,
             \Database\Seeders\OrganisasiSeeder::class,
             \Database\Seeders\MahasiswaSeeder::class,
             \Database\Seeders\JenisSuratSeeder::class,

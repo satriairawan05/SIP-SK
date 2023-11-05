@@ -32,8 +32,17 @@ Route::middleware('guest')->group(function () {
         // Organisasi
         Route::resource('organisasi', \App\Http\Controllers\Backend\OrganisasiController::class);
 
-        // Kegiatan
-        Route::resource('kegiatan',\App\Http\Controllers\Backend\KegiatanController::class);
+        // Struktur Organisasi
+        Route::resource('struktur_organisasi', \App\Http\Controllers\Backend\StrukturOrganisasiController::class);
+
+        // Surat Keputusan Kegiatan
+        Route::resource('skk', \App\Http\Controllers\Backend\SuratKeputusanKegiatanController::class);
+
+        // Surat Keputusan Organisasi
+        Route::resource('sko', \App\Http\Controllers\Backend\SuratKeputusanOrganisasiController::class);
+
+        // Approval
+        Route::resource('approval', \App\Http\Controllers\Backend\ApprovalController::class);
     });
 });
 
@@ -56,6 +65,9 @@ Route::prefix('admin')->middleware('guest')->group(function () {
         // Organisasi
         Route::resource('organisasi', \App\Http\Controllers\Backend\OrganisasiController::class);
 
+        // Struktur Organisasi
+        Route::resource('struktur_organisasi', \App\Http\Controllers\Backend\StrukturOrganisasiController::class);
+
         // Jurusan
         Route::resource('jurusan', \App\Http\Controllers\Backend\JurusanController::class);
 
@@ -69,18 +81,16 @@ Route::prefix('admin')->middleware('guest')->group(function () {
         // Organisasi
         Route::resource('organisasi', \App\Http\Controllers\Backend\OrganisasiController::class);
 
-        // Kegiatan
-        Route::resource('kegiatan',\App\Http\Controllers\Backend\KegiatanController::class);
-
         // Jenis Surat
-        Route::resource('jenis_surat',\App\Http\Controllers\Backend\JenisSuratController::class);
+        Route::resource('jenis_surat', \App\Http\Controllers\Backend\JenisSuratController::class);
 
-        Route::get('surat_keputusan/kegiatan/document', function(){
-            return view('backend.surat_kegiatan.document');
-        });
+        // Surat Keputusan Kegiatan
+        Route::resource('skk', \App\Http\Controllers\Backend\SuratKeputusanKegiatanController::class);
 
-        Route::get('surat_keputusan/organisasi/document', function(){
-            return view('backend.surat_organisasi.document');
-        });
+        // Surat Keputusan Organisasi
+        Route::resource('sko', \App\Http\Controllers\Backend\SuratKeputusanOrganisasiController::class);
+
+        // Approval
+        Route::resource('approval', \App\Http\Controllers\Backend\ApprovalController::class);
     });
 });

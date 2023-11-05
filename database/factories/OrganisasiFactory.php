@@ -18,10 +18,10 @@ class OrganisasiFactory extends Factory
     {
         return [
             'organisasi_nama' => fake()->company(),
-            'organisasi_status' => fake()->randomElement(['aktif','vakum sementara','vakum']),
-            'organisasi_periode' => fake()->randomElement(['2020 - 2021','2021 - 2022','2022 - 2023','2023 - 2024']),
-            'organisasi_affiliate' => fake()->randomElement([true,false]),
-            'prodi_id' => mt_rand(1,2)
+            'organisasi_status' => fake()->randomElement(['aktif', 'vakum sementara', 'vakum']),
+            'organisasi_periode' => fake()->randomElement(['2020 - 2021', '2021 - 2022', '2022 - 2023', '2023 - 2024', '2025 - 2026', '2026 - 2027','2027 - 2028', '2028 - 2029', '2029 - 2030']),
+            'organisasi_affiliate' => fake()->randomElement([true, false]),
+            'prodi_id' => mt_rand(1, 2)
         ];
     }
 }
