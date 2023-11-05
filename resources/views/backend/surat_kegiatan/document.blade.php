@@ -125,10 +125,11 @@
             </div>
             <div class="col-6">
                 <p style="text-align: left;" class="mb-0">Direktur, </p>
+                <p style="text-align: left;" class="mb-0">Politeknik Pertanian Negeri Samarinda</p>
+                <br>
+                <br>
+                <br>
                 <p style="text-align: left;" class="mb-0">Nama Direktur</p>
-                <br>
-                <br>
-                <br>
                 <p style="text-align: left;" class="mb-0">Nip Direktur</p>
             </div>
         </div>
