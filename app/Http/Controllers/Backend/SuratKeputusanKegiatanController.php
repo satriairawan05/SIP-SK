@@ -58,6 +58,7 @@ class SuratKeputusanKegiatanController extends Controller
         ]);
 
         if (!$validated->fails()) {
+            $jenisSurat = \App\Models\JenisSurat::where('js_jenis',$this->name)->first();
             SuratKeputusanKegiatan::create([
                 'skk_subject' => $request->input('skk_subject'),
                 'skk_tgl_surat' => $request->input('skk_tgl_surat'),
@@ -71,7 +72,8 @@ class SuratKeputusanKegiatanController extends Controller
                 'skk_keempat' => $request->input('skk_keempat'),
                 'skk_tembusan' => $request->input('skk_tembusan'),
                 'skk_uuid' => \Illuminate\Support\Str::uuid()->toString(),
-                'skk_created' => auth()->guard('admin')->user()->name ? auth()->guard('admin')->user()->name : auth()->guard('mahasiswa')->user()->name
+                'skk_created' => auth()->guard('admin')->user()->name ? auth()->guard('admin')->user()->name : auth()->guard('mahasiswa')->user()->name,
+                'js_id' => $jenisSurat->js_id
             ]);
 
             return redirect()->to(route('skk.index'))->with('success', 'Added Successfully!');

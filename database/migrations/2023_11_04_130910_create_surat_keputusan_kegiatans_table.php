@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('surat_keputusan_kegiatans', function (Blueprint $table) {
             $table->increments('skk_id');
+            $table->foreignId('js_id');
             $table->string('skk_created')->nullable();
             $table->string('skk_updated')->nullable();
             $table->longText('skk_subject')->nullable();
@@ -31,7 +32,7 @@ return new class extends Migration
             $table->string('skk_disposisi')->nullable();
             $table->string('skk_approved')->nullable();
             $table->string('skk_remark')->nullable();
-            $table->string('skk_tembusan')->nullable();
+            $table->longText('skk_tembusan')->nullable();
             $table->date('skk_last_print')->nullable();
             $table->timestamps();
         });

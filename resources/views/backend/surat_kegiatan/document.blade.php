@@ -117,7 +117,7 @@
             </div>
             <div class="col-6">
                 <p style="text-align: left;" class="mb-0">Ditetapkan di : Samarinda</p>
-                <p style="text-align: left;" class="mb-0">Pada tanggal : {{ \Carbon\Carbon::now()->isoformat('D MMMM YYYY') }}</p>
+                <p style="text-align: left;" class="mb-0">Pada tanggal : {{ \Carbon\Carbon::parse($keputusan->skk_tgl_surat)->isoformat('D MMMM YYYY') }}</p>
             </div>
         </div>
         <div class="row mt-5">
