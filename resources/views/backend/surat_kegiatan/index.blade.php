@@ -30,10 +30,48 @@
                 </div>
             @endif
             <div class="card-header d-flex justify-content-end">
-                <a href="#" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                <a href="{{ route('skk.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
             <div class="card-body">
-
+                <table class="align-items-center table-flush table" id="dataTable">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>No Surat</th>
+                            <th>Subject Surat</th>
+                            <th>Disposisi</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($kegiatan as $kgt)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $kgt->skk_no_surat != null ? $kgt->skk_no_surat : $kgt->skk_uuid }}</td>
+                                <td>{{ $kgt->skk_subject }}</td>
+                                <td>{{ $kgt->skk_disposisi ?? 'belum ada data' }}</td>
+                                <td>{{ $kgt->skk_created ?? 'belum ada data' }}</td>
+                                <td>{{ $kgt->skk_updated ?? 'belum ada data' }}</td>
+                                <td>
+                                    <a href="{{ route('skk.edit', $kgt->skk_id) }}" class="btn btn-sm btn-warning"><i
+                                            class="fas fa-edit"></i></a>
+                                    <a href="{{ route('skk.show', $kgt->skk_id) }}" target="__blank" class="btn btn-sm btn-info"><i
+                                            class="fas fa-print"></i></a>
+                                    <a href="#" class="btn btn-sm btn-secondary"><i
+                                            class="fas fa-check-square"></i></a>
+                                    <form action="{{ route('skk.destroy', $kgt->skk_id) }}" method="post"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

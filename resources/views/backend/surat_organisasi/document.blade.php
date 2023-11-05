@@ -12,18 +12,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style type="text/css">
-        body {
+        :root {
             font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         .tebal {
-            border: 6px solid #000;
-            color: #000;
-            line-height: 1;
+            display: block;
+            border-bottom: 5px solid #000;
         }
 
         @media print {
-
             @page {
                 size: F4;
             }
@@ -33,14 +33,6 @@
 
 <body>
     <div class="container">
-        {{-- <table>
-            <thead>
-                <tr>
-                    <td><img src="{{ asset('ruang-admin/img/snapedit_1698973548659.png') }}" alt="Kop Surat"
-                            width="100%" style="top:0;"></td>
-                </tr>
-            </thead>
-        </table> --}}
         <table class="mt-2">
             <thead>
                 <tr>
@@ -61,14 +53,21 @@
                 </tr>
             </thead>
         </table>
-        <hr class="tebal mb-0">
-        <hr>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-        </script>
-        <script type="text/javascript">
-            window.print();
-        </script>
+        <span class="tebal mt-2"></span>
+        <span style="display: block; border-bottom: 1px solid #000;" class="mt-1"></span>
+        <div style="text-align: center;" class="mt-3"><b class="text-uppercase fs-5">Keputusan</b></div>
+        <div style="text-align: center;"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian Negeri Samarinda</b></div>
+        <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: ###/PL21/KM/2023</b></div>
+        <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">Tentang</b></div>
+        <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">Subject</b></div>
+        <div style="text-align: center;" class="mt-1"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian Negeri</b></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+        window.print();
+    </script>
 </body>
 
 </html>

@@ -67,8 +67,7 @@
                         </div>
                         <div class="form-group col-6">
                             <label for="mhs_prodi">Program Studi <sup class="text-danger">*</sup></label>
-                            <select name="mhs_prodi" class="form-control form-control-sm"
-                                id="mhs_prodi">
+                            <select name="mhs_prodi" class="form-control form-control-sm" id="mhs_prodi">
                                 @foreach ($prodi as $p)
                                     @if (old('mhs_prodi') == $p->prodi_nama)
                                         <option value="{{ $p->prodi_nama }}" name="mhs_prodi" selected>

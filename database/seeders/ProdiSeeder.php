@@ -26,7 +26,7 @@ class ProdiSeeder extends Seeder
             'prodi_nama' => 'Teknologi Rekayasa Geomatika & Survey',
             'prodi_alias' => 'TRGS',
             'prodi_code' => 'TRGS',
-            'prodi_jenjang' => 'D3',
+            'prodi_jenjang' => 'D4',
         ]);
     }
 }

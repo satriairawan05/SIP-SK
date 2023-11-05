@@ -16,13 +16,13 @@
         Registration
     </div>
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('sko.create') }}">
             <i class="fas fa-fw fa-envelope"></i>
             <span>SK Organisasi</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('skk.create') }}">
             <i class="fas fa-fw fa-envelope"></i>
             <span>SK Kegiatan</span>
         </a>
@@ -39,8 +39,9 @@
         <div id="collapseOrganisasi" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
             <div class="collapse-inner rounded bg-white py-2">
                 <h6 class="collapse-header">SK Organisasi</h6>
+                <a class="collapse-item" href="#">Struktur Organisasi</a>
                 <a class="collapse-item" href="{{ route('organisasi.index') }}">Organisasi</a>
-                <a class="collapse-item" href="#">Surat Keputusan</a>
+                <a class="collapse-item" href="{{ route('sko.index') }}">Surat Keputusan</a>
             </div>
         </div>
     </li>
@@ -52,8 +53,7 @@
         <div id="collapseKegiatan" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
             <div class="collapse-inner rounded bg-white py-2">
                 <h6 class="collapse-header">SK Kegiatan</h6>
-                <a class="collapse-item" href="{{ route('kegiatan.index') }}">Kegiatan</a>
-                <a class="collapse-item" href="#">Surat Keputusan</a>
+                <a class="collapse-item" href="{{ route('skk.index') }}">Surat Keputusan</a>
             </div>
         </div>
     </li>
@@ -81,6 +81,7 @@
                 <a class="collapse-item" href="{{ route('prodi.index') }}">Program Studi</a>
                 <a class="collapse-item" href="{{ route('jurusan.index') }}">Jurusan</a>
                 <a class="collapse-item" href="{{ route('jenis_surat.index') }}">Jenis Surat</a>
+                <a class="collapse-item" href="#">Signature</a>
             </div>
         </div>
     </li>
