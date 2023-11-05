@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('skk_approved')->nullable();
             $table->string('skk_remark')->nullable();
             $table->string('skk_tembusan')->nullable();
+            $table->date('skk_last_print')->nullable();
             $table->timestamps();
         });
     }
