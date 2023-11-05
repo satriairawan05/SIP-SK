@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('surat_keputusan_organisasis', function (Blueprint $table) {
             $table->increments('sko_id');
+            $table->foreignId('js_id');
             $table->foreignId('organisasi_id')->nullable();
             $table->string('sko_created')->nullable();
             $table->string('sko_updated')->nullable();
@@ -33,7 +34,7 @@ return new class extends Migration
             $table->string('sko_disposisi')->nullable();
             $table->string('sko_approved')->nullable();
             $table->string('sko_remark')->nullable();
-            $table->string('sko_tembusan')->nullable();
+            $table->longText('sko_tembusan')->nullable();
             $table->string('sko_lampiran')->nullable();
             $table->date('sko_last_print')->nullable();
             $table->timestamps();
