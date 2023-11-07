@@ -55,7 +55,7 @@
                                 <td>{{ $kgt->skk_disposisi ?? 'belum ada data' }}</td>
                                 <td>{{ $kgt->skk_created ?? 'belum ada data' }}</td>
                                 <td>{{ $kgt->skk_updated ?? 'belum ada data' }}</td>
-                                <td>{{ $kgt->sk_last_print ?? 'belum ada data' }}</td>
+                                <td>{{ $kgt->skk_last_print ?? 'belum ada data' }}</td>
                                 <td>
                                     <a href="{{ route('skk.edit', $kgt->skk_id) }}" class="btn btn-sm btn-warning"><i
                                             class="fas fa-edit"></i></a>

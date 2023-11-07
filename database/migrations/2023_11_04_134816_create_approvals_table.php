@@ -15,7 +15,6 @@ return new class extends Migration
             $table->increments('app_id');
             $table->foreignId('js_id')->nullable();
             $table->foreignId('user_id')->nullable();
-            $table->string('app_module')->nullable();
             $table->string('app_status')->nullable();
             $table->string('app_date')->nullable();
             $table->string('created_by')->nullable();

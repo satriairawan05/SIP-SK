@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('signatures', function (Blueprint $table) {
             $table->increments('sign_id');
+            $table->foreignId('js_id')->nullable();
             $table->string('sign_nama')->nullable();
             $table->string('sign_jabatan')->nullable();
             $table->string('sign_nip')->nullable();

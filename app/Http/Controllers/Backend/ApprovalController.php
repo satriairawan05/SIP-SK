@@ -21,7 +21,17 @@ class ApprovalController extends Controller
      */
     public function index()
     {
-        //
+        if (!request()->input('js_id')) {
+            return view('backend.setting.approval.index', [
+                'name' => $this->name,
+                'surat' => \App\Models\JenisSurat::all()
+            ]);
+        } else {
+            return view('backend.setting.approval.index2', [
+                'name' => $this->name,
+                'surat' => \App\Models\JenisSurat::where('js_id', request()->input('js_id'))->first(),
+            ]);
+        }
     }
 
     /**

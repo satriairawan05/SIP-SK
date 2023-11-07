@@ -87,7 +87,7 @@
                                     @endif
                                 @endforeach
                             </select>
-                            @error('organisasi_id')
+                            @error('prodi_id')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
