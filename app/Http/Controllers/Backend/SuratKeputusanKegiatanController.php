@@ -151,6 +151,6 @@ class SuratKeputusanKegiatanController extends Controller
     {
         SuratKeputusanKegiatan::destroy($suratKeputusanKegiatan->skk_id);
 
-        return redirect()->to(route('skk.index'))->with('success', 'deleted Successfully!');
+        return redirect()->to(route('skk.index'))->with('success', 'Deleted Successfully!');
     }
 }

@@ -120,7 +120,7 @@ class OrganisasiController extends Controller
      */
     public function destroy(Organisasi $organisasi)
     {
-        Organisasi::destroy($organisasi->id);
+        Organisasi::destroy($organisasi->organisasi_id);
 
         return redirect()->back()->with('success', 'Deleted Successfully!');
     }

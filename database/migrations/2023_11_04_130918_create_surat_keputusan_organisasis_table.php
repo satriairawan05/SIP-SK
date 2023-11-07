@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string('sko_approved')->nullable();
             $table->string('sko_remark')->nullable();
             $table->longText('sko_tembusan')->nullable();
-            $table->string('sko_lampiran')->nullable();
+            $table->string('sko_tentang')->nullable();
             $table->date('sko_last_print')->nullable();
             $table->timestamps();
         });

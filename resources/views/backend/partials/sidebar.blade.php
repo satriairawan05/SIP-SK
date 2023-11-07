@@ -39,7 +39,7 @@
         <div id="collapseOrganisasi" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
             <div class="collapse-inner rounded bg-white py-2">
                 <h6 class="collapse-header">SK Organisasi</h6>
-                <a class="collapse-item" href="#">Struktur Organisasi</a>
+                <a class="collapse-item" href="{{ route('struktur_organisasi.index') }}">Struktur Organisasi</a>
                 <a class="collapse-item" href="{{ route('organisasi.index') }}">Organisasi</a>
                 <a class="collapse-item" href="{{ route('sko.index') }}">Surat Keputusan</a>
             </div>
@@ -81,20 +81,8 @@
                 <a class="collapse-item" href="{{ route('prodi.index') }}">Program Studi</a>
                 <a class="collapse-item" href="{{ route('jurusan.index') }}">Jurusan</a>
                 <a class="collapse-item" href="{{ route('jenis_surat.index') }}">Jenis Surat</a>
-                <a class="collapse-item" href="#">Signature</a>
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseApproval" aria-expanded="true" aria-controls="collapseApproval">
-            <i class="fas fa-fw fa-pen-square"></i>
-            <span>Approval</span>
-        </a>
-        <div id="collapseApproval" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-            <div class="collapse-inner rounded bg-white py-2">
-                <h6 class="collapse-header">Approval</h6>
-                <a class="collapse-item" href="#">SK Organisasi</a>
-                <a class="collapse-item" href="#">SK Kegiatan</a>
+                <a class="collapse-item" href="{{ route('signature.index') }}">Signature</a>
+                <a class="collapse-item" href="{{ route('approval.index') }}">Approval</a>
             </div>
         </div>
     </li>

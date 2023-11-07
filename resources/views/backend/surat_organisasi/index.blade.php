@@ -30,10 +30,50 @@
                 </div>
             @endif
             <div class="card-header d-flex justify-content-end">
-                <a href="#" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                <a href="{{ route('sko.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
             <div class="card-body">
-
+                <table class="align-items-center table-flush table" id="dataTable">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>No Surat</th>
+                            <th>Subject Surat</th>
+                            <th>Disposisi</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                            <th>Last Print</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($organisasi as $org)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $org->sko_no_surat != null ? $org->sko_no_surat : $org->sko_uuid }}</td>
+                                <td>{{ $org->sko_subject }}</td>
+                                <td>{{ $org->sko_disposisi ?? 'belum ada data' }}</td>
+                                <td>{{ $org->sko_created ?? 'belum ada data' }}</td>
+                                <td>{{ $org->sko_updated ?? 'belum ada data' }}</td>
+                                <td>{{ $org->sko_last_print ?? 'belum ada data' }}</td>
+                                <td>
+                                    <a href="{{ route('sko.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
+                                            class="fas fa-edit"></i></a>
+                                    <a href="{{ route('sko.show', $org->sko_id) }}" target="__blank" class="btn btn-sm btn-info"><i
+                                            class="fas fa-print"></i></a>
+                                    <a href="#" class="btn btn-sm btn-secondary"><i
+                                            class="fas fa-check-square"></i></a>
+                                    <form action="{{ route('sko.destroy', $org->sko_id) }}" method="post"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

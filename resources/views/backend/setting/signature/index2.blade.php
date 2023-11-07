@@ -6,7 +6,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
             <li class="breadcrumb-item">{{ $name }}</li>
-            <li class="breadcrumb-item active" aria-current="page">Jenis Surat</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $surat->js_jenis }}</li>
         </ol>
     </div>
 
@@ -30,11 +30,117 @@
                     {{ session('failed') }}
                 </div>
             @endif
-            <div class="card-header d-flex justify-content-end">
-                <a href="#" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
-            </div>
             <div class="card-body">
+                <table class="align-items-center table-flush table" id="dataTable">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Jenis Surat</th>
+                            <th>Nama</th>
+                            <th>Jabatan</th>
+                            <th>Nip</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($signature as $sign)
+                            <form action="{{ route('signature.update', $sign->sign_id) }}" method="post">
+                                @csrf
+                                @method('put')
+                                <tr>
+                                    <td>
+                                        <input type="text" readonly value="{{ $surat->js_jenis }}"
+                                            class="form-control form-control-sm" name="js_jenis">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm" name="sign_nama"
+                                            value="{{ old('sign_nama', $sign->sign_nama) }}" placeholder="Enter Name">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm" name="sign_jabatan"
+                                            value="{{ old('sign_jabatan', $sign->sign_jabatan) }}"
+                                            placeholder="Enter Position">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control form-control-sm" name="sign_nip"
+                                            value="{{ old('sign_nip', $sign->sign_nip) }}" placeholder="Enter Nip">
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-sm btn-warning"><i
+                                                class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                                            data-target="#exampleModal" id="#myBtn">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </form>
 
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete {{ $sign->sign_nama }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <form action="{{ route('signature.destroy',$sign->sign_id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </tbody>
+                </table>
+                <table class="align-items-center table-flush mt-2 table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Jenis Surat</th>
+                            <th>Nama</th>
+                            <th>Jabatan</th>
+                            <th>Nip</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <form action="{{ route('signature.store') }}" method="post">
+                            @csrf
+                            <tr>
+                                <td>
+                                    <input type="text" readonly value="{{ $surat->js_jenis }}"
+                                        class="form-control form-control-sm" name="js_jenis">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control form-control-sm" name="sign_nama"
+                                        value="{{ old('sign_nama') }}" placeholder="Enter Name">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control form-control-sm" name="sign_jabatan"
+                                        value="{{ old('sign_jabatan') }}" placeholder="Enter Position">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control form-control-sm" name="sign_nip"
+                                        value="{{ old('sign_nip') }}" placeholder="Enter Nip">
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-sm btn-success"><i
+                                            class="fa fa-plus"></i></button>
+                                </td>
+                            </tr>
+                        </form>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

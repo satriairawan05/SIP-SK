@@ -40,9 +40,6 @@ Route::middleware('guest')->group(function () {
 
         // Surat Keputusan Organisasi
         Route::resource('sko', \App\Http\Controllers\Backend\SuratKeputusanOrganisasiController::class);
-
-        // Approval
-        Route::resource('approval', \App\Http\Controllers\Backend\ApprovalController::class);
     });
 });
 
@@ -92,5 +89,8 @@ Route::prefix('admin')->middleware('guest')->group(function () {
 
         // Approval
         Route::resource('approval', \App\Http\Controllers\Backend\ApprovalController::class);
+
+        // Signature
+        Route::resource('signature', \App\Http\Controllers\Backend\SignatureController::class);
     });
 });
