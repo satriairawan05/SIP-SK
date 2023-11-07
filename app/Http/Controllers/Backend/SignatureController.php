@@ -6,6 +6,7 @@ use App\Models\Signature;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator;
 
 class SignatureController extends Controller
 {
@@ -22,6 +23,18 @@ class SignatureController extends Controller
      */
     public function index()
     {
+        if (!request()->input('js_id')) {
+            return view('backend.setting.signature.index', [
+                'name' => $this->name,
+                'surat' => \App\Models\JenisSurat::all()
+            ]);
+        } else {
+            return view('backend.setting.signature.index2', [
+                'name' => $this->name,
+                'surat' => \App\Models\JenisSurat::where('js_id', request()->input('js_id'))->first(),
+                'signature' => Signature::all()
+            ]);
+        }
         if (!request()->input('js_id')) {
             return view('backend.setting.signature.index', [
                 'name' => $this->name,
@@ -119,6 +132,9 @@ class SignatureController extends Controller
      */
     public function destroy(Signature $signature)
     {
+        Signature::destroy($signature->sign_id);
+
+        return redirect()->back()->with('success', 'Deleted Successfully!');
         Signature::destroy($signature->sign_id);
 
         return redirect()->back()->with('success', 'Deleted Successfully!');
