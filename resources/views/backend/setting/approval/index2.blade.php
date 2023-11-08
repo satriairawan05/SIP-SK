@@ -30,6 +30,9 @@
                     {{ session('failed') }}
                 </div>
             @endif
+            <div class="card-header d-flex justify-content-end">
+                <a href="#" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+            </div>
             <div class="card-body">
                 <table class="align-items-center table-flush table" id="dataTable">
                     <thead class="thead-light">
@@ -52,16 +55,16 @@
                                         @foreach ($user as $u)
                                             @if (old('user_id',$app->user_id) == $u->id)
                                                 <option value="{{ $u->id }}" name="user_id" selected>
-                                                    {{ $u->name }}</option>
+                                                    {{ $u->nama }}</option>
                                             @else
                                                 <option value="{{ $u->id }}" name="user_id">
-                                                    {{ $u->name }}</option>
+                                                    {{ $u->nama }}</option>
                                             @endif
                                         @endforeach
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="number" name="app_ordinal" id="app_ordinal" min="1" max="6" value="{{ old('app_ordinal',$app->app_ordinal) }}" class="form-control form-control-sm">
+                                    <input type="number" name="app_ordinal" id="app_ordinal" min="1" max="6" value="{{ old('app_ordinal',$app->app_ordinal) }}">
                                 </td>
                                 <td>
                                         <button type="submit" class="btn btn-sm btn-warning"><i
@@ -106,7 +109,8 @@
                         <tr>
                             <th>Jenis Surat</th>
                             <th>Nama</th>
-                            <th>Ordinal</th>
+                            <th>Jabatan</th>
+                            <th>Nip</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -123,10 +127,10 @@
                                         @foreach ($user as $u)
                                             @if (old('user_id') == $u->id)
                                                 <option value="{{ $u->id }}" name="user_id" selected>
-                                                    {{ $u->name }}</option>
+                                                    {{ $u->nama }}</option>
                                             @else
                                                 <option value="{{ $u->id }}" name="user_id">
-                                                    {{ $u->name }}</option>
+                                                    {{ $u->nama }}</option>
                                             @endif
                                         @endforeach
                                     </select>
