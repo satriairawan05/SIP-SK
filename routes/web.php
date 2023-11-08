@@ -27,19 +27,19 @@ Route::middleware('guest')->group(function () {
         Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logoutMahasiswa'])->name('mahasiswa.logout');
 
         // Dashboard Mahasiswa
-        Route::get('/', fn () => view('backend.home'))->name('home');
+        Route::get('/', fn () => view('mahasiswa.home'))->name('home');
 
         // Organisasi
-        Route::resource('organisasi', \App\Http\Controllers\Backend\OrganisasiController::class);
+        Route::resource('organisasi', \App\Http\Controllers\Mahasiswa\OrganisasiController::class);
 
         // Struktur Organisasi
-        Route::resource('struktur_organisasi', \App\Http\Controllers\Backend\StrukturOrganisasiController::class);
+        Route::resource('struktur_organisasi', \App\Http\Controllers\Mahasiswa\StrukturOrganisasiController::class);
 
         // Surat Keputusan Kegiatan
-        Route::resource('skk', \App\Http\Controllers\Backend\SuratKeputusanKegiatanController::class);
+        Route::resource('skk', \App\Http\Controllers\Mahasiswa\SuratKeputusanKegiatanController::class);
 
         // Surat Keputusan Organisasi
-        Route::resource('sko', \App\Http\Controllers\Backend\SuratKeputusanOrganisasiController::class);
+        Route::resource('sko', \App\Http\Controllers\Mahasiswa\SuratKeputusanOrganisasiController::class);
     });
 });
 

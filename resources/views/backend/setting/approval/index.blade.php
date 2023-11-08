@@ -12,7 +12,10 @@
     <div class="row mb-3">
         <div class="card col-12">
             <div class="card-body">
-
+                @foreach ($surat as $s)
+                    <li class="list-group-item"><a href="?js_id={!! $s->js_id !!}"
+                            class="text-decoration-none">{{ $s->js_jenis }}</a></li>
+                @endforeach
             </div>
         </div>
     </div>

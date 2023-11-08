@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('organisasis', function (Blueprint $table) {
             $table->increments('organisasi_id');
             $table->foreignId('prodi_id')->nullable();
-            $table->string('organisasi_departemen')->nullable();
             $table->string('organisasi_nama')->nullable();
             $table->string('organisasi_status')->nullable();
             $table->string('organisasi_periode')->nullable();
