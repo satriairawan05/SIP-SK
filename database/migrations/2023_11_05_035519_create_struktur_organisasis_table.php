@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('struktur_organisasis', function (Blueprint $table) {
             $table->increments('so_id');
             $table->foreignId('organisasi_id')->nullable();
+            $table->string('so_departemen')->nullable();
             $table->string('so_jabatan')->nullable();
             $table->string('so_nama')->nullable();
             $table->timestamps();

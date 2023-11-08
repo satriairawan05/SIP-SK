@@ -30,41 +30,45 @@
                 </div>
             @endif
             <div class="card-header d-flex justify-content-end">
-                <a href="{{ route('struktur_organisasi.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                <a href="{{ route('skk.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
             <div class="card-body">
                 <table class="align-items-center table-flush table" id="dataTable">
                     <thead class="thead-light">
                         <tr>
                             <th>#</th>
-                            <th>Nama</th>
-                            <th>Jabatan</th>
-                            <th>Organisasi</th>
-                            <th>Departemen</th>
+                            <th>No Surat</th>
+                            <th>Subject Surat</th>
+                            <th>Disposisi</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                            <th>Last Print</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($organisasi as $org)
+                        @foreach ($kegiatan as $kgt)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $org->so_nama }}</td>
-                                <td>{{ $org->so_jabatan }}</td>
-                                <td>{{ $org->so_departemen }}</td>
-                                <td>{{ $org->organisasi_nama }}</td>
+                                <td>{{ $kgt->skk_no_surat != null ? $kgt->skk_no_surat : $kgt->skk_uuid }}</td>
+                                <td>{{ $kgt->skk_subject }}</td>
+                                <td>{{ $kgt->skk_disposisi ?? 'belum ada data' }}</td>
+                                <td>{{ $kgt->skk_created ?? 'belum ada data' }}</td>
+                                <td>{{ $kgt->skk_updated ?? 'belum ada data' }}</td>
+                                <td>{{ $kgt->skk_last_print ?? 'belum ada data' }}</td>
                                 <td>
-                                    {{-- Edit --}}
-                                    <a href="{{ route('struktur_organisasi.edit', $org->so_id) }}"
-                                        class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                                    {{-- Edit --}}
-                                    {{-- Delete --}}
-                                    <form action="{{ route('struktur_organisasi.destroy', $org->so_id) }}" method="post"
+                                    <a href="{{ route('skk.edit', $kgt->skk_id) }}" class="btn btn-sm btn-warning"><i
+                                            class="fas fa-edit"></i></a>
+                                    <a href="{{ route('skk.show', $kgt->skk_id) }}" target="__blank" class="btn btn-sm btn-info"><i
+                                            class="fas fa-print"></i></a>
+                                    <a href="#" class="btn btn-sm btn-secondary"><i
+                                            class="fas fa-check-square"></i></a>
+                                    <form action="{{ route('skk.destroy', $kgt->skk_id) }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
-                                    {{-- Delete --}}
                                 </td>
                             </tr>
                         @endforeach

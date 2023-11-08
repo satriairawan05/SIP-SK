@@ -30,7 +30,7 @@
                 </div>
             @endif
             <div class="card-header d-flex justify-content-end">
-                <a href="{{ route('struktur_organisasi.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                <a href="{{ route('organisasi.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
             <div class="card-body">
                 <table class="align-items-center table-flush table" id="dataTable">
@@ -38,9 +38,8 @@
                         <tr>
                             <th>#</th>
                             <th>Nama</th>
-                            <th>Jabatan</th>
-                            <th>Organisasi</th>
-                            <th>Departemen</th>
+                            <th>Status</th>
+                            <th>Periode</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -48,17 +47,16 @@
                         @foreach ($organisasi as $org)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $org->so_nama }}</td>
-                                <td>{{ $org->so_jabatan }}</td>
-                                <td>{{ $org->so_departemen }}</td>
                                 <td>{{ $org->organisasi_nama }}</td>
+                                <td>{{ $org->organisasi_status }}</td>
+                                <td>{{ $org->organisasi_periode }}</td>
                                 <td>
                                     {{-- Edit --}}
-                                    <a href="{{ route('struktur_organisasi.edit', $org->so_id) }}"
+                                    <a href="{{ route('organisasi.edit', $org->organisasi_id) }}"
                                         class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
                                     {{-- Edit --}}
                                     {{-- Delete --}}
-                                    <form action="{{ route('struktur_organisasi.destroy', $org->so_id) }}" method="post"
+                                    <form action="{{ route('organisasi.destroy', $org->organisasi_id) }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         @method('delete')

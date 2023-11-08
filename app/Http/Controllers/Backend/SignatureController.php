@@ -122,8 +122,5 @@ class SignatureController extends Controller
         Signature::destroy($signature->sign_id);
 
         return redirect()->back()->with('success', 'Deleted Successfully!');
-        Signature::destroy($signature->sign_id);
-
-        return redirect()->back()->with('success', 'Deleted Successfully!');
     }
 }

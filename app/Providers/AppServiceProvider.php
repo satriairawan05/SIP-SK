@@ -11,6 +11,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Not use Fillable
         \Illuminate\Database\Eloquent\Model::unguard();
     }
 

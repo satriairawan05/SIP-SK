@@ -5,7 +5,7 @@
         <h1 class="h3 mb-0 text-gray-800">{{ $name }}</h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item">{{ $name }}</li>
+            <li class="breadcrumb-item"><a href="{{ route('signature.index') }}">{{ $name }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ $surat->js_jenis }}</li>
         </ol>
     </div>
