@@ -32,7 +32,7 @@ class ApprovalController extends Controller
                 'name' => $this->name,
                 'surat' => \App\Models\JenisSurat::where('js_id', request()->input('js_id'))->first(),
                 'approval' => Approval::all(),
-                'user' => \App\Models\User::all(),
+                'user' => \App\Models\User::whereNot('id',1)->get(),
             ]);
         }
     }

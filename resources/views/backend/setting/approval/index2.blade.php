@@ -55,10 +55,10 @@
                                         @foreach ($user as $u)
                                             @if (old('user_id',$app->user_id) == $u->id)
                                                 <option value="{{ $u->id }}" name="user_id" selected>
-                                                    {{ $u->nama }}</option>
+                                                    {{ $u->name }}</option>
                                             @else
                                                 <option value="{{ $u->id }}" name="user_id">
-                                                    {{ $u->nama }}</option>
+                                                    {{ $u->name }}</option>
                                             @endif
                                         @endforeach
                                     </select>
@@ -127,10 +127,10 @@
                                         @foreach ($user as $u)
                                             @if (old('user_id') == $u->id)
                                                 <option value="{{ $u->id }}" name="user_id" selected>
-                                                    {{ $u->nama }}</option>
+                                                    {{ $u->name }}</option>
                                             @else
                                                 <option value="{{ $u->id }}" name="user_id">
-                                                    {{ $u->nama }}</option>
+                                                    {{ $u->name }}</option>
                                             @endif
                                         @endforeach
                                     </select>
