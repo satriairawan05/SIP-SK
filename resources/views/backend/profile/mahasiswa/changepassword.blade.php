@@ -5,47 +5,33 @@
         <h1 class="h3 mb-0 text-gray-800">{{ $name }}</h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('user.index') }}">{{ $name }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $name }}</li>
         </ol>
     </div>
 
     <div class="row mb-3">
         <div class="card col-12">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h6><i class="fas fa-check"></i><b> Success!</b></h6>
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session('failed'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h6><i class="fas fa-exclamation-triangle"></i><b> Failed!</b></h6>
+                    {{ session('failed') }}
+                </div>
+            @endif
             <div class="card-body">
-                <form action="{{ route('user.update', $user->id) }}" method="post">
+                <form action="{{ route('mahasiswa.changepassword_update', $mahasiswa->mhs_id) }}" method="post">
                     @csrf
-                    @method('put')
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <label for="name">Name<sup class="text-danger">*</sup></label>
-                            <input type="text"
-                                class="form-control form-control-sm @error('name')
-                            is-invalid
-                        @enderror"
-                                name="name" id="name" value="{{ old('name', $user->name) }}"
-                                placeholder="Enter name ex: Budi" required>
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="email">Email<sup class="text-danger">*</sup></label>
-                            <input type="email"
-                                class="form-control form-control-sm @error('email')
-                            is-invalid
-                        @enderror"
-                                name="email" id="email" value="{{ old('email', $user->email) }}"
-                                placeholder="Enter email" required>
-                            @error('email')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="password">Password<sup class="text-danger">*</sup></label>
@@ -65,12 +51,13 @@
                             <label for="password-confirm">Confirm Password<sup class="text-danger">*</sup></label>
                             <input type="password" name="password_confirmation" class="form-control form-control-sm"
                                 id="password-confirm" placeholder="Enter password" required>
-                            <span id="togglePasswordConfirm" class="toggle-password text-bg-dark"><i class="fa fa-eye"></i></span>
+                            <span id="togglePasswordConfirm" class="toggle-password text-bg-dark"><i
+                                    class="fa fa-eye"></i></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
-                            <a href="{{ route('user.index') }}" class="btn btn-sm btn-info mx-2"><i
+                            <a href="{{ route('dashboard') }}" class="btn btn-sm btn-info mx-2"><i
                                     class="fas fa-reply-all"></i></a>
                             <button type="submit" class="btn btn-sm btn-success">Submit</button>
                         </div>

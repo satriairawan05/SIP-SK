@@ -23,9 +23,13 @@
                     @endif
                 @endif
                 <span
-                    class="d-none d-lg-inline small ml-2 text-white">{{ auth()->guard('admin')->check()? auth()->user()->name: auth()->guard('mahasiswa')->user()->mhs_nama }}</span>
+                    class="d-none d-lg-inline small ml-2 text-white">{{ auth()->guard('admin')->check() ? auth()->user()->name : auth()->guard('mahasiswa')->user()->mhs_nama }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right animated--grow-in shadow" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="{{ auth()->guard('admin')->check() ? route('user.changepassword',auth()->guard('admin')->user()->id) : route('mahasiswa.changepassword',auth()->guard('mahasiswa')->user()->mhs_id) }}">
+                    <i class="fas fa-user-cog fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Change Password
+                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

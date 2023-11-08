@@ -53,7 +53,7 @@
                             is-invalid
                         @enderror"
                                 name="password" id="password" placeholder="Enter password" required>
-
+                            <span id="togglePassword" class="toggle-password text-bg-dark"><i class="fa fa-eye"></i></span>
                             @error('password')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -64,6 +64,7 @@
                             <label for="password-confirm">Confirm Password<sup class="text-danger">*</sup></label>
                             <input type="password" name="password_confirmation" class="form-control form-control-sm"
                                 id="password-confirm" placeholder="Enter password" required>
+                                <span id="togglePasswordConfirm" class="toggle-password text-bg-dark"><i class="fa fa-eye"></i></span>
                         </div>
                     </div>
                     <div class="row">

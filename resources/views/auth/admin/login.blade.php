@@ -1,6 +1,15 @@
 @extends('auth.layout.app')
 
 @section('auth')
+    <style>
+        .toggle-password {
+            position: absolute;
+            right: 70px;
+            top: 45%;
+            transform: translateY(-70%);
+            cursor: pointer;
+        }
+    </style>
     <div class="card my-5 shadow-sm">
         <div class="card-body p-0">
             @if (session('loginError'))
@@ -35,6 +44,8 @@
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control" id="password"
                                     placeholder="Password">
+                                <span id="togglePassword" class="toggle-password text-bg-dark"><i
+                                        class="fa fa-eye"></i></span>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">

@@ -17,7 +17,7 @@
                 <div class="row align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Total Mahasiswa</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ App\Models\Mahasiswa::count() }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $mahasiswa }}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-users fa-2x text-primary"></i>
@@ -33,7 +33,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Total Organisasi</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ App\Models\Organisasi::count() }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $organisasi }}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-users-cog fa-2x text-primary"></i>

@@ -26,8 +26,18 @@ Route::middleware('guest')->group(function () {
         // Logout
         Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logoutMahasiswa'])->name('mahasiswa.logout');
 
+        // Change Password
+        Route::get('/change_password/{mahasiswa}/password', [\App\Http\Controllers\Auth\LoginController::class, 'showChangePasswordMahasiswaForm'])->name('mahasiswa.changepassword');
+        Route::put('/change_password/{mahasiswa}', [\App\Http\Controllers\Auth\Controller::class, 'ChangePasswordMahasiswa'])->name('mahasiswa.changepassword_update');
+
         // Dashboard Mahasiswa
-        Route::get('/', fn () => view('mahasiswa.home'))->name('home');
+        Route::get('/', fn () => view('mahasiswa.home', [
+            'mahasiswa' => \App\Models\Organisasi::count(),
+            'organisasi' => \App\Models\Organisasi::count()
+        ]))->name('home');
+
+        // Archive
+        Route::get('archive', \App\Http\Controllers\Mahasiswa\ArchiveController::class)->name('archive.index');
 
         // Organisasi
         Route::resource('organisasi', \App\Http\Controllers\Mahasiswa\OrganisasiController::class);
@@ -53,8 +63,18 @@ Route::prefix('admin')->middleware('guest')->group(function () {
         // Logout
         Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logoutUser'])->name('user.logout');
 
+        // Change Password
+        Route::get('/change_password/{user}/password', [\App\Http\Controllers\Auth\LoginController::class, 'showChangePasswordUserForm'])->name('user.changepassword');
+        Route::put('/change_password/{user}', [\App\Http\Controllers\Auth\Controller::class, 'ChangePasswordUser'])->name('user.changepassword_update');
+
         // Dashboard Admin
-        Route::get('/', fn () => view('backend.home'))->name('dashboard');
+        Route::get('/', fn () => view('backend.home', [
+            'mahasiswa' => \App\Models\Organisasi::count(),
+            'organisasi' => \App\Models\Organisasi::count()
+        ]))->name('dashboard');
+
+        // Archive
+        Route::get('archive', \App\Http\Controllers\Backend\ArchiveController::class)->name('archive.index');
 
         // User
         Route::resource('user', \App\Http\Controllers\Backend\UserController::class);

@@ -100,3 +100,23 @@ window.addEventListener("focus", () => {
 var version = document.getElementById("version-ruangadmin");
 
 version.innerHTML = "Version 1.0";
+
+const togglePassword = document.getElementById('togglePassword');
+const passwordInput = document.getElementById('password');
+
+togglePassword.addEventListener('click', function () {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.querySelector('i').classList.toggle('fa-eye');
+    this.querySelector('i').classList.toggle('fa-eye-slash');
+});
+
+const togglePasswordConfirm = document.getElementById('togglePasswordConfirm');
+const passwordInputConfirm = document.getElementById('password-confirm');
+
+togglePasswordConfirm.addEventListener('click', function () {
+    const type = passwordInputConfirm.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInputConfirm.setAttribute('type', type);
+    this.querySelector('i').classList.toggle('fa-eye');
+    this.querySelector('i').classList.toggle('fa-eye-slash');
+});

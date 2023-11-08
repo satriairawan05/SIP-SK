@@ -28,6 +28,37 @@ class LoginController extends Controller
     }
 
     /**
+     * Display a listing for User of the resource.
+     */
+    public function showChangePasswordUserForm(\App\Models\User $user)
+    {
+        return view('backend.profile.admin.changepassword',[
+            'name' => 'Change Password',
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Process change password for User.
+     */
+    public function ChangePasswordUser(Request $request, \App\Models\User $user)
+    {
+        $validated = \Illuminate\Support\Facades\Validator::make($request->all(), [
+            'password' => ['required', 'string', 'confirmed']
+        ]);
+
+        if(!$validated->fails()){
+            \App\Models\User::where('id',$user->id)->update([
+                'password' => bcrypt($request->input('password'))
+            ]);
+
+            return redirect()->back()->with('success', 'Updated Password Successfully!');
+        } else {
+            return redirect()->back()->with('failed', $validated->getMessageBag());
+        }
+    }
+
+    /**
      * Process login for User.
      */
     public function loginUser(Request $request)
@@ -73,6 +104,38 @@ class LoginController extends Controller
         return view('auth.mahasiswa.login', [
             'name' => $this->name
         ]);
+    }
+
+    /**
+     * Display a listing for Mahasiswa of the resource.
+     */
+    public function showChangePasswordMahasiswaForm(\App\Models\Mahasiswa $mahasiswa)
+    {
+        return view('backend.profile.mahasiswa.changepassword',[
+            'name' => 'Change Password',
+            'mahasiswa' => $mahasiswa
+        ]);
+    }
+
+    /**
+     * Process change password for Mahasiswa.
+     */
+    public function ChangePasswordMahasiswa(Request $request, \App\Models\Mahasiswa $mahasiswa)
+    {
+        $validated = \Illuminate\Support\Facades\Validator::make($request->all(), [
+            'password' => ['required', 'string', 'confirmed']
+        ]);
+
+        if(!$validated->fails()){
+            \App\Models\Mahasiswa::where('mhs_id',$mahasiswa->mhs_id)->update([
+                'password' => bcrypt($request->input('password'))
+            ]);
+
+            return redirect()->back()->with('success', 'Updated Password Successfully!');
+
+        } else {
+            return redirect()->back()->with('failed', $validated->getMessageBag());
+        }
     }
 
     /**

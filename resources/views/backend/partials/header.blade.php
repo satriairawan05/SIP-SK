@@ -17,6 +17,15 @@
     <link href="{{ asset('ruang-admin/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('ruang-admin/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"
         rel="stylesheet">
+    <style>
+        .toggle-password {
+            position: absolute;
+            right: 22px;
+            top: 82%;
+            transform: translateY(-70%);
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body id="page-top">
