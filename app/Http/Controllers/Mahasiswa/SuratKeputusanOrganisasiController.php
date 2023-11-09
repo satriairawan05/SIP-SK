@@ -72,21 +72,7 @@ class SuratKeputusanOrganisasiController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $validated = Validator::make($request->all(), [
-                'sko_subject' => ['required', 'string'],
-                'sko_tgl_surat' => ['required', 'date'],
-                'sko_menimbang' => ['required', 'string'],
-                'sko_mengingat' => ['required', 'string'],
-                'sko_memperhatikan' => ['required', 'string'],
-                'sko_menetapkan' => ['required', 'string'],
-                'sko_kesatu' => ['required', 'string'],
-                'sko_kedua' => ['required', 'string'],
-                'sko_ketiga' => ['required', 'string'],
-                'sko_keempat' => ['required', 'string'],
-                'sko_kelima' => ['required', 'string'],
-                'sko_tembusan' => ['required', 'string'],
-            ]);
+
         try {
             $validated = Validator::make($request->all(), [
                 'sko_subject' => ['required', 'string'],
@@ -125,13 +111,6 @@ class SuratKeputusanOrganisasiController extends Controller
                     'sko_approved_step' => 1
                 ]);
 
-                return redirect()->to(route('sko.index'))->with('success', 'Added Successfully!');
-            } else {
-                return redirect()->to(route('sko.index'))->with('failed', $validated->getMessageBag());
-            }
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
                 return redirect()->to(route('sko.index'))->with('success', 'Added Successfully!');
             } else {
                 return redirect()->to(route('sko.index'))->with('failed', $validated->getMessageBag());
@@ -210,20 +189,6 @@ class SuratKeputusanOrganisasiController extends Controller
                 'sko_keempat' => ['required', 'string'],
                 'sko_tembusan' => ['required', 'string'],
             ]);
-        try {
-            $validated = Validator::make($request->all(), [
-                'sko_subject' => ['required', 'string'],
-                'sko_tgl_surat' => ['required', 'date'],
-                'sko_menimbang' => ['required', 'string'],
-                'sko_mengingat' => ['required', 'string'],
-                'sko_memperhatikan' => ['required', 'string'],
-                'sko_menetapkan' => ['required', 'string'],
-                'sko_kesatu' => ['required', 'string'],
-                'sko_kedua' => ['required', 'string'],
-                'sko_ketiga' => ['required', 'string'],
-                'sko_keempat' => ['required', 'string'],
-                'sko_tembusan' => ['required', 'string'],
-            ]);
 
             if (!$validated->fails()) {
                 SuratKeputusanOrganisasi::where('sko_id', $suratKeputusanOrganisasi->sko_id)->update([
@@ -251,13 +216,6 @@ class SuratKeputusanOrganisasiController extends Controller
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
         }
-                return redirect()->to(route('sko.index'))->with('success', 'Updated Successfully!');
-            } else {
-                return redirect()->to(route('sko.index'))->with('failed', $validated->getMessageBag());
-            }
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
     }
 
     /**
@@ -267,13 +225,7 @@ class SuratKeputusanOrganisasiController extends Controller
     {
         try {
             SuratKeputusanOrganisasi::destroy($suratKeputusanOrganisasi->sko_id);
-        try {
-            SuratKeputusanOrganisasi::destroy($suratKeputusanOrganisasi->sko_id);
 
-            return redirect()->to(route('sko.index'))->with('success', 'Deleted Successfully!');
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
             return redirect()->to(route('sko.index'))->with('success', 'Deleted Successfully!');
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());

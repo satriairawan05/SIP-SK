@@ -80,20 +80,6 @@ class SuratKeputusanKegiatanController extends Controller
                 'skk_keempat' => ['required', 'string'],
                 'skk_tembusan' => ['required', 'string'],
             ]);
-        try {
-            $validated = Validator::make($request->all(), [
-                'skk_subject' => ['required', 'string'],
-                'skk_tgl_surat' => ['required', 'date'],
-                'skk_menimbang' => ['required', 'string'],
-                'skk_mengingat' => ['required', 'string'],
-                'skk_memperhatikan' => ['required', 'string'],
-                'skk_menetapkan' => ['required', 'string'],
-                'skk_kesatu' => ['required', 'string'],
-                'skk_kedua' => ['required', 'string'],
-                'skk_ketiga' => ['required', 'string'],
-                'skk_keempat' => ['required', 'string'],
-                'skk_tembusan' => ['required', 'string'],
-            ]);
 
             if (!$validated->fails()) {
                 $jenisSurat = \App\Models\JenisSurat::where('js_jenis',$this->name)->first();
@@ -122,13 +108,6 @@ class SuratKeputusanKegiatanController extends Controller
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
         }
-                return redirect()->to(route('skk.index'))->with('success', 'Added Successfully!');
-            } else {
-                return redirect()->to(route('skk.index'))->with('failed', $validated->getMessageBag());
-            }
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
     }
 
     /**
@@ -136,15 +115,6 @@ class SuratKeputusanKegiatanController extends Controller
      */
     public function show(SuratKeputusanKegiatan $suratKeputusanKegiatan)
     {
-        try {
-            $surat = $suratKeputusanKegiatan->find(request()->segment(3));
-            return view('mahasiswa.surat_kegiatan.document',[
-                'keputusan' => $suratKeputusanKegiatan->find(request()->segment(3)),
-                'signature' => \App\Models\Signature::leftJoin('jenis_surats','signatures.js_id', '=', 'jenis_surats.js_id')->where('signatures.js_id','=', $surat->js_id)->first()
-            ]);
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
         try {
             $surat = $suratKeputusanKegiatan->find(request()->segment(3));
             return view('mahasiswa.surat_kegiatan.document',[
@@ -169,14 +139,6 @@ class SuratKeputusanKegiatanController extends Controller
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
         }
-        try {
-            return view('mahasiswa.surat_kegiatan.edit', [
-                'name' => $this->name,
-                'keputusan' => $suratKeputusanKegiatan->find(request()->segment(3)),
-            ]);
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
     }
 
     /**
@@ -184,20 +146,6 @@ class SuratKeputusanKegiatanController extends Controller
      */
     public function update(Request $request, SuratKeputusanKegiatan $suratKeputusanKegiatan)
     {
-        try {
-            $validated = Validator::make($request->all(), [
-                'skk_subject' => ['required', 'string'],
-                'skk_tgl_surat' => ['required', 'date'],
-                'skk_menimbang' => ['required', 'string'],
-                'skk_mengingat' => ['required', 'string'],
-                'skk_memperhatikan' => ['required', 'string'],
-                'skk_menetapkan' => ['required', 'string'],
-                'skk_kesatu' => ['required', 'string'],
-                'skk_kedua' => ['required', 'string'],
-                'skk_ketiga' => ['required', 'string'],
-                'skk_keempat' => ['required', 'string'],
-                'skk_tembusan' => ['required', 'string'],
-            ]);
         try {
             $validated = Validator::make($request->all(), [
                 'skk_subject' => ['required', 'string'],
@@ -237,13 +185,6 @@ class SuratKeputusanKegiatanController extends Controller
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
         }
-                return redirect()->to(route('skk.index'))->with('success', 'Updated Successfully!');
-            } else {
-                return redirect()->to(route('skk.index'))->with('failed', $validated->getMessageBag());
-            }
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
     }
 
     /**
@@ -253,13 +194,7 @@ class SuratKeputusanKegiatanController extends Controller
     {
         try {
             SuratKeputusanKegiatan::destroy($suratKeputusanKegiatan->skk_id);
-        try {
-            SuratKeputusanKegiatan::destroy($suratKeputusanKegiatan->skk_id);
 
-            return redirect()->to(route('skk.index'))->with('success', 'Deleted Successfully!');
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
             return redirect()->to(route('skk.index'))->with('success', 'Deleted Successfully!');
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
