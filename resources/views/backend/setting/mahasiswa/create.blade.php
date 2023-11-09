@@ -12,6 +12,15 @@
 
     <div class="row mb-3">
         <div class="card col-12">
+            @if (session('failed'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h6><i class="fas fa-exclamation-triangle"></i><b> Failed!</b></h6>
+                    {{ session('failed') }}
+                </div>
+            @endif
             <div class="card-body">
                 <form action="{{ route('mahasiswa.store') }}" method="post">
                     @csrf

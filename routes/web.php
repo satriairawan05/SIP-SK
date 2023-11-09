@@ -33,23 +33,25 @@ Route::middleware('guest')->group(function () {
         // Dashboard Mahasiswa
         Route::get('/', fn () => view('mahasiswa.home', [
             'mahasiswa' => \App\Models\Organisasi::count(),
-            'organisasi' => \App\Models\Organisasi::count()
+            'organisasi' => \App\Models\Organisasi::count(),
+            'acc' => \App\Models\SuratKeputusanOrganisasi::whereNotNull('sko_no_surat')->count() + \App\Models\SuratKeputusanKegiatan::whereNotNull('skk_no_surat')->count(),
+            'wait' => \App\Models\SuratKeputusanOrganisasi::whereNull('sko_no_surat')->count() + \App\Models\SuratKeputusanKegiatan::whereNull('skk_no_surat')->count(),
         ]))->name('home');
 
         // Archive
-        Route::get('archive', \App\Http\Controllers\Mahasiswa\ArchiveController::class)->name('archive.index');
+        Route::get('archive', \App\Http\Controllers\Mahasiswa\ArchiveController::class)->name('arc.index');
 
         // Organisasi
-        Route::resource('organisasi', \App\Http\Controllers\Mahasiswa\OrganisasiController::class);
+        Route::resource('organisasi', \App\Http\Controllers\Mahasiswa\OrganisasiController::class)->names('organisasis');
 
         // Struktur Organisasi
-        Route::resource('struktur_organisasi', \App\Http\Controllers\Mahasiswa\StrukturOrganisasiController::class);
+        Route::resource('struktur_organisasi', \App\Http\Controllers\Mahasiswa\StrukturOrganisasiController::class)->names('struktur_organisasis');
 
         // Surat Keputusan Kegiatan
-        Route::resource('skk', \App\Http\Controllers\Mahasiswa\SuratKeputusanKegiatanController::class);
+        Route::resource('skk', \App\Http\Controllers\Mahasiswa\SuratKeputusanKegiatanController::class)->names('skks');
 
         // Surat Keputusan Organisasi
-        Route::resource('sko', \App\Http\Controllers\Mahasiswa\SuratKeputusanOrganisasiController::class);
+        Route::resource('sko', \App\Http\Controllers\Mahasiswa\SuratKeputusanOrganisasiController::class)->names('skos');
     });
 });
 
@@ -70,7 +72,9 @@ Route::prefix('admin')->middleware('guest')->group(function () {
         // Dashboard Admin
         Route::get('/', fn () => view('backend.home', [
             'mahasiswa' => \App\Models\Organisasi::count(),
-            'organisasi' => \App\Models\Organisasi::count()
+            'organisasi' => \App\Models\Organisasi::count(),
+            'acc' => \App\Models\SuratKeputusanOrganisasi::whereNotNull('sko_no_surat')->count() + \App\Models\SuratKeputusanKegiatan::whereNotNull('skk_no_surat')->count(),
+            'wait' => \App\Models\SuratKeputusanOrganisasi::whereNull('sko_no_surat')->count() + \App\Models\SuratKeputusanKegiatan::whereNull('skk_no_surat')->count(),
         ]))->name('dashboard');
 
         // Archive
@@ -112,5 +116,8 @@ Route::prefix('admin')->middleware('guest')->group(function () {
 
         // Signature
         Route::resource('signature', \App\Http\Controllers\Backend\SignatureController::class);
+
+        // Role Permission
+        // Route::resource('role', \App\Http\Controllers\Backend\GroupController::class)->except(['show']);
     });
 });

@@ -57,7 +57,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
-                            <a href="{{ route('dashboard') }}" class="btn btn-sm btn-info mx-2"><i
+                            <a href="{{ auth()->guard('admin')->check() ?  route('dashboard') : route('home') }}" class="btn btn-sm btn-info mx-2"><i
                                     class="fas fa-reply-all"></i></a>
                             <button type="submit" class="btn btn-sm btn-success">Submit</button>
                         </div>

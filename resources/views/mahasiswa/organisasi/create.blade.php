@@ -1,19 +1,28 @@
-@extends('backend.layout.app')
+@extends('mahasiswa.layout.app')
 
 @section('app')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">{{ $name }}</h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('organisasi.index') }}">{{ $name }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('organisasis.index') }}">{{ $name }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">Create</li>
         </ol>
     </div>
 
     <div class="row mb-3">
         <div class="card col-12">
+            @if (session('failed'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h6><i class="fas fa-exclamation-triangle"></i><b> Failed!</b></h6>
+                    {{ session('failed') }}
+                </div>
+            @endif
             <div class="card-body">
-                <form action="{{ route('organisasi.store') }}" method="post">
+                <form action="{{ route('organisasis.store') }}" method="post">
                     @csrf
                     <div class="row">
                         <div class="form-group col-6">
@@ -93,7 +102,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
-                            <a href="{{ route('organisasi.index') }}" class="btn btn-sm btn-info mx-2"><i
+                            <a href="{{ route('organisasis.index') }}" class="btn btn-sm btn-info mx-2"><i
                                     class="fas fa-reply-all"></i></a>
                             <button type="submit" class="btn btn-sm btn-success">Submit</button>
                         </div>

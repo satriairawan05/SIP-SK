@@ -126,15 +126,17 @@
         <div class="row mt-5">
             <div class="col-6">
             </div>
+            @if($keputusan->sk_no_surat != null)
             <div class="col-6">
                 <p style="text-align: left;" class="mb-0">Direktur, </p>
-                <p style="text-align: left;" class="mb-0">Politeknik Pertanian Negeri Samarinda</p>
+                <p style="text-align: left;" class="mb-0">{{ $signature->sign_jabatan }}</p>
                 <br>
                 <br>
                 <br>
-                <p style="text-align: left;" class="mb-0">Nama Direktur</p>
-                <p style="text-align: left;" class="mb-0">Nip Direktur</p>
+                <p style="text-align: left;" class="mb-0">{{ $signatur->sign_nama }}</p>
+                <p style="text-align: left;" class="mb-0">{{ $signature->sign_nip }}</p>
             </div>
+            @endif
         </div>
         <div class="row">
             <div class="col-6">

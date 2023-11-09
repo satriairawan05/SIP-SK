@@ -17,15 +17,20 @@ class JurusanController extends Controller
         //
     }
 
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('backend.setting.jurusan.index', [
-            'name' => $this->name,
-            'jurusan' => Jurusan::all()
-        ]);
+        try {
+            return view('backend.setting.jurusan.index', [
+                'name' => $this->name,
+                'jurusan' => Jurusan::all(),
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -33,9 +38,13 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        return view('backend.setting.jurusan.create', [
-            'name' => $this->name
-        ]);
+        try {
+            return view('backend.setting.jurusan.create', [
+                'name' => $this->name
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -43,21 +52,25 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = Validator::make($request->all(), [
-            'jurusan_nama' => ['required', 'string'],
-            'jurusan_alias' => ['required', 'string'],
-        ]);
-
-        if (!$validated->fails()) {
-            Jurusan::create([
-                'jurusan_nama' => $request->input('jurusan_nama'),
-                'jurusan_alias' => $request->input('jurusan_alias'),
-                'jurusan_code' => $request->input('jurusan_code') ? $request->input('jurusan_code') : null,
+        try {
+            $validated = Validator::make($request->all(), [
+                'jurusan_nama' => ['required', 'string'],
+                'jurusan_alias' => ['required', 'string'],
             ]);
 
-            return redirect()->to(route('jurusan.index'))->with('success', 'Added Successfully');
-        } else {
-            return redirect()->to(route('jurusan.index'))->with('failed', $validated->getMessageBag());
+            if (!$validated->fails()) {
+                Jurusan::create([
+                    'jurusan_nama' => $request->input('jurusan_nama'),
+                    'jurusan_alias' => $request->input('jurusan_alias'),
+                    'jurusan_code' => $request->input('jurusan_code') ? $request->input('jurusan_code') : null,
+                ]);
+
+                return redirect()->to(route('jurusan.index'))->with('success', 'Added Successfully');
+            } else {
+                return redirect()->to(route('jurusan.index'))->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -74,10 +87,14 @@ class JurusanController extends Controller
      */
     public function edit(Jurusan $jurusan)
     {
-        return view('backend.setting.jurusan.edit', [
-            'name' => $this->name,
-            'jurusan' => $jurusan
-        ]);
+        try {
+            return view('backend.setting.jurusan.edit', [
+                'name' => $this->name,
+                'jurusan' => $jurusan
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -85,21 +102,25 @@ class JurusanController extends Controller
      */
     public function update(Request $request, Jurusan $jurusan)
     {
-        $validated = Validator::make($request->all(), [
-            'jurusan_nama' => ['required', 'string'],
-            'jurusan_alias' => ['required', 'string'],
-        ]);
-
-        if (!$validated->fails()) {
-            Jurusan::where('jurusan_id', $jurusan->jurusan_id)->udate([
-                'jurusan_nama' => $request->input('jurusan_name'),
-                'jurusan_alias' => $request->input('jurusan_alias'),
-                'jurusan_code' => $request->input('jurusan_code') ? $request->input('jurusan_code') : null,
+        try {
+            $validated = Validator::make($request->all(), [
+                'jurusan_nama' => ['required', 'string'],
+                'jurusan_alias' => ['required', 'string'],
             ]);
 
-            return redirect()->to(route('jurusan.index'))->with('success', 'Updated Successfully');
-        } else {
-            return redirect()->to(route('jurusan.index'))->with('failed', $validated->getMessageBag());
+            if (!$validated->fails()) {
+                Jurusan::where('jurusan_id', $jurusan->jurusan_id)->udate([
+                    'jurusan_nama' => $request->input('jurusan_name'),
+                    'jurusan_alias' => $request->input('jurusan_alias'),
+                    'jurusan_code' => $request->input('jurusan_code') ? $request->input('jurusan_code') : null,
+                ]);
+
+                return redirect()->to(route('jurusan.index'))->with('success', 'Updated Successfully');
+            } else {
+                return redirect()->to(route('jurusan.index'))->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -108,8 +129,12 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
-        Jurusan::destroy($jurusan->jurusan_id);
+        try {
+            Jurusan::destroy($jurusan->jurusan_id);
 
-        return redirect()->back()->with('success', 'Deleted Successfully');
+            return redirect()->back()->with('success', 'Deleted Successfully');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 }

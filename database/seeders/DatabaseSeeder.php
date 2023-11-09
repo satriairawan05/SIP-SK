@@ -27,6 +27,9 @@ class DatabaseSeeder extends Seeder
             \Database\Seeders\OrganisasiSeeder::class,
             \Database\Seeders\MahasiswaSeeder::class,
             \Database\Seeders\JenisSuratSeeder::class,
+            \Database\Seeders\GroupSeeder::class,
+            \Database\Seeders\PageSeeder::class,
+            \Database\Seeders\GroupPageSeeder::class,
         ]);
     }
 }

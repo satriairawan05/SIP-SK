@@ -1,5 +1,5 @@
 <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-    <a class="sidebar-brand bg-gradient-success d-flex align-items-center justify-content-center" href="/">
+    <a class="sidebar-brand bg-gradient-success d-flex align-items-center justify-content-center" href="{{ auth()->guard('admin')->check()? route('dashboard'): route('home') }}">
         <div class="sidebar-brand-icon">
             <img src="{{ asset('ruang-admin/img/logo/logo.png') }}" class="shadow shadow-lg">
         </div>
@@ -7,7 +7,7 @@
     </a>
     <hr class="sidebar-divider my-0">
     <li class="nav-item active">
-        <a class="nav-link" href="{{ auth()->guard('admin')->check() ? route('dashboard') :  route('home')  }}">
+        <a class="nav-link" href="{{ auth()->guard('admin')->check()? route('dashboard'): route('home') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -32,11 +32,13 @@
         Bank File
     </div>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrganisasi" aria-expanded="true" aria-controls="collapseOrganisasi">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrganisasi"
+            aria-expanded="true" aria-controls="collapseOrganisasi">
             <i class="far fa-fw fa-envelope"></i>
             <span>SK Organisasi</span>
         </a>
-        <div id="collapseOrganisasi" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+        <div id="collapseOrganisasi" class="collapse" aria-labelledby="headingBootstrap"
+            data-parent="#accordionSidebar">
             <div class="collapse-inner rounded bg-white py-2">
                 <h6 class="collapse-header">SK Organisasi</h6>
                 <a class="collapse-item" href="{{ route('struktur_organisasi.index') }}">Struktur Organisasi</a>
@@ -46,7 +48,8 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKegiatan" aria-expanded="true" aria-controls="collapseKegiatan">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKegiatan"
+            aria-expanded="true" aria-controls="collapseKegiatan">
             <i class="far fa-fw fa-envelope"></i>
             <span>SK Kegiatan</span>
         </a>
@@ -65,34 +68,35 @@
     </li>
     <hr class="sidebar-divider">
     @if (auth()->guard('admin')->check())
-    <div class="sidebar-heading">
-        Configuration
-    </div>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true" aria-controls="collapsePage">
-            <i class="fas fa-fw fa-users-cog"></i>
-            <span>Setting</span>
-        </a>
-        <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-            <div class="collapse-inner rounded bg-white py-2">
-                <h6 class="collapse-header">Setting</h6>
-                <a class="collapse-item" href="{{ route('user.index') }}">User</a>
-                <a class="collapse-item" href="{{ route('mahasiswa.index') }}">Mahasiswa</a>
-                <a class="collapse-item" href="{{ route('prodi.index') }}">Program Studi</a>
-                <a class="collapse-item" href="{{ route('jurusan.index') }}">Jurusan</a>
-                <a class="collapse-item" href="{{ route('jenis_surat.index') }}">Jenis Surat</a>
-                <a class="collapse-item" href="{{ route('signature.index') }}">Signature</a>
-                <a class="collapse-item" href="{{ route('approval.index') }}">Approval</a>
-            </div>
+        <div class="sidebar-heading">
+            Configuration
         </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Role</span>
-        </a>
-    </li>
-    <hr class="sidebar-divider">
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
+                aria-expanded="true" aria-controls="collapsePage">
+                <i class="fas fa-fw fa-cogs"></i>
+                <span>Setting</span>
+            </a>
+            <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+                <div class="collapse-inner rounded bg-white py-2">
+                    <h6 class="collapse-header">Setting</h6>
+                    <a class="collapse-item" href="{{ route('user.index') }}">User</a>
+                    <a class="collapse-item" href="{{ route('mahasiswa.index') }}">Mahasiswa</a>
+                    <a class="collapse-item" href="{{ route('prodi.index') }}">Program Studi</a>
+                    <a class="collapse-item" href="{{ route('jurusan.index') }}">Jurusan</a>
+                    <a class="collapse-item" href="{{ route('jenis_surat.index') }}">Jenis Surat</a>
+                    <a class="collapse-item" href="{{ route('signature.index') }}">Signature</a>
+                    <a class="collapse-item" href="{{ route('approval.index') }}">Approval</a>
+                </div>
+            </div>
+        </li>
+        {{-- <li class="nav-item">
+                <a class="nav-link" href="{{ route('role.index') }}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Role</span>
+                </a>
+            </li> --}}
+        <hr class="sidebar-divider">
     @endif
     <div class="version" id="version-ruangadmin"></div>
     <hr class="sidebar-divider">

@@ -1,4 +1,4 @@
-@extends('backend.layout.app')
+@extends('mahasiswa.layout.app')
 
 @section('app')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -30,7 +30,7 @@
                 </div>
             @endif
             <div class="card-header d-flex justify-content-end">
-                <a href="{{ route('sko.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                <a href="{{ route('skos.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
             <div class="card-body">
                 <table class="align-items-center table-flush table" id="dataTable">
@@ -57,13 +57,13 @@
                                 <td>{{ $org->sko_updated ?? 'belum ada data' }}</td>
                                 <td>{{ $org->sko_last_print ?? 'belum ada data' }}</td>
                                 <td>
-                                    <a href="{{ route('sko.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
+                                    <a href="{{ route('skos.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
                                             class="fas fa-edit"></i></a>
-                                    <a href="{{ route('sko.show', $org->sko_id) }}" target="__blank" class="btn btn-sm btn-info"><i
+                                    <a href="{{ route('skos.show', $org->sko_id) }}" target="__blank" class="btn btn-sm btn-info"><i
                                             class="fas fa-print"></i></a>
                                     <a href="#" class="btn btn-sm btn-secondary"><i
                                             class="fas fa-check-square"></i></a>
-                                    <form action="{{ route('sko.destroy', $org->sko_id) }}" method="post"
+                                    <form action="{{ route('skos.destroy', $org->sko_id) }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         @method('delete')

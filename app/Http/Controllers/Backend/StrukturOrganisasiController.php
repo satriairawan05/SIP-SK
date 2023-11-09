@@ -17,15 +17,20 @@ class StrukturOrganisasiController extends Controller
         //
     }
 
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('backend.organisasi.struktur.index',[
-            'name' => $this->name,
-            'organisasi' => StrukturOrganisasi::leftJoin('organisasis','struktur_organisasis.organisasi_id','=','organisasis.organisasi_id')->get()
-        ]);
+        try {
+            return view('backend.organisasi.struktur.index', [
+                'name' => $this->name,
+                'organisasi' => StrukturOrganisasi::leftJoin('organisasis', 'struktur_organisasis.organisasi_id', '=', 'organisasis.organisasi_id')->get()
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -33,10 +38,14 @@ class StrukturOrganisasiController extends Controller
      */
     public function create()
     {
-        return view('backend.organisasi.struktur.create',[
-            'name' => $this->name,
-            'organisasi' => \App\Models\Organisasi::all()
-        ]);
+        try {
+            return view('backend.organisasi.struktur.create', [
+                'name' => $this->name,
+                'organisasi' => \App\Models\Organisasi::all()
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -44,22 +53,26 @@ class StrukturOrganisasiController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = Validator::make($request->all(), [
-            'so_nama' => ['required', 'string'],
-            'so_jabatan' => ['required', 'string'],
-            'organisasi_id' => ['required', 'string'],
-        ]);
-
-        if (!$validated->fails()) {
-            StrukturOrganisasi::create([
-                'so_nama' => $request->input('so_nama'),
-                'so_jabatan' => $request->input('so_jabatan'),
-                'organisasi_id' => $request->input('organisasi_id'),
+        try {
+            $validated = Validator::make($request->all(), [
+                'so_nama' => ['required', 'string'],
+                'so_jabatan' => ['required', 'string'],
+                'organisasi_id' => ['required', 'string'],
             ]);
 
-            return redirect()->to(route('struktur_organisasi.index'))->with('success', 'Added Successfully!');
-        } else {
-            return redirect()->back()->with('failed', $validated->getMessageBag());
+            if (!$validated->fails()) {
+                StrukturOrganisasi::create([
+                    'so_nama' => $request->input('so_nama'),
+                    'so_jabatan' => $request->input('so_jabatan'),
+                    'organisasi_id' => $request->input('organisasi_id'),
+                ]);
+
+                return redirect()->to(route('struktur_organisasi.index'))->with('success', 'Added Successfully!');
+            } else {
+                return redirect()->back()->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -76,11 +89,15 @@ class StrukturOrganisasiController extends Controller
      */
     public function edit(StrukturOrganisasi $strukturOrganisasi)
     {
-        return view('backend.organisasi.struktur.edit',[
-            'name' => $this->name,
-            'organisasi' => \App\Models\Organisasi::all(),
-            'struktur' => $strukturOrganisasi
-        ]);
+        try {
+            return view('backend.organisasi.struktur.edit', [
+                'name' => $this->name,
+                'organisasi' => \App\Models\Organisasi::all(),
+                'struktur' => $strukturOrganisasi
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -88,22 +105,26 @@ class StrukturOrganisasiController extends Controller
      */
     public function update(Request $request, StrukturOrganisasi $strukturOrganisasi)
     {
-        $validated = Validator::make($request->all(), [
-            'so_nama' => ['required', 'string'],
-            'so_jabatan' => ['required', 'string'],
-            'organisasi_id' => ['required', 'string'],
-        ]);
-
-        if (!$validated->fails()) {
-            StrukturOrganisasi::where('so_id', $strukturOrganisasi->so_id)->update([
-                'so_nama' => $request->input('so_nama'),
-                'so_jabatan' => $request->input('so_jabatan'),
-                'organisasi_id' => $request->input('organisasi_id'),
+        try {
+            $validated = Validator::make($request->all(), [
+                'so_nama' => ['required', 'string'],
+                'so_jabatan' => ['required', 'string'],
+                'organisasi_id' => ['required', 'string'],
             ]);
 
-            return redirect()->to(route('struktur_organisasi.index'))->with('success', 'Updated Successfully!');
-        } else {
-            return redirect()->back()->with('failed', $validated->getMessageBag());
+            if (!$validated->fails()) {
+                StrukturOrganisasi::where('so_id', $strukturOrganisasi->so_id)->update([
+                    'so_nama' => $request->input('so_nama'),
+                    'so_jabatan' => $request->input('so_jabatan'),
+                    'organisasi_id' => $request->input('organisasi_id'),
+                ]);
+
+                return redirect()->to(route('struktur_organisasi.index'))->with('success', 'Updated Successfully!');
+            } else {
+                return redirect()->back()->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -112,8 +133,12 @@ class StrukturOrganisasiController extends Controller
      */
     public function destroy(StrukturOrganisasi $strukturOrganisasi)
     {
-        StrukturOrganisasi::destroy($strukturOrganisasi->id);
+        try {
+            StrukturOrganisasi::destroy($strukturOrganisasi->id);
 
-        return redirect()->back()->with('success', 'Deleted Successfully!');
+            return redirect()->back()->with('success', 'Deleted Successfully!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 }

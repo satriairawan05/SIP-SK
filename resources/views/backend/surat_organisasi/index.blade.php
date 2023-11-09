@@ -59,8 +59,8 @@
                                 <td>
                                     <a href="{{ route('sko.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
                                             class="fas fa-edit"></i></a>
-                                    <a href="{{ route('sko.show', $org->sko_id) }}" target="__blank" class="btn btn-sm btn-info"><i
-                                            class="fas fa-print"></i></a>
+                                    <a href="{{ route('sko.show', $org->sko_id) }}" target="__blank"
+                                        class="btn btn-sm btn-info"><i class="fas fa-print"></i></a>
                                     <a href="#" class="btn btn-sm btn-secondary"><i
                                             class="fas fa-check-square"></i></a>
                                     <form action="{{ route('sko.destroy', $org->sko_id) }}" method="post"

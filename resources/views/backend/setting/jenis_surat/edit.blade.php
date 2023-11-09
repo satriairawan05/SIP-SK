@@ -12,8 +12,17 @@
 
     <div class="row mb-3">
         <div class="card col-12">
+            @if (session('failed'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h6><i class="fas fa-exclamation-triangle"></i><b> Failed!</b></h6>
+                    {{ session('failed') }}
+                </div>
+            @endif
             <div class="card-body">
-                <form action="{{ route('jenis_surat.update',$surat->js_id) }}" method="post">
+                <form action="{{ route('jenis_surat.update', $surat->js_id) }}" method="post">
                     @csrf
                     <div class="row">
                         <div class="form-group col-4">
@@ -22,8 +31,8 @@
                                 class="form-control form-control-sm @error('js_jenis')
                             is-invalid
                         @enderror"
-                                name="js_jenis" id="js_jenis" value="{{ old('js_jenis',$surat->js_jenis) }}" placeholder="Enter Jenis Surat"
-                                required>
+                                name="js_jenis" id="js_jenis" value="{{ old('js_jenis', $surat->js_jenis) }}"
+                                placeholder="Enter Jenis Surat" required>
                             @error('js_jenis')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -36,8 +45,8 @@
                                 class="form-control form-control-sm @error('js_kode')
                             is-invalid
                         @enderror"
-                                name="js_kode" id="js_kode" value="{{ old('js_kode',$surat->js_kode) }}" placeholder="Enter Kode Surat"
-                                required>
+                                name="js_kode" id="js_kode" value="{{ old('js_kode', $surat->js_kode) }}"
+                                placeholder="Enter Kode Surat" required>
                             @error('js_kode')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -50,8 +59,8 @@
                                 class="form-control form-control-sm @error('js_nomor')
                             is-invalid
                         @enderror"
-                                name="js_nomor" id="js_nomor" value="{{ old('js_nomor',$surat->js_nomor) }}" placeholder="Enter Nomor Surat"
-                                required>
+                                name="js_nomor" id="js_nomor" value="{{ old('js_nomor', $surat->js_nomor) }}"
+                                placeholder="Enter Nomor Surat" required>
                             @error('js_nomor')
                                 <div class="invalid-feedback">
                                     {{ $message }}

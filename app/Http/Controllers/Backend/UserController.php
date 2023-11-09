@@ -22,10 +22,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('backend.setting.user.index', [
-            'name' => $this->name,
-            'users' => User::latest()->get(),
-        ]);
+        try {
+            return view('backend.setting.user.index', [
+                'name' => $this->name,
+                'users' => User::latest()->get(),
+                'pages' => $this->get_access($this->name, auth()->guard('admin')->user()->group_id)
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -33,9 +38,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('backend.setting.user.create', [
-            'name' => $this->name,
-        ]);
+        try {
+            return view('backend.setting.user.create', [
+                'name' => $this->name,
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -43,22 +52,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:3', 'confirmed']
-        ]);
-
-        if (!$validated->fails()) {
-            User::create([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => bcrypt($request->input('password')),
+        try {
+            $validated = Validator::make($request->all(), [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'password' => ['required', 'string', 'min:3', 'confirmed']
             ]);
 
-            return redirect('user')->with('success', 'Added Account Successfully');
-        } else {
-            return redirect('dashboard')->with('failed', $validated->getMessageBag());
+            if (!$validated->fails()) {
+                User::create([
+                    'name' => $request->input('name'),
+                    'email' => $request->input('email'),
+                    'password' => bcrypt($request->input('password')),
+                ]);
+
+                return redirect('user')->with('success', 'Added Account Successfully');
+            } else {
+                return redirect('dashboard')->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -75,10 +88,14 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('backend.setting.user.edit', [
-            'name' => $this->name,
-            'user' => $user
-        ]);
+        try {
+            return view('backend.setting.user.edit', [
+                'name' => $this->name,
+                'user' => $user
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -86,22 +103,26 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validated = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:3', 'confirmed']
-        ]);
-
-        if (!$validated->fails()) {
-            User::where('id', $user->id)->update([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => bcrypt($request->input('password')),
+        try {
+            $validated = Validator::make($request->all(), [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'password' => ['required', 'string', 'min:3', 'confirmed']
             ]);
 
-            return redirect('user')->with('success', 'Updated Account Successfully');
-        } else {
-            return redirect('dashboard')->with('failed', $validated->getMessageBag());
+            if (!$validated->fails()) {
+                User::where('id', $user->id)->update([
+                    'name' => $request->input('name'),
+                    'email' => $request->input('email'),
+                    'password' => bcrypt($request->input('password')),
+                ]);
+
+                return redirect('user')->with('success', 'Updated Account Successfully');
+            } else {
+                return redirect('dashboard')->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -110,8 +131,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        User::destroy($user->id);
+        try {
+            User::destroy($user->id);
 
-        return redirect('user')->with('success', 'Deleted Account Successfully');
+            return redirect('user')->with('success', 'Deleted Account Successfully');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 }

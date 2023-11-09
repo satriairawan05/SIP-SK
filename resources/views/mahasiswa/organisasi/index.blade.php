@@ -1,4 +1,4 @@
-@extends('backend.layout.app')
+@extends('mahasiswa.layout.app')
 
 @section('app')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -30,7 +30,7 @@
                 </div>
             @endif
             <div class="card-header d-flex justify-content-end">
-                <a href="{{ route('organisasi.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                <a href="{{ route('organisasis.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
             <div class="card-body">
                 <table class="align-items-center table-flush table" id="dataTable">
@@ -52,11 +52,11 @@
                                 <td>{{ $org->organisasi_periode }}</td>
                                 <td>
                                     {{-- Edit --}}
-                                    <a href="{{ route('organisasi.edit', $org->organisasi_id) }}"
+                                    <a href="{{ route('organisasis.edit',$org->organisasi_id) }}"
                                         class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
                                     {{-- Edit --}}
                                     {{-- Delete --}}
-                                    <form action="{{ route('organisasi.destroy', $org->organisasi_id) }}" method="post"
+                                    <form action="{{ route('organisasis.destroy',$org->organisasi_id) }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         @method('delete')

@@ -12,6 +12,15 @@
 
     <div class="row mb-3">
         <div class="card col-12">
+            @if (session('failed'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h6><i class="fas fa-exclamation-triangle"></i><b> Failed!</b></h6>
+                    {{ session('failed') }}
+                </div>
+            @endif
             <div class="card-body">
                 <form action="{{ route('struktur_organisasi.store') }}" method="post">
                     @csrf
@@ -22,8 +31,8 @@
                                 class="form-control form-control-sm @error('so_nama')
                             is-invalid
                         @enderror"
-                                name="so_nama" id="so_nama" value="{{ old('so_nama') }}"
-                                placeholder="Enter Nama" required>
+                                name="so_nama" id="so_nama" value="{{ old('so_nama') }}" placeholder="Enter Nama"
+                                required>
                             @error('so_nama')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -33,7 +42,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-6">
-                        <label for="so_jabatan">Jabatan <sup class="text-danger">*</sup></label>
+                            <label for="so_jabatan">Jabatan <sup class="text-danger">*</sup></label>
                             <input type="text"
                                 class="form-control form-control-sm @error('so_jabatan')
                             is-invalid

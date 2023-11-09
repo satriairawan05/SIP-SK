@@ -22,10 +22,14 @@ class JenisSuratController extends Controller
      */
     public function index()
     {
-        return view('backend.setting.jenis_surat.index',[
-            'name' => $this->name,
-            'surat' => JenisSurat::all()
-        ]);
+        try {
+            return view('backend.setting.jenis_surat.index', [
+                'name' => $this->name,
+                'surat' => JenisSurat::all(),
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -33,9 +37,13 @@ class JenisSuratController extends Controller
      */
     public function create()
     {
-        return view('backend.setting.jenis_surat.create',[
-            'name' => $this->name
-        ]);
+        try {
+            return view('backend.setting.jenis_surat.create', [
+                'name' => $this->name
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -43,23 +51,27 @@ class JenisSuratController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = Validator::make($request->all(), [
-            'js_jenis' => ['required', 'string'],
-            'js_kode' => ['required', 'string'],
-            'js_nomor' => ['required', 'string'],
-        ]);
-
-        if(!$validated->fails()){
-            JenisSurat::create([
-                'js_jenis' => $request->input('js_jenis'),
-                'js_kode' => $request->input('js_kode'),
-                'js_nomor' => $request->input('js_nomor'),
-                'js_ordinal' => 0
+        try {
+            $validated = Validator::make($request->all(), [
+                'js_jenis' => ['required', 'string'],
+                'js_kode' => ['required', 'string'],
+                'js_nomor' => ['required', 'string'],
             ]);
 
-            return redirect()->to(route('jenis_surat.index'))->with('success', 'Added Successfully');
-        } else {
-            return redirect()->to(route('jenis_surat.index'))->with('failed', $validated->getMessageBag());
+            if (!$validated->fails()) {
+                JenisSurat::create([
+                    'js_jenis' => $request->input('js_jenis'),
+                    'js_kode' => $request->input('js_kode'),
+                    'js_nomor' => $request->input('js_nomor'),
+                    'js_ordinal' => 0
+                ]);
+
+                return redirect()->to(route('jenis_surat.index'))->with('success', 'Added Successfully');
+            } else {
+                return redirect()->to(route('jenis_surat.index'))->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -76,10 +88,14 @@ class JenisSuratController extends Controller
      */
     public function edit(JenisSurat $jenisSurat)
     {
-        return view('backend.setting.jenis_surat.edit',[
-            'name' => $this->name,
-            'surat' => $jenisSurat
-        ]);
+        try {
+            return view('backend.setting.jenis_surat.edit', [
+                'name' => $this->name,
+                'surat' => $jenisSurat
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -87,22 +103,26 @@ class JenisSuratController extends Controller
      */
     public function update(Request $request, JenisSurat $jenisSurat)
     {
-        $validated = Validator::make($request->all(), [
-            'js_jenis' => ['required', 'string'],
-            'js_kode' => ['required', 'string'],
-            'js_nomor' => ['required', 'string'],
-        ]);
-
-        if(!$validated->fails()){
-            JenisSurat::where('js_id',$jenisSurat->js_id)->update([
-                'js_jenis' => $request->input('js_jenis'),
-                'js_kode' => $request->input('js_kode'),
-                'js_nomor' => $request->input('js_nomor')
+        try {
+            $validated = Validator::make($request->all(), [
+                'js_jenis' => ['required', 'string'],
+                'js_kode' => ['required', 'string'],
+                'js_nomor' => ['required', 'string'],
             ]);
 
-            return redirect()->to(route('jenis_surat.index'))->with('success', 'Updated Successfully');
-        } else {
-            return redirect()->to(route('jenis_surat.index'))->with('failed', $validated->getMessageBag());
+            if (!$validated->fails()) {
+                JenisSurat::where('js_id', $jenisSurat->js_id)->update([
+                    'js_jenis' => $request->input('js_jenis'),
+                    'js_kode' => $request->input('js_kode'),
+                    'js_nomor' => $request->input('js_nomor')
+                ]);
+
+                return redirect()->to(route('jenis_surat.index'))->with('success', 'Updated Successfully');
+            } else {
+                return redirect()->to(route('jenis_surat.index'))->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -111,8 +131,12 @@ class JenisSuratController extends Controller
      */
     public function destroy(JenisSurat $jenisSurat)
     {
-        JenisSurat::destroy($jenisSurat->js_id);
+        try {
+            JenisSurat::destroy($jenisSurat->js_id);
 
-        return redirect()->back()->with('success', 'Deleted Successfully!');
+            return redirect()->back()->with('success', 'Deleted Successfully!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 }

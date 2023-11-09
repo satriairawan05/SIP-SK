@@ -49,7 +49,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Total Surat Menunggu Persetujuan</div>
-                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">55</div>
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $wait }}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-envelope fa-2x text-info"></i>
@@ -65,7 +65,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Total Surat Disetujui</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $acc }}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-envelope fa-2x text-success"></i>
