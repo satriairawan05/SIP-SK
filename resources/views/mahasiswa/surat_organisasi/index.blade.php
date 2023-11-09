@@ -59,18 +59,18 @@
                                 <td>{{ $org->sko_updated ?? 'belum ada data' }}</td>
                                 <td>{{ $org->sko_last_print ?? 'belum ada data' }}</td>
                                 <td>
-                                    <a href="{{ route('skos.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
-                                    <a href="{{ route('skos.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
-                                            class="fas fa-edit"></i></a>
-                                    <a href="{{ route('skos.show', $org->sko_id) }}" target="__blank" class="btn btn-sm btn-info"><i
                                     <a href="{{ route('skos.show', $org->sko_id) }}" target="__blank" class="btn btn-sm btn-info"><i
                                             class="fas fa-print"></i></a>
+                                    @if($kgt->skk_no_surat == null || $kgt->skk_no_surat_old == null)
+                                    <a href="{{ route('skos.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
+                                            class="fas fa-edit"></i></a>
                                     <form action="{{ route('skos.destroy', $org->sko_id) }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

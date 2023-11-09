@@ -128,12 +128,12 @@
             </div>
             @if($keputusan->sk_no_surat != null)
             <div class="col-6">
-                <p style="text-align: left;" class="mb-0">Direktur, </p>
-                <p style="text-align: left;" class="mb-0">{{ $signature->sign_jabatan }}</p>
+                <p style="text-align: left;" class="mb-0">{{ $signature->sign_jabatan }}, </p>
+                <p style="text-align: left;" class="mb-0">Politeknik Pertanian Negeri Samarinda</p>
                 <br>
                 <br>
                 <br>
-                <p style="text-align: left;" class="mb-0">{{ $signatur->sign_nama }}</p>
+                <p style="text-align: left;" class="mb-0">{{ $signature->sign_nama }}</p>
                 <p style="text-align: left;" class="mb-0">{{ $signature->sign_nip }}</p>
             </div>
             @endif

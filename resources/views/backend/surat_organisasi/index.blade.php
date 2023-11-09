@@ -57,12 +57,8 @@
                                 <td>{{ $org->sko_updated ?? 'belum ada data' }}</td>
                                 <td>{{ $org->sko_last_print ?? 'belum ada data' }}</td>
                                 <td>
-                                    <a href="{{ route('sko.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
-                                            class="fas fa-edit"></i></a>
                                     <a href="{{ route('sko.show', $org->sko_id) }}" target="__blank"
                                         class="btn btn-sm btn-info"><i class="fas fa-print"></i></a>
-                                    <a href="{{ route('sko.approval', $org->sko_id) }}" class="btn btn-sm btn-secondary"><i
-                                            class="fas fa-check-square"></i></a>
                                     @if (
                                         \App\Models\Approval::where(
                                             'user_id',
@@ -131,12 +127,16 @@
                                         </div>
                                         <!-- Modal -->
                                     @endif
-                                    <form action="{{ route('sko.destroy', $org->sko_id) }}" method="post"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form>
+                                    @if ($kgt->skk_no_surat == null || $kgt->skk_no_surat_old == null)
+                                        <form action="{{ route('sko.destroy', $org->sko_id) }}" method="post"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                        <a href="{{ route('sko.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
+                                                class="fas fa-edit"></i></a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

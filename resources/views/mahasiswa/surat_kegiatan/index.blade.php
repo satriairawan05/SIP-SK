@@ -59,18 +59,18 @@
                                 <td>{{ $kgt->skk_updated ?? 'belum ada data' }}</td>
                                 <td>{{ $kgt->skk_last_print ?? 'belum ada data' }}</td>
                                 <td>
-                                    <a href="{{ route('skks.edit', $kgt->skk_id) }}" class="btn btn-sm btn-warning"><i
-                                    <a href="{{ route('skks.edit', $kgt->skk_id) }}" class="btn btn-sm btn-warning"><i
-                                            class="fas fa-edit"></i></a>
-                                    <a href="{{ route('skks.show', $kgt->skk_id) }}" target="__blank" class="btn btn-sm btn-info"><i
-                                    <a href="{{ route('skks.show', $kgt->skk_id) }}" target="__blank" class="btn btn-sm btn-info"><i
-                                            class="fas fa-print"></i></a>
-                                    <form action="{{ route('skks.destroy', $kgt->skk_id) }}" method="post"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form>
+                                    <a href="{{ route('skks.show', $kgt->skk_id) }}" target="__blank"
+                                        class="btn btn-sm btn-info"><i class="fas fa-print"></i></a>
+                                    @if ($kgt->skk_no_surat == null || $kgt->skk_no_surat_old == null)
+                                        <a href="{{ route('skks.edit', $kgt->skk_id) }}" class="btn btn-sm btn-warning"><i
+                                                class="fas fa-edit"></i></a>
+                                        <form action="{{ route('skks.destroy', $kgt->skk_id) }}" method="post"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

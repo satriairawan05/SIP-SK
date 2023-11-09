@@ -30,14 +30,6 @@ class SuratKeputusanKegiatanController extends Controller
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
         }
-        try {
-            return view('mahasiswa.surat_kegiatan.index', [
-                'name' => $this->name,
-                'kegiatan' => SuratKeputusanKegiatan::all()
-            ]);
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
     }
 
     /**
@@ -45,13 +37,6 @@ class SuratKeputusanKegiatanController extends Controller
      */
     public function create()
     {
-        try {
-            return view('mahasiswa.surat_kegiatan.create', [
-                'name' => $this->name
-            ]);
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
         try {
             return view('mahasiswa.surat_kegiatan.create', [
                 'name' => $this->name
@@ -117,6 +102,11 @@ class SuratKeputusanKegiatanController extends Controller
     {
         try {
             $surat = $suratKeputusanKegiatan->find(request()->segment(3));
+
+            SuratKeputusanKegiatan::where('skk_id', $surat->skk_id)->update([
+                'skk_last_print' => \Carbon\Carbon::now()
+            ]);
+
             return view('mahasiswa.surat_kegiatan.document',[
                 'keputusan' => $suratKeputusanKegiatan->find(request()->segment(3)),
                 'signature' => \App\Models\Signature::leftJoin('jenis_surats','signatures.js_id', '=', 'jenis_surats.js_id')->where('signatures.js_id','=', $surat->js_id)->first()
@@ -131,13 +121,17 @@ class SuratKeputusanKegiatanController extends Controller
      */
     public function edit(SuratKeputusanKegiatan $suratKeputusanKegiatan)
     {
-        try {
-            return view('mahasiswa.surat_kegiatan.edit', [
-                'name' => $this->name,
-                'keputusan' => $suratKeputusanKegiatan->find(request()->segment(3)),
-            ]);
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
+        if ($suratKeputusanKegiatan->skk_no_surat == null || $suratKeputusanKegiatan->skk_no_surat_old == null) {
+            try {
+                return view('mahasiswa.surat_kegiatan.edit', [
+                    'name' => $this->name,
+                    'keputusan' => $suratKeputusanKegiatan->find(request()->segment(3)),
+                ]);
+            } catch(\Illuminate\Database\QueryException $e){
+                return redirect()->back()->with('failed', $e->getMessage());
+            }
+        } else {
+            return redirect()->back()->with('failed', 'You not Have Authority');
         }
     }
 
@@ -192,12 +186,16 @@ class SuratKeputusanKegiatanController extends Controller
      */
     public function destroy(SuratKeputusanKegiatan $suratKeputusanKegiatan)
     {
-        try {
-            SuratKeputusanKegiatan::destroy($suratKeputusanKegiatan->skk_id);
+        if ($suratKeputusanKegiatan->skk_no_surat == null || $suratKeputusanKegiatan->skk_no_surat_old == null) {
+            try {
+                SuratKeputusanKegiatan::destroy($suratKeputusanKegiatan->skk_id);
 
-            return redirect()->to(route('skk.index'))->with('success', 'Deleted Successfully!');
-        } catch(\Illuminate\Database\QueryException $e){
-            return redirect()->back()->with('failed', $e->getMessage());
+                return redirect()->to(route('skk.index'))->with('success', 'Deleted Successfully!');
+            } catch(\Illuminate\Database\QueryException $e){
+                return redirect()->back()->with('failed', $e->getMessage());
+            }
+        } else {
+            return redirect()->back()->with('failed', 'You not Have Authority');
         }
     }
 }

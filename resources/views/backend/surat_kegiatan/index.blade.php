@@ -57,8 +57,6 @@
                                 <td>{{ $kgt->skk_updated ?? 'belum ada data' }}</td>
                                 <td>{{ $kgt->skk_last_print ?? 'belum ada data' }}</td>
                                 <td>
-                                    <a href="{{ route('skk.edit', $kgt->skk_id) }}" class="btn btn-sm btn-warning"><i
-                                            class="fas fa-edit"></i></a>
                                     <a href="{{ route('skk.show', $kgt->skk_id) }}" target="__blank"
                                         class="btn btn-sm btn-info"><i class="fas fa-print"></i></a>
                                     @if (
@@ -66,7 +64,8 @@
                                             'user_id',
                                             auth()->guard('admin')->user()->id)->first() ==
                                             auth()->guard('admin')->user()->id &&
-                                            $kgt->skk_approved_step == \App\Models\Approval::where('app_ordinal', $kgt->skk_approved_step)->whereNull('app_status')->first())
+                                            $kgt->skk_approved_step ==
+                                                \App\Models\Approval::where('app_ordinal', $kgt->skk_approved_step)->whereNull('app_status')->first())
                                         <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal"
                                             data-target="#exampleModal" id="#myBtn">
                                             <i class="fas fa-check-square"></i>
@@ -128,12 +127,16 @@
                                         </div>
                                         <!-- Modal -->
                                     @endif
-                                    <form action="{{ route('skk.destroy', $kgt->skk_id) }}" method="post"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form>
+                                    @if ($kgt->skk_no_surat == null || $kgt->skk_no_surat_old == null)
+                                        <a href="{{ route('skk.edit', $kgt->skk_id) }}" class="btn btn-sm btn-warning"><i
+                                                class="fas fa-edit"></i></a>
+                                        <form action="{{ route('skk.destroy', $kgt->skk_id) }}" method="post"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

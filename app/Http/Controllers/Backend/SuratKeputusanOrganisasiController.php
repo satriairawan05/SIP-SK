@@ -22,22 +22,14 @@ class SuratKeputusanOrganisasiController extends Controller
      */
     public function index()
     {
-            try {
-                return view('backend.surat_organisasi.index', [
-                    'name' => $this->name,
-                    'organisasi' => SuratKeputusanOrganisasi::all()
-                ]);
-            } catch (\Illuminate\Database\QueryException $e) {
-                return redirect()->back()->with('failed', $e->getMessage());
-            }
-            try {
-                return view('backend.surat_organisasi.index', [
-                    'name' => $this->name,
-                    'organisasi' => SuratKeputusanOrganisasi::all()
-                ]);
-            } catch (\Illuminate\Database\QueryException $e) {
-                return redirect()->back()->with('failed', $e->getMessage());
-            }
+        try {
+            return view('backend.surat_organisasi.index', [
+                'name' => $this->name,
+                'organisasi' => SuratKeputusanOrganisasi::all()
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -45,14 +37,6 @@ class SuratKeputusanOrganisasiController extends Controller
      */
     public function create()
     {
-        try {
-            return view('backend.surat_organisasi.create', [
-                'name' => $this->name,
-                'organisasi' => \App\Models\Organisasi::all()
-            ]);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
         try {
             return view('backend.surat_organisasi.create', [
                 'name' => $this->name,
@@ -124,7 +108,7 @@ class SuratKeputusanOrganisasiController extends Controller
             $surat = $suratKeputusanOrganisasi->find(request()->segment(3));
             return view('backend.surat_organisasi.document', [
                 'keputusan' => $surat,
-                'signature' => \App\Models\Signature::leftJoin('jenis_surats','signatures.js_id', '=', 'jenis_surats.js_id')->where('signatures.js_id','=', $surat->js_id)->first()
+                'signature' => \App\Models\Signature::leftJoin('jenis_surats', 'signatures.js_id', '=', 'jenis_surats.js_id')->where('signatures.js_id', '=', $surat->js_id)->first()
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());
@@ -136,14 +120,18 @@ class SuratKeputusanOrganisasiController extends Controller
      */
     public function edit(SuratKeputusanOrganisasi $suratKeputusanOrganisasi)
     {
-        try {
-            return view('backend.surat_organisasi.edit', [
-                'name' => $this->name,
-                'keputusan' => $suratKeputusanOrganisasi->find(request()->segment(3)),
-                'organisasi' => \App\Models\Organisasi::all()
-            ]);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back()->with('failed', $e->getMessage());
+        if ($suratKeputusanOrganisasi->sko_no_surat == null || $suratKeputusanOrganisasi->sko_no_surat_old == null) {
+            try {
+                return view('backend.surat_organisasi.edit', [
+                    'name' => $this->name,
+                    'keputusan' => $suratKeputusanOrganisasi->find(request()->segment(3)),
+                    'organisasi' => \App\Models\Organisasi::all()
+                ]);
+            } catch (\Illuminate\Database\QueryException $e) {
+                return redirect()->back()->with('failed', $e->getMessage());
+            }
+        } else {
+            return redirect()->back()->with('failed', 'You not Have Authority');
         }
     }
 
@@ -200,9 +188,9 @@ class SuratKeputusanOrganisasiController extends Controller
      */
     public function updateApproval(Request $request, SuratKeputusanOrganisasi $suratKeputusanOrganisasi)
     {
-        if(\App\Models\Approval::where('user_id', auth()->guard('admin')->user()->id)->first() == auth()->guard('admin')->user()->id && $suratKeputusanOrganisasi->sko_approved_step == \App\Models\Approval::where('app_ordinal', $suratKeputusanOrganisasi->sko_approved_step)->whereNull('app_status')->first()){
+        if (\App\Models\Approval::where('user_id', auth()->guard('admin')->user()->id)->first() == auth()->guard('admin')->user()->id && $suratKeputusanOrganisasi->sko_approved_step == \App\Models\Approval::where('app_ordinal', $suratKeputusanOrganisasi->sko_approved_step)->whereNull('app_status')->first()) {
             try {
-                SuratKeputusanOrganisasi::where('skk_id',$suratKeputusanOrganisasi->sko_id)->update([
+                SuratKeputusanOrganisasi::where('skk_id', $suratKeputusanOrganisasi->sko_id)->update([
                     'sko_remark' => $request->input('sko_remark'),
                     'sko_disposisi' => $request->input('sko_disposisi'),
                     'sko_approved' => auth()->guard('admin')->user()->name
@@ -227,18 +215,15 @@ class SuratKeputusanOrganisasiController extends Controller
      */
     public function destroy(SuratKeputusanOrganisasi $suratKeputusanOrganisasi)
     {
-        try {
-            SuratKeputusanOrganisasi::destroy($suratKeputusanOrganisasi->sko_id);
-        try {
-            SuratKeputusanOrganisasi::destroy($suratKeputusanOrganisasi->sko_id);
-
-            return redirect()->to(route('sko.index'))->with('success', 'Deleted Successfully!');
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back()->with('failed', $e->getMessage());
-        }
-            return redirect()->to(route('sko.index'))->with('success', 'Deleted Successfully!');
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back()->with('failed', $e->getMessage());
+        if ($suratKeputusanOrganisasi->sko_no_surat == null || $suratKeputusanOrganisasi->sko_no_surat_old == null) {
+            try {
+                SuratKeputusanOrganisasi::destroy($suratKeputusanOrganisasi->sko_id);
+                return redirect()->to(route('sko.index'))->with('success', 'Deleted Successfully!');
+            } catch (\Illuminate\Database\QueryException $e) {
+                return redirect()->back()->with('failed', $e->getMessage());
+            }
+        } else {
+            return redirect()->back()->with('failed', 'You not Have Authority');
         }
     }
 }
