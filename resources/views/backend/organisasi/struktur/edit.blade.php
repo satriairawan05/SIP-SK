@@ -12,6 +12,15 @@
 
     <div class="row mb-3">
         <div class="card col-12">
+            @if (session('failed'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h6><i class="fas fa-exclamation-triangle"></i><b> Failed!</b></h6>
+                    {{ session('failed') }}
+                </div>
+            @endif
             <div class="card-body">
                 <form action="{{ route('struktur_organisasi.update', $struktur->so_id) }}" method="post">
                     @csrf
@@ -53,8 +62,9 @@
                                 class="form-control form-control-sm @error('so_departemen')
                             is-invalid
                         @enderror"
-                                name="so_departemen" id="so_departemen" value="{{ old('so_departemen',$struktur->so_departemen) }}"
-                                placeholder="Enter departemen" required>
+                                name="so_departemen" id="so_departemen"
+                                value="{{ old('so_departemen', $struktur->so_departemen) }}" placeholder="Enter departemen"
+                                required>
                             @error('so_departemen')
                                 <div class="invalid-feedback">
                                     {{ $message }}

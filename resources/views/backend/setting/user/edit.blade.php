@@ -12,6 +12,15 @@
 
     <div class="row mb-3">
         <div class="card col-12">
+            @if (session('failed'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h6><i class="fas fa-exclamation-triangle"></i><b> Failed!</b></h6>
+                    {{ session('failed') }}
+                </div>
+            @endif
             <div class="card-body">
                 <form action="{{ route('user.update', $user->id) }}" method="post">
                     @csrf
@@ -65,7 +74,8 @@
                             <label for="password-confirm">Confirm Password<sup class="text-danger">*</sup></label>
                             <input type="password" name="password_confirmation" class="form-control form-control-sm"
                                 id="password-confirm" placeholder="Enter password" required>
-                            <span id="togglePasswordConfirm" class="toggle-password text-bg-dark"><i class="fa fa-eye"></i></span>
+                            <span id="togglePasswordConfirm" class="toggle-password text-bg-dark"><i
+                                    class="fa fa-eye"></i></span>
                         </div>
                     </div>
                     <div class="row">

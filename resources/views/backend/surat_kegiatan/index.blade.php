@@ -59,10 +59,75 @@
                                 <td>
                                     <a href="{{ route('skk.edit', $kgt->skk_id) }}" class="btn btn-sm btn-warning"><i
                                             class="fas fa-edit"></i></a>
-                                    <a href="{{ route('skk.show', $kgt->skk_id) }}" target="__blank" class="btn btn-sm btn-info"><i
-                                            class="fas fa-print"></i></a>
-                                    <a href="#" class="btn btn-sm btn-secondary"><i
-                                            class="fas fa-check-square"></i></a>
+                                    <a href="{{ route('skk.show', $kgt->skk_id) }}" target="__blank"
+                                        class="btn btn-sm btn-info"><i class="fas fa-print"></i></a>
+                                    @if (
+                                        \App\Models\Approval::where(
+                                            'user_id',
+                                            auth()->guard('admin')->user()->id)->first() ==
+                                            auth()->guard('admin')->user()->id &&
+                                            $kgt->skk_approved_step == \App\Models\Approval::where('app_ordinal', $kgt->skk_approved_step)->whereNull('app_status')->first())
+                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal"
+                                            data-target="#exampleModal" id="#myBtn">
+                                            <i class="fas fa-check-square"></i>
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Approved
+                                                            {{ $kgt->skk_subject }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="{{ route('skk.approval_update', $kgt->skk_id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('put')
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <label for="skk_disposisi">Disposisi</label>
+                                                                <select name="skk_disposisi"
+                                                                    class="form-control form-control-sm select2-single-placeholder"
+                                                                    id="skk_disposisi">
+                                                                    <option value="">Select Disposisi</option>
+                                                                    @php
+                                                                        $disposisi = [['status' => 'Accepted'], ['status' => 'Rejected']];
+                                                                    @endphp
+                                                                    @foreach ($disposisi as $d)
+                                                                        @if (old('skk_disposisi') == $d['status'])
+                                                                            <option value="{{ $d['status'] }}"
+                                                                                name="skk_disposisi" selected>
+                                                                                {{ $d['status'] }}</option>
+                                                                        @else
+                                                                            <option value="{{ $d['status'] }}"
+                                                                                name="skk_disposisi">
+                                                                                {{ $d['status'] }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="row">
+                                                                <label for="skk_remark">Remark</label>
+                                                                <textarea name="skk_remark" id="skk_remark" cols="20" rows="10">{{ old('skk_remark') }}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-outline-primary"
+                                                                data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Save
+                                                                changes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal -->
+                                    @endif
                                     <form action="{{ route('skk.destroy', $kgt->skk_id) }}" method="post"
                                         class="d-inline">
                                         @csrf

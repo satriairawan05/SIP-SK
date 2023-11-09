@@ -22,17 +22,21 @@ class SignatureController extends Controller
      */
     public function index()
     {
-        if (!request()->input('js_id')) {
-            return view('backend.setting.signature.index', [
-                'name' => $this->name,
-                'surat' => \App\Models\JenisSurat::all()
-            ]);
-        } else {
-            return view('backend.setting.signature.index2', [
-                'name' => $this->name,
-                'surat' => \App\Models\JenisSurat::where('js_id', request()->input('js_id'))->first(),
-                'signature' => Signature::all()
-            ]);
+        try {
+            if (!request()->input('js_id')) {
+                return view('backend.setting.signature.index', [
+                    'name' => $this->name,
+                    'surat' => \App\Models\JenisSurat::all(),
+                ]);
+            } else {
+                return view('backend.setting.signature.index2', [
+                    'name' => $this->name,
+                    'surat' => \App\Models\JenisSurat::where('js_id', request()->input('js_id'))->first(),
+                    'signature' => Signature::all(),
+                ]);
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -49,25 +53,29 @@ class SignatureController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = Validator::make($request->all(), [
-            'sign_nama' => ['required', 'string'],
-            'sign_nip' => ['required', 'string'],
-            'sign_jabatan' => ['required', 'string'],
-        ]);
-
-        if (!$validated->fails()) {
-            $surat = \App\Models\JenisSurat::where('js_jenis', $request->js_jenis)->first();
-
-            Signature::create([
-                'js_id' => $surat->js_id,
-                'sign_nama' => $request->input('sign_nama'),
-                'sign_nip' => $request->input('sign_nip'),
-                'sign_jabatan' => $request->input('sign_jabatan'),
+        try {
+            $validated = Validator::make($request->all(), [
+                'sign_nama' => ['required', 'string'],
+                'sign_nip' => ['required', 'string'],
+                'sign_jabatan' => ['required', 'string'],
             ]);
 
-            return redirect()->back()->with('success', 'Added Successfully!');
-        } else {
-            return redirect()->back()->with('failed', $validated->getMessageBag());
+            if (!$validated->fails()) {
+                $surat = \App\Models\JenisSurat::where('js_jenis', $request->js_jenis)->first();
+
+                Signature::create([
+                    'js_id' => $surat->js_id,
+                    'sign_nama' => $request->input('sign_nama'),
+                    'sign_nip' => $request->input('sign_nip'),
+                    'sign_jabatan' => $request->input('sign_jabatan'),
+                ]);
+
+                return redirect()->back()->with('success', 'Added Successfully!');
+            } else {
+                return redirect()->back()->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -92,25 +100,29 @@ class SignatureController extends Controller
      */
     public function update(Request $request, Signature $signature)
     {
-        $validated = Validator::make($request->all(), [
-            'sign_nama' => ['required', 'string'],
-            'sign_nip' => ['required', 'string'],
-            'sign_jabatan' => ['required', 'string'],
-        ]);
-
-        if (!$validated->fails()) {
-            $surat = \App\Models\JenisSurat::where('js_jenis', $request->js_jenis)->first();
-
-            Signature::where('sign_id',$signature->sign_id)->update([
-                'js_id' => $surat->js_id,
-                'sign_nama' => $request->input('sign_nama'),
-                'sign_nip' => $request->input('sign_nip'),
-                'sign_jabatan' => $request->input('sign_jabatan'),
+        try {
+            $validated = Validator::make($request->all(), [
+                'sign_nama' => ['required', 'string'],
+                'sign_nip' => ['required', 'string'],
+                'sign_jabatan' => ['required', 'string'],
             ]);
 
-            return redirect()->back()->with('success', 'Added Successfully!');
-        } else {
-            return redirect()->back()->with('failed', $validated->getMessageBag());
+            if (!$validated->fails()) {
+                $surat = \App\Models\JenisSurat::where('js_jenis', $request->js_jenis)->first();
+
+                Signature::where('sign_id', $signature->sign_id)->update([
+                    'js_id' => $surat->js_id,
+                    'sign_nama' => $request->input('sign_nama'),
+                    'sign_nip' => $request->input('sign_nip'),
+                    'sign_jabatan' => $request->input('sign_jabatan'),
+                ]);
+
+                return redirect()->back()->with('success', 'Added Successfully!');
+            } else {
+                return redirect()->back()->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -119,8 +131,12 @@ class SignatureController extends Controller
      */
     public function destroy(Signature $signature)
     {
-        Signature::destroy($signature->sign_id);
+        try {
+            Signature::destroy($signature->sign_id);
 
-        return redirect()->back()->with('success', 'Deleted Successfully!');
+            return redirect()->back()->with('success', 'Deleted Successfully!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 }

@@ -22,10 +22,14 @@ class OrganisasiController extends Controller
      */
     public function index()
     {
-        return view('backend.organisasi.index', [
-            'name' => $this->name,
-            'organisasi' => Organisasi::leftJoin('prodis', 'organisasis.prodi_id', '=', 'prodis.prodi_id')->get()
-        ]);
+        try {
+            return view('backend.organisasi.index', [
+                'name' => $this->name,
+                'organisasi' => Organisasi::leftJoin('prodis', 'organisasis.prodi_id', '=', 'prodis.prodi_id')->get(),
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -33,10 +37,14 @@ class OrganisasiController extends Controller
      */
     public function create()
     {
-        return view('backend.organisasi.create', [
-            'name' => $this->name,
-            'prodi' => \App\Models\Prodi::all()
-        ]);
+        try {
+            return view('backend.organisasi.create', [
+                'name' => $this->name,
+                'prodi' => \App\Models\Prodi::all()
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -44,27 +52,29 @@ class OrganisasiController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-
-        $validated = Validator::make($request->all(), [
-            'organisasi_nama' => ['required', 'string'],
-            'organisasi_status' => ['required', 'string'],
-            'organisasi_periode' => ['required', 'string'],
-        ]);
-
-        if (!$validated->fails()) {
-            Organisasi::create([
-                'organisasi_nama' => $request->input('organisasi_nama'),
-                'organisasi_status' => $request->input('organisasi_status'),
-                'organisasi_periode' => $request->input('organisasi_periode'),
-                'organisasi_affiliate' => $request->input('organisasi_affiliate') ? $request->input('organisasi_affiliate') : null,
-                'prodi_id' => $request->input('prodi_id') ? $request->input('prodi_id') : null,
+        try {
+            $validated = Validator::make($request->all(), [
+                'organisasi_nama' => ['required', 'string'],
+                'organisasi_status' => ['required', 'string'],
+                'organisasi_periode' => ['required', 'string'],
             ]);
 
+            if (!$validated->fails()) {
+                Organisasi::create([
+                    'organisasi_nama' => $request->input('organisasi_nama'),
+                    'organisasi_status' => $request->input('organisasi_status'),
+                    'organisasi_periode' => $request->input('organisasi_periode'),
+                    'organisasi_affiliate' => $request->input('organisasi_affiliate') ? $request->input('organisasi_affiliate') : null,
+                    'prodi_id' => $request->input('prodi_id') ? $request->input('prodi_id') : null,
+                ]);
 
-            return redirect()->to(route('organisasi.index'))->with('success', 'Added Successfully!');
-        } else {
-            return redirect()->back()->with('failed', $validated->getMessageBag());
+
+                return redirect()->to(route('organisasi.index'))->with('success', 'Added Successfully!');
+            } else {
+                return redirect()->back()->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -81,12 +91,15 @@ class OrganisasiController extends Controller
      */
     public function edit(Organisasi $organisasi)
     {
-        return view('backend.organisasi.edit', [
-            'name' => $this->name,
-            'organisasi' => $organisasi,
-            'prodi' => \App\Models\Prodi::all()
-
-        ]);
+        try {
+            return view('backend.organisasi.edit', [
+                'name' => $this->name,
+                'organisasi' => $organisasi,
+                'prodi' => \App\Models\Prodi::all()
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 
     /**
@@ -94,24 +107,28 @@ class OrganisasiController extends Controller
      */
     public function update(Request $request, Organisasi $organisasi)
     {
-        $validated = Validator::make($request->all(), [
-            'organisasi_nama' => ['required', 'string'],
-            'organisasi_status' => ['required', 'string'],
-            'organisasi_periode' => ['required', 'string'],
-        ]);
-
-        if (!$validated->fails()) {
-            Organisasi::where('organisasi_id', $organisasi->organisasi_id)->update([
-                'organisasi_nama' => $request->input('organisasi_nama'),
-                'organisasi_status' => $request->input('organisasi_status'),
-                'organisasi_periode' => $request->input('organisasi_periode'),
-                'organisasi_affiliate' => $request->input('organisasi_affiliate') ? $request->input('organisasi_affiliate') : null,
-                'prodi_id' => $request->input('prodi_id') ? $request->input('prodi_id') : null,
+        try {
+            $validated = Validator::make($request->all(), [
+                'organisasi_nama' => ['required', 'string'],
+                'organisasi_status' => ['required', 'string'],
+                'organisasi_periode' => ['required', 'string'],
             ]);
 
-            return redirect()->to(route('organisasi.index'))->with('success', 'Updated Successfully!');
-        } else {
-            return redirect()->back()->with('failed', $validated->getMessageBag());
+            if (!$validated->fails()) {
+                Organisasi::where('organisasi_id', $organisasi->organisasi_id)->update([
+                    'organisasi_nama' => $request->input('organisasi_nama'),
+                    'organisasi_status' => $request->input('organisasi_status'),
+                    'organisasi_periode' => $request->input('organisasi_periode'),
+                    'organisasi_affiliate' => $request->input('organisasi_affiliate') ? $request->input('organisasi_affiliate') : null,
+                    'prodi_id' => $request->input('prodi_id') ? $request->input('prodi_id') : null,
+                ]);
+
+                return redirect()->to(route('organisasi.index'))->with('success', 'Updated Successfully!');
+            } else {
+                return redirect()->back()->with('failed', $validated->getMessageBag());
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
@@ -120,8 +137,12 @@ class OrganisasiController extends Controller
      */
     public function destroy(Organisasi $organisasi)
     {
-        Organisasi::destroy($organisasi->organisasi_id);
+        try {
+            Organisasi::destroy($organisasi->organisasi_id);
 
-        return redirect()->back()->with('success', 'Deleted Successfully!');
+            return redirect()->back()->with('success', 'Deleted Successfully!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
+        }
     }
 }

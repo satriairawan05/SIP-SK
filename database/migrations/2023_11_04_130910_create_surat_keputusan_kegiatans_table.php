@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('skk_approved')->nullable();
             $table->string('skk_remark')->nullable();
             $table->longText('skk_tembusan')->nullable();
+            $table->string('skk_approved_step')->nullable();
             $table->date('skk_last_print')->nullable();
             $table->timestamps();
         });

@@ -21,4 +21,9 @@ class Helper implements HelperInterface
     {
         return number_format(floatval($param), 2, ',', '.');
     }
+
+    public static function generateNumber($code, $ordinal, $year)
+    {
+        return $ordinal . '/' . $code . '/KM/' . $year;
+    }
 }

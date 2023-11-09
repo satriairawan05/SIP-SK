@@ -5,13 +5,22 @@
         <h1 class="h3 mb-0 text-gray-800">{{ $name }}</h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">{{ $name }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('skk.index') }}">{{ $name }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">Create</li>
         </ol>
     </div>
 
     <div class="row mb-3">
         <div class="card col-12">
+            @if (session('failed'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h6><i class="fas fa-exclamation-triangle"></i><b> Failed!</b></h6>
+                    {{ session('failed') }}
+                </div>
+            @endif
             <div class="card-body">
                 <form action="{{ route('skk.store') }}" method="post">
                     @csrf
@@ -40,7 +49,8 @@
                                     class="form-control form-control-sm @error('skk_tgl_surat')
                             is-invalid
                         @enderror"
-                                    value="{{ old('skk_tgl_surat',date('Y-m-d')) }}" name="skk_tgl_surat" id="skk_tgl_surat" required>
+                                    value="{{ old('skk_tgl_surat', date('Y-m-d')) }}" name="skk_tgl_surat" id="skk_tgl_surat"
+                                    required>
                             </div>
                             @error('skk_tgl_surat')
                                 <div class="invalid-feedback">

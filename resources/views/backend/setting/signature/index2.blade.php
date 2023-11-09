@@ -67,10 +67,12 @@
                                     <td>
                                         <button type="submit" class="btn btn-sm btn-warning"><i
                                                 class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
-                                            data-target="#exampleModal" id="#myBtn">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        @if ($delete == 1)
+                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                                                data-target="#exampleModal" id="#myBtn">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        @endif
                                     </td>
                                 </tr>
                             </form>
@@ -80,7 +82,9 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Delete {{ $sign->sign_nama }}</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                {{ $sign->sign_nama }}
+                                            </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -89,13 +93,13 @@
                                             <p>Are you sure?</p>
                                         </div>
                                         <div class="modal-footer">
-                                        <form action="{{ route('signature.destroy',$sign->sign_id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
+                                            <form action="{{ route('signature.destroy', $sign->sign_id) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

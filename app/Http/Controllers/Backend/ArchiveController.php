@@ -20,25 +20,31 @@ class ArchiveController extends Controller
      */
     public function __invoke(Request $request)
     {
-        if(!$request->js_id){
-            return view('backend.archive.index',[
-                'name' => $this->name,
-                'surat' => \App\Models\JenisSurat::all()
-            ]);
-        } else {
-            if($request->js_id == 1){
-                return view('backend.archive.index2',[
+        try {
+            if (!$request->js_id) {
+                return view('backend.archive.index', [
                     'name' => $this->name,
-                    'surat' => \App\Models\JenisSurat::where('js_id',$request->js_id)->first(),
-                    'organisasi' => \App\Models\SuratKeputusanOrganisasi::whereNotNull('sko_no_surat')->get()
+                    'surat' => \App\Models\JenisSurat::all(),
                 ]);
             } else {
-                return view('backend.archive.index2',[
-                    'name' => $this->name,
-                    'surat' => \App\Models\JenisSurat::where('js_id',$request->js_id)->first(),
-                    'kegiatan' => \App\Models\SuratKeputusanKegiatan::whereNotNull('skk_no_surat')->get()
-                ]);
+                if ($request->js_id == 1) {
+                    return view('backend.archive.index2', [
+                        'name' => $this->name,
+                        'surat' => \App\Models\JenisSurat::where('js_id', $request->js_id)->first(),
+                        'organisasi' => \App\Models\SuratKeputusanOrganisasi::whereNotNull('sko_no_surat')->get(),
+
+                    ]);
+                } else {
+                    return view('backend.archive.index2', [
+                        'name' => $this->name,
+                        'surat' => \App\Models\JenisSurat::where('js_id', $request->js_id)->first(),
+                        'kegiatan' => \App\Models\SuratKeputusanKegiatan::whereNotNull('skk_no_surat')->get(),
+
+                    ]);
+                }
             }
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 }
