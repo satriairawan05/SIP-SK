@@ -23,6 +23,19 @@
             border-bottom: 5px solid #000;
         }
 
+        .page-break {
+            page-break-before: always;
+            page-break-after: always;
+        }
+
+        .page-break-before {
+            page-break-before: always;
+        }
+
+        .page-break-after {
+            page-break-after: always;
+        }
+
         @media print {
             @page {
                 size: F4;
@@ -56,11 +69,13 @@
         <span class="tebal mt-2"></span>
         <span style="display: block; border-bottom: 1px solid #000;" class="mt-1"></span>
         <div style="text-align: center;" class="mt-3"><b class="text-uppercase fs-5">Keputusan</b></div>
-        <div style="text-align: center;"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian Negeri Samarinda</b></div>
+        <div style="text-align: center;"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian Negeri
+                Samarinda</b></div>
         <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: 001/PL21/KM/2023</b></div>
         <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">Tentang</b></div>
         <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">{!! $keputusan->sko_subject !!}</b></div>
-        <div style="text-align: center;" class="mt-1"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian Negeri</b></div>
+        <div style="text-align: center;" class="mt-1"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian
+                Negeri</b></div>
         <table style="text-align: justify;">
             <tbody>
                 <tr>
@@ -93,6 +108,7 @@
                     <td width="5%" style="vertical-align: top;">:</td>
                     <td width="85%" style="vertical-align: top;">{!! $keputusan->sko_kesatu !!}</td>
                 </tr>
+                <div class="page-break-before"></div>
                 <tr>
                     <td width="10%" style="vertical-align: top; word-wrap: break-word;">Kedua</td>
                     <td width="5%" style="vertical-align: top;">:</td>
@@ -120,22 +136,23 @@
             </div>
             <div class="col-6">
                 <p style="text-align: left;" class="mb-0">Ditetapkan di : Samarinda</p>
-                <p style="text-align: left;" class="mb-0">Pada tanggal : {{ \Carbon\Carbon::parse($keputusan->sko_tgl_surat)->isoformat('D MMMM YYYY') }}</p>
+                <p style="text-align: left;" class="mb-0">Pada tanggal :
+                    {{ \Carbon\Carbon::parse($keputusan->sko_tgl_surat)->isoformat('D MMMM YYYY') }}</p>
             </div>
         </div>
         <div class="row mt-5">
             <div class="col-6">
             </div>
-            @if($keputusan->sk_no_surat != null)
-            <div class="col-6">
-                <p style="text-align: left;" class="mb-0">{{ $signature->sign_jabatan }}, </p>
-                <p style="text-align: left;" class="mb-0">Politeknik Pertanian Negeri Samarinda</p>
-                <br>
-                <br>
-                <br>
-                <p style="text-align: left;" class="mb-0">{{ $signature->sign_nama }}</p>
-                <p style="text-align: left;" class="mb-0">{{ $signature->sign_nip }}</p>
-            </div>
+            @if ($keputusan->sk_no_surat != null)
+                <div class="col-6">
+                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_jabatan }}, </p>
+                    <p style="text-align: left;" class="mb-0">Politeknik Pertanian Negeri Samarinda</p>
+                    <br>
+                    <br>
+                    <br>
+                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_nama }}</p>
+                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_nip }}</p>
+                </div>
             @endif
         </div>
         <div class="row">
@@ -145,6 +162,56 @@
             </div>
             <div class="col-6">
             </div>
+        </div>
+        <div class="page-break-before"></div>
+        <table>
+            <tbody>
+                <tr>
+                    <td width="10%" style="vertical-align: top;" class="mt-2">Lampiran</td>
+                    <td width="5%" style="vertical-align: top;">:</td>
+                    <td width="85%" style="vertical-align: top;">Surat Keputusan Direktur Politeknik Pertanian
+                        Negeri Samarinda</td>
+                </tr>
+                <tr>
+                    <td width="10%" style="vertical-align: top;" class="mt-2">Nomor</td>
+                    <td width="5%" style="vertical-align: top;">:</td>
+                    <td width="85%" style="vertical-align: top;">{{ $keputusan->sko_no_surat ?? '' }}</td>
+                </tr>
+                <tr>
+                    <td width="10%" style="vertical-align: top;" class="mt-2">Tentang</td>
+                    <td width="5%" style="vertical-align: top;">:</td>
+                    <td width="85%" style="vertical-align: top;">{{ $keputusan->sko_subject }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <p class="text-uppercase text-bold">Susunan Pengurus</p>
+                <p class="text-uppercase text-bold"></p>
+                <p class="text-uppercase text-bold">Politeknik Pertanian Negeri Samarinda Tahun {{ date('Y') }}</p>
+            </div>
+        </div>
+        <table>
+            <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row mt-3">
+            <div class="col-6">
+            </div>
+            @if ($keputusan->sk_no_surat != null)
+                <div class="col-6">
+                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_jabatan }}, </p>
+                    <p style="text-align: left;" class="mb-0">Politeknik Pertanian Negeri Samarinda</p>
+                    <br>
+                    <br>
+                    <br>
+                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_nama }}</p>
+                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_nip }}</p>
+                </div>
+            @endif
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

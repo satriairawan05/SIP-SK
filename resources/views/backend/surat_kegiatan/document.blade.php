@@ -23,6 +23,19 @@
             border-bottom: 5px solid #000;
         }
 
+        .page-break {
+            page-break-before: always;
+            page-break-after: always;
+        }
+
+        .page-break-before {
+            page-break-before: always;
+        }
+
+        .page-break-after {
+            page-break-after: always;
+        }
+
         @media print {
             @page {
                 size: F4;
@@ -95,6 +108,7 @@
                     <td width="5%" style="vertical-align: top;">:</td>
                     <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_kesatu !!}</td>
                 </tr>
+                <div class="page-break-before"></div>
                 <tr>
                     <td width="10%" style="vertical-align: top; word-wrap: break-word;">Kedua</td>
                     <td width="5%" style="vertical-align: top;">:</td>
@@ -117,22 +131,23 @@
             </div>
             <div class="col-6">
                 <p style="text-align: left;" class="mb-0">Ditetapkan di : Samarinda</p>
-                <p style="text-align: left;" class="mb-0">Pada tanggal : {{ \Carbon\Carbon::parse($keputusan->skk_tgl_surat)->isoformat('D MMMM YYYY') }}</p>
+                <p style="text-align: left;" class="mb-0">Pada tanggal :
+                    {{ \Carbon\Carbon::parse($keputusan->skk_tgl_surat)->isoformat('D MMMM YYYY') }}</p>
             </div>
         </div>
         <div class="row mt-5">
             <div class="col-6">
             </div>
-            @if($keputusan->skk_no_surat != null)
-            <div class="col-6">
-                <p style="text-align: left;" class="mb-0">{{ $signature->sign_jabatan }}, </p>
-                <p style="text-align: left;" class="mb-0">Politeknik Pertanian Negeri Samarinda</p>
-                <br>
-                <br>
-                <br>
-                <p style="text-align: left;" class="mb-0">{{ $signature->sign_nama }}</p>
-                <p style="text-align: left;" class="mb-0">{{ $signature->sign_nip }}</p>
-            </div>
+            @if ($keputusan->skk_no_surat != null)
+                <div class="col-6">
+                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_jabatan }}, </p>
+                    <p style="text-align: left;" class="mb-0">Politeknik Pertanian Negeri Samarinda</p>
+                    <br>
+                    <br>
+                    <br>
+                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_nama }}</p>
+                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_nip }}</p>
+                </div>
             @endif
         </div>
         <div class="row">

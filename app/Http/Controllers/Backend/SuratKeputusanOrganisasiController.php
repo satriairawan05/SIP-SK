@@ -106,9 +106,14 @@ class SuratKeputusanOrganisasiController extends Controller
     {
         try {
             $surat = $suratKeputusanOrganisasi->find(request()->segment(3));
+
+            SuratKeputusanOrganisasi::where('sko_id', $surat->sko_id)->update([
+                'sko_last_print' => \Carbon\Carbon::now()
+            ]);
+
             return view('backend.surat_organisasi.document', [
                 'keputusan' => $surat,
-                'signature' => \App\Models\Signature::leftJoin('jenis_surats', 'signatures.js_id', '=', 'jenis_surats.js_id')->where('signatures.js_id', '=', $surat->js_id)->first()
+                'signature' => \App\Models\Signature::leftJoin('jenis_surats', 'signatures.js_id', '=', 'jenis_surats.js_id')->where('signatures.js_id', '=', $surat->js_id)->first(),
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());

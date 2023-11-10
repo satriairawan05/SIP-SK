@@ -39,6 +39,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Nim</th>
+                            <th>Tahun Masuk</th>
                             <th>Jurusan</th>
                             <th>Program Studi</th>
                             <th>Jenjang/Semester</th>
@@ -53,6 +54,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $mhs->mhs_nama }}</td>
                                 <td>{{ $mhs->mhs_nim }}</td>
+                                <td>{{ $mhs->mhs_tahun_masuk }}</td>
                                 <td>{{ $mhs->mhs_jurusan }}</td>
                                 <td>{{ $mhs->mhs_prodi }}</td>
                                 <td>{{ $mhs->mhs_jenjang }}/{{ $mhs->mhs_semester }}</td>

@@ -23,9 +23,11 @@ class MahasiswaController extends Controller
     public function index()
     {
         try {
+            $mahasiswa = Mahasiswa::where('mhs_id', auth()->guard('mahasiswa')->user()->mhs_id)->latest()->get();
+
             return view('backend.setting.mahasiswa.index', [
                 'name' => $this->name,
-                'mahasiswas' => Mahasiswa::latest()->get(),
+                'mahasiswas' => $mahasiswa,
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());
@@ -85,6 +87,7 @@ class MahasiswaController extends Controller
                     'mhs_jk' => $request->input('mhs_jk'),
                     'mhs_no_hp' => $request->input('mhs_no_hp'),
                     'mhs_alamat' => $request->input('mhs_alamat'),
+                    'mhs_tahun_masuk' => $request->input('mhs_tahun_masuk'),
                     'mhs_jenjang' => $jenjang,
                     'password' => bcrypt($request->input('mhs_nim')),
                 ]);
@@ -160,6 +163,7 @@ class MahasiswaController extends Controller
                     'mhs_jk' => $request->input('mhs_jk'),
                     'mhs_no_hp' => $request->input('mhs_no_hp'),
                     'mhs_alamat' => $request->input('mhs_alamat'),
+                    'mhs_tahun_masuk' => $request->input('mhs_tahun_masuk'),
                     'mhs_jenjang' => $jenjang,
                     'password' => bcrypt($request->input('mhs_nim')),
                 ]);

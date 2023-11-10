@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('mhs_jurusan')->nullable();
             $table->string('mhs_jenjang')->nullable();
             $table->string('mhs_semester')->nullable();
+            $table->string('mhs_tahun_masuk')->nullable();
             $table->string('mhs_jk')->nullable();
             $table->string('mhs_alamat')->nullable();
             $table->string('mhs_no_hp')->nullable();

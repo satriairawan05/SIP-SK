@@ -19,6 +19,7 @@ class MahasiswaFactory extends Factory
         return [
             'mhs_nama' => fake()->name(),
             'mhs_nim' => fake()->numerify('H#########'),
+            'mhs_tahun_masuk' => fake()->randomElement(['2020','2021','2022','2023','2024','2025','2026','2027','2028','2029','2030']),
             'mhs_prodi' => fake()->randomElement(['Teknologi Rekayasa Perangkat Lunak', 'Teknologi Rekayasa Geomatika & Survey']),
             'mhs_jurusan' => fake()->randomElement(['Teknik Informatika']),
             'mhs_jenjang' => fake()->randomElement(['D3', 'D4']),

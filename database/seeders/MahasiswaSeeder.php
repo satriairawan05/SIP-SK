@@ -21,6 +21,7 @@ class MahasiswaSeeder extends Seeder
             'mhs_jenjang' => 'D4',
             'mhs_semester' => '8',
             'mhs_jk' => 'Laki-Laki',
+            'mhs_tahun_masuk' => '2018',
             'mhs_alamat' => 'Jl. Pemuda 1 Rt. 13 No. 51 Sungai Pinang dalam, Samarinda. Kota samarinda, Kalimantan Timur. Indonesia',
             'mhs_no_hp' => '082253332802',
             'password' => bcrypt('H181600607')

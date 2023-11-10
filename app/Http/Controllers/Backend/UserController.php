@@ -23,9 +23,15 @@ class UserController extends Controller
     public function index()
     {
         try {
+            if (auth()->guard('admin')->user()->id == 1) {
+                $user = User::latest()->get();
+            } else {
+                $user = User::where('id', auth()->guard('admin')->user()->id)->get();
+            }
+
             return view('backend.setting.user.index', [
                 'name' => $this->name,
-                'users' => User::latest()->get(),
+                'users' => $user,
                 'pages' => $this->get_access($this->name, auth()->guard('admin')->user()->group_id)
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
