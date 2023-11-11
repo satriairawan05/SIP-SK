@@ -32,7 +32,6 @@
             @endif
             <div class="card-header d-flex justify-content-end">
                 <a href="{{ route('skks.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
-                <a href="{{ route('skks.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
             <div class="card-body">
                 <table class="align-items-center table-flush table" id="dataTable">

@@ -114,6 +114,10 @@ class SuratKeputusanOrganisasiController extends Controller
             return view('backend.surat_organisasi.document', [
                 'keputusan' => $surat,
                 'signature' => \App\Models\Signature::leftJoin('jenis_surats', 'signatures.js_id', '=', 'jenis_surats.js_id')->where('signatures.js_id', '=', $surat->js_id)->first(),
+                'organisasi' => SuratKeputusanOrganisasi::left('organisasis', 'surat_keputusan_organisasis.organisasi_id', '=', 'organisasis.organisasi_id')
+                    ->leftJoin('struktur_organisasis', 'surat_keputusan_organisasis.organisasi_id', '=', 'struktur_organisasis.organisasi_id')->whereIn('struktur_organisasis.so_nama', function ($query) {
+                        $query->from('mahasiswas')->leftJoin('prodis','mahasiswas.mhs_prodi','=','prodis.prodi_nama')->where('mahasiswas.nama', '=', 'struktur_organisasis.so_nama')->get();
+                    })->get()
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());

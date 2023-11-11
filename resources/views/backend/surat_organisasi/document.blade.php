@@ -187,17 +187,24 @@
         <div class="row mt-3">
             <div class="col-12 d-flex justify-content-center align-items-center">
                 <p class="text-uppercase text-bold">Susunan Pengurus</p>
-                <p class="text-uppercase text-bold">Lembaga Kajian Islam Mahasiswa</p>
-                <p class="text-uppercase text-bold">Politeknik Pertanian Negeri Samarinda Tahun {{ date('Y') }}</p>
+                <p class="text-uppercase text-bold">{{ $organisasi->organisasi_nama }}</p>
+                <p class="text-uppercase text-bold">Politeknik Pertanian Negeri Samarinda Tahun {{ date('Y') }}
+                </p>
             </div>
         </div>
-        <table>
-            <tbody>
-                <tr>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+        @foreach ($organisasi as $org)
+            <table>
+                <tbody>
+                    <tr>
+                        <td width="10%" style="vertical-align: top;" class="mt-2">{{ $org->so_jabatan ?? '' }}</td>
+                        <td width="5%" style="vertical-align: top;">:</td>
+                        <td width="35%%" style="vertical-align: top;">{{ $org->mhs_nama ?? '' }}</td>
+                        <td width="25%%" style="vertical-align: top;">{{ $org->mhs_nim }}</td>
+                        <td width="25%%" style="vertical-align: top;">{{ $org->prodi_alias }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        @endforeach
         <div class="row mt-3">
             <div class="col-6">
             </div>
