@@ -68,6 +68,7 @@
         </div>
     </div>
 
+    <script src="{{ asset('ruang-admin/css/ruang-admin.min.css') }}"></script>
     <script type="text/javascript">
         var csrfToken = $('meta[name="csrf-token"]').attr("content");
 
