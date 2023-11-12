@@ -1,5 +1,4 @@
 @extends('mahasiswa.layout.app')
-@extends('mahasiswa.layout.app')
 
 @section('app')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -56,11 +55,10 @@
                                 <td>{{ $org->sko_disposisi ?? 'belum ada data' }}</td>
                                 <td>{{ $org->sko_created ?? 'belum ada data' }}</td>
                                 <td>{{ $org->sko_updated ?? 'belum ada data' }}</td>
-                                <td>{{ $org->sko_last_print ?? 'belum ada data' }}</td>
+                                <td>{{ \Carbon\Carbon::parse($org->sko_last_print)->isoFormat('DD MMMM YYYY') ?? 'belum ada data' }}</td>
                                 <td>
-                                    <a href="{{ route('skos.show', $org->sko_id) }}" target="__blank" class="btn btn-sm btn-info"><i
-                                            class="fas fa-print"></i></a>
-                                    @if($kgt->skk_no_surat == null || $kgt->skk_no_surat_old == null)
+                                    <a href="{{ route('skos.show', $org->sko_id) }}" target="__blank"
+                                        class="btn btn-sm btn-info"><i class="fas fa-print"></i></a>
                                     <a href="{{ route('skos.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
                                             class="fas fa-edit"></i></a>
                                     <form action="{{ route('skos.destroy', $org->sko_id) }}" method="post"
@@ -69,7 +67,6 @@
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
-                                    @endif
                                 </td>
                             </tr>
                         @endforeach

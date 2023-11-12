@@ -184,7 +184,7 @@ class SuratKeputusanKegiatanController extends Controller
     /**
      * Update the specified approval in resource storage.
      */
-    public function updateApproval(Request $request, SuratKeputusanKegiatan $suratKeputusanKegiatan, \App\Models\Approval $approval)
+    public function updateApproval(Request $request, SuratKeputusanKegiatan $suratKeputusanKegiatan)
     {
         if (\App\Models\Approval::where('user_id', auth()->guard('admin')->user()->id)->first() == auth()->guard('admin')->user()->id && $suratKeputusanKegiatan->skk_approved_step == \App\Models\Approval::where('app_ordinal', $suratKeputusanKegiatan->skk_approved_step)->whereNull('app_status')->first()) {
             try {
@@ -194,10 +194,31 @@ class SuratKeputusanKegiatanController extends Controller
                     'skk_approved' => auth()->guard('admin')->user()->name
                 ]);
 
-                \App\Models\Approval::where('js_id', $suratKeputusanKegiatan->js_id)->update([
-                    'app_status' => $request->input('skk_disposisi'),
-                    'app_date' => \Carbon\Carbon::now()
-                ]);
+                if ($request->skk_disposisi == 'Accepted') {
+                    SuratKeputusanKegiatan::where('skk_id', $suratKeputusanKegiatan->sko_id)->update([
+                        'sko_approved_step' => $suratKeputusanKegiatan->sko_approved_step + 1
+                    ]);
+
+                    \App\Models\Approval::where('js_id', $suratKeputusanKegiatan->js_id)->update([
+                        'app_status' => $request->input('skk_disposisi'),
+                        'app_date' => \Carbon\Carbon::now()
+                    ]);
+
+                    $surat = \App\Models\JenisSurat::where('js_id', $suratKeputusanKegiatan->js_id)->first();
+                    $code = $surat->js_code;
+                    $ordinal = $surat->js_ordinal;
+
+                    $this->generateNomor($suratKeputusanKegiatan->sko_id, $ordinal, $code,  $suratKeputusanKegiatan->created_at);
+                } else {
+                    SuratKeputusanKegiatan::where('skk_id', $suratKeputusanKegiatan->sko_id)->update([
+                        'sko_approved_step' => 1
+                    ]);
+
+                    \App\Models\Approval::where('js_id', $suratKeputusanKegiatan->js_id)->update([
+                        'app_status' => $request->input('skk_disposisi'),
+                        'app_date' => \Carbon\Carbon::now()
+                    ]);
+                }
 
                 return redirect()->back()->with('success', 'Data ' . $suratKeputusanKegiatan->skk_subject . ' telah di perbaru');
             } catch (\Illuminate\Database\QueryException $e) {
@@ -206,6 +227,30 @@ class SuratKeputusanKegiatanController extends Controller
         } else {
             return redirect()->back()->with('failed', 'You not Have Authority!');
         }
+    }
+
+    public function generateNomor(string $idSurat, string $ordinal, string $code, string $reqTgl)
+    {
+        $tgl_surat = explode('-', $reqTgl);
+        $year = $tgl_surat[0];
+
+        $surat = SuratKeputusanKegiatan::findOrfail($idSurat);
+        $lastCount = $surat->js_ordinal;
+        $count = $lastCount + 1;
+
+        if($ordinal == 0){
+            \App\Models\JenisSurat::where('js_id', $surat->js_id)->update(['js_ordinal' => $count]);
+        } else {
+            if ($ordinal >= 100) {
+                \App\Models\JenisSurat::where('js_id', $surat->js_id)->update(['js_ordinal' => 0]);
+            }
+            $plusOrdinal = $surat->js_ordinal + 1;
+            \App\Models\JenisSurat::where('js_id', $surat->js_id)->update(['js_ordinal' => $plusOrdinal]);
+        }
+
+        $nomor_surat = \App\Helper\Helper::generateNumber($code, $ordinal, $year);
+
+        return SuratKeputusanKegiatan::where('sko_id', $idSurat)->update(['sko_no_surat' => $nomor_surat, 'sko_nomor_surat_old' => $nomor_surat]);
     }
 
     /**

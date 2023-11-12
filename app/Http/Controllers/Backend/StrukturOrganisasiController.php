@@ -64,6 +64,7 @@ class StrukturOrganisasiController extends Controller
                 StrukturOrganisasi::create([
                     'so_nama' => $request->input('so_nama'),
                     'so_jabatan' => $request->input('so_jabatan'),
+                    'so_departemen' => $request->input('so_departemen'),
                     'organisasi_id' => $request->input('organisasi_id'),
                 ]);
 
@@ -116,6 +117,7 @@ class StrukturOrganisasiController extends Controller
                 StrukturOrganisasi::where('so_id', $strukturOrganisasi->so_id)->update([
                     'so_nama' => $request->input('so_nama'),
                     'so_jabatan' => $request->input('so_jabatan'),
+                    'so_departemen' => $request->input('so_departemen'),
                     'organisasi_id' => $request->input('organisasi_id'),
                 ]);
 

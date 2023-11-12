@@ -86,7 +86,7 @@ class SuratKeputusanOrganisasiController extends Controller
                     'sko_kelima' => $request->input('sko_kelima'),
                     'sko_tembusan' => $request->input('sko_tembusan'),
                     'sko_uuid' => \Illuminate\Support\Str::uuid()->toString(),
-                    'sko_created' => auth()->guard('admin')->user()->name ? auth()->guard('admin')->user()->name : auth()->guard('mahasiswa')->user()->name,
+                    'sko_created' => auth()->guard('mahasiswa')->user()->name,
                     'js_id' => $jenisSurat->js_id,
                     'organisasi_id' => $request->input('organisasi_id'),
                     'sko_approved_step' => 1
@@ -116,10 +116,8 @@ class SuratKeputusanOrganisasiController extends Controller
             return view('mahasiswa.surat_organisasi.document', [
                 'keputusan' => $surat,
                 'signature' => \App\Models\Signature::leftJoin('jenis_surats','signatures.js_id', '=', 'jenis_surats.js_id')->where('signatures.js_id','=', $surat->js_id)->first(),
-                'organisasi' => SuratKeputusanOrganisasi::left('organisasis', 'surat_keputusan_organisasis.organisasi_id', '=', 'organisasis.organisasi_id')
-                    ->leftJoin('struktur_organisasis', 'surat_keputusan_organisasis.organisasi_id', '=', 'struktur_organisasis.organisasi_id')->whereIn('struktur_organisasis.so_nama', function ($query) {
-                        $query->from('mahasiswas')->leftJoin('prodis','mahasiswas.mhs_prodi','=','prodis.prodi_nama')->where('mahasiswas.nama', '=', 'struktur_organisasis.so_nama')->get();
-                    })->get()
+                'nama_organisasi' => \App\Models\Organisasi::where('organisasi_id', $surat->organisasi_id)->first(),
+                'organisasi' => \App\Models\Organisasi::leftJoin('struktur_organisasis','organisasis.organisasi_id','=','struktur_organisasis.organisasi_id')->get()
             ]);
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
@@ -180,7 +178,7 @@ class SuratKeputusanOrganisasiController extends Controller
                     'sko_keempat' => $request->input('sko_keempat'),
                     'sko_kelima' => $request->input('sko_kelima'),
                     'sko_tembusan' => $request->input('sko_tembusan'),
-                    'sko_updated' => auth()->guard('admin')->user()->name ? auth()->guard('admin')->user()->name : auth()->guard('mahasiswa')->user()->name,
+                    'sko_updated' =>auth()->guard('mahasiswa')->user()->name,
                     'organisasi_id' => $request->input('organisasi_id'),
                     'sko_approved_step' => 1
                 ]);

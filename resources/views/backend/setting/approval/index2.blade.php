@@ -31,93 +31,87 @@
                 </div>
             @endif
             <div class="card-body">
-                @if ($update == 1)
-                    <table class="align-items-center table-flush table" id="dataTable">
-                        <thead class="thead-light">
+                <table class="align-items-center table-flush table" id="dataTable">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Jenis Surat</th>
+                            <th>Nama</th>
+                            <th>Ordinal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($approval as $app)
                             <tr>
-                                <th>Jenis Surat</th>
-                                <th>Nama</th>
-                                <th>Ordinal</th>
-                                <th>Action</th>
+                                <td>
+                                    <input type="text" name="js_jenis" id="js_jenis" value="{{ $surat->js_jenis }}"
+                                        class="form-control form-control-sm" readonly>
+                                </td>
+                                <td>
+                                    <select name="user_id" class="form-control form-control-sm" id="user_id">
+                                        @foreach ($user as $u)
+                                            @if (old('user_id', $app->user_id) == $u->id)
+                                                <option value="{{ $u->id }}" name="user_id" selected>
+                                                    {{ $u->name }}</option>
+                                            @else
+                                                <option value="{{ $u->id }}" name="user_id">
+                                                    {{ $u->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="number" name="app_ordinal" id="app_ordinal" min="1" max="6"
+                                        value="{{ old('app_ordinal', $app->app_ordinal) }}">
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-sm btn-warning"><i
+                                            class="fas fa-edit"></i></button>
+                                    @if ($delete == 1)
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                                            data-target="#exampleModal" id="#myBtn">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    @endif
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($approval as $app)
-                                <tr>
-                                    <td>
-                                        <input type="text" name="js_jenis" id="js_jenis" value="{{ $surat->js_jenis }}"
-                                            class="form-control form-control-sm" readonly>
-                                    </td>
-                                    <td>
-                                        <select name="user_id" class="form-control form-control-sm" id="user_id">
-                                            @foreach ($user as $u)
-                                                @if (old('user_id', $app->user_id) == $u->id)
-                                                    <option value="{{ $u->id }}" name="user_id" selected>
-                                                        {{ $u->name }}</option>
-                                                @else
-                                                    <option value="{{ $u->id }}" name="user_id">
-                                                        {{ $u->name }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="app_ordinal" id="app_ordinal" min="1"
-                                            max="6" value="{{ old('app_ordinal', $app->app_ordinal) }}">
-                                    </td>
-                                    <td>
-                                        <button type="submit" class="btn btn-sm btn-warning"><i
-                                                class="fas fa-edit"></i></button>
-                                        @if ($delete == 1)
-                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
-                                                data-target="#exampleModal" id="#myBtn">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        @endif
-                                    </td>
-                                </tr>
 
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Delete
-                                                    {{ $sign->sign_nama }}
-                                                </h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Are you sure?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <form action="{{ route('approval.destroy', $app->app_id) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
-                                            </div>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                {{ $sign->sign_nama }}
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="{{ route('approval.destroy', $app->app_id) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @endif
-                @if($create == 1)
+                            </div>
+                        @endforeach
+                    </tbody>
+                </table>
                 <table class="align-items-center table-flush mt-2 table">
                     <thead class="thead-light">
                         <tr>
                             <th>Jenis Surat</th>
                             <th>Nama</th>
-                            <th>Jabatan</th>
-                            <th>Nip</th>
+                            <th>Ordinal</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -154,7 +148,6 @@
                         </form>
                     </tbody>
                 </table>
-                @endif
             </div>
         </div>
     </div>

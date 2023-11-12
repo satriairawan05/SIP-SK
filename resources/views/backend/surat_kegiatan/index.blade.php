@@ -55,7 +55,7 @@
                                 <td>{{ $kgt->skk_disposisi ?? 'belum ada data' }}</td>
                                 <td>{{ $kgt->skk_created ?? 'belum ada data' }}</td>
                                 <td>{{ $kgt->skk_updated ?? 'belum ada data' }}</td>
-                                <td>{{ $kgt->skk_last_print ?? 'belum ada data' }}</td>
+                                <td>{{ \Carbon\Carbon::parse($kgt->skk_last_print)->isoFormat('DD MMMM YYYY') ?? 'belum ada data' }}</td>
                                 <td>
                                     <a href="{{ route('skk.show', $kgt->skk_id) }}" target="__blank"
                                         class="btn btn-sm btn-info"><i class="fas fa-print"></i></a>
@@ -127,16 +127,14 @@
                                         </div>
                                         <!-- Modal -->
                                     @endif
-                                    @if ($kgt->skk_no_surat == null || $kgt->skk_no_surat_old == null)
-                                        <a href="{{ route('skk.edit', $kgt->skk_id) }}" class="btn btn-sm btn-warning"><i
-                                                class="fas fa-edit"></i></a>
-                                        <form action="{{ route('skk.destroy', $kgt->skk_id) }}" method="post"
-                                            class="d-inline">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                        </form>
-                                    @endif
+                                    <a href="{{ route('skk.edit', $kgt->skk_id) }}" class="btn btn-sm btn-warning"><i
+                                            class="fas fa-edit"></i></a>
+                                    <form action="{{ route('skk.destroy', $kgt->skk_id) }}" method="post"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

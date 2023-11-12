@@ -71,7 +71,7 @@
         <div style="text-align: center;" class="mt-3"><b class="text-uppercase fs-5">Keputusan</b></div>
         <div style="text-align: center;"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian Negeri
                 Samarinda</b></div>
-        <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: 001/PL21/KM/2023</b></div>
+        <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: {{ $keputusan->sko_no_surat ?? '' }}</b></div>
         <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">Tentang</b></div>
         <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">{!! $keputusan->skk_subject !!}</b></div>
         <div style="text-align: center;" class="mt-1"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian
@@ -108,7 +108,6 @@
                     <td width="5%" style="vertical-align: top;">:</td>
                     <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_kesatu !!}</td>
                 </tr>
-                <div class="page-break-before"></div>
                 <tr>
                     <td width="10%" style="vertical-align: top; word-wrap: break-word;">Kedua</td>
                     <td width="5%" style="vertical-align: top;">:</td>

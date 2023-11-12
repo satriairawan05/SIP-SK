@@ -50,8 +50,8 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $org->so_nama }}</td>
                                 <td>{{ $org->so_jabatan }}</td>
-                                <td>{{ $org->so_departemen }}</td>
                                 <td>{{ $org->organisasi_nama }}</td>
+                                <td>{{ $org->so_departemen }}</td>
                                 <td>
                                     {{-- Edit --}}
                                     <a href="{{ route('struktur_organisasi.edit', $org->so_id) }}"

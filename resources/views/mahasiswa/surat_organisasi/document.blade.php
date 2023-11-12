@@ -71,7 +71,7 @@
         <div style="text-align: center;" class="mt-3"><b class="text-uppercase fs-5">Keputusan</b></div>
         <div style="text-align: center;"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian Negeri
                 Samarinda</b></div>
-        <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: 001/PL21/KM/2023</b></div>
+        <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: {{ $keputusan->sko_no_surat ?? '' }}</b></div>
         <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">Tentang</b></div>
         <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">{!! $keputusan->sko_subject !!}</b></div>
         <div style="text-align: center;" class="mt-1"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian
@@ -108,7 +108,6 @@
                     <td width="5%" style="vertical-align: top;">:</td>
                     <td width="85%" style="vertical-align: top;">{!! $keputusan->sko_kesatu !!}</td>
                 </tr>
-                <div class="page-break-before"></div>
                 <tr>
                     <td width="10%" style="vertical-align: top; word-wrap: break-word;">Kedua</td>
                     <td width="5%" style="vertical-align: top;">:</td>
@@ -163,7 +162,6 @@
             <div class="col-6">
             </div>
         </div>
-        <div class="page-break-before"></div>
         <table>
             <tbody>
                 <tr>
@@ -186,9 +184,9 @@
         </table>
         <div class="row mt-3">
             <div class="col-12 d-flex justify-content-center align-items-center">
-                <p class="text-uppercase text-bold">Susunan Pengurus</p>
-                <p class="text-uppercase text-bold">{{ $organisasi->organisasi_nama }}</p>
-                <p class="text-uppercase text-bold">Politeknik Pertanian Negeri Samarinda Tahun {{ date('Y') }}
+                <p class="text-center">Susunan Pengurus </p>&nbsp;
+                <p class="text-center">{{ $nama_organisasi->organisasi_nama }} </p>&nbsp;
+                <p class="text-center">Politeknik Pertanian Negeri Samarinda Tahun {{ date('Y') }}</p>
                 </p>
             </div>
         </div>
@@ -196,10 +194,11 @@
             <table>
                 <tbody>
                     <tr>
-                        <td width="10%" style="vertical-align: top;" class="mt-2">{{ $org->so_jabatan ?? '' }}</td>
-                        <td width="5%" style="vertical-align: top;">:</td>
-                        <td width="35%%" style="vertical-align: top;">{{ $org->mhs_nama ?? '' }}</td>
-                        <td width="25%%" style="vertical-align: top;">{{ $org->mhs_nim }}</td>
+                        <td width="10%" style="vertical-align: top;" class="mt-2">{{ $org->so_jabatan ?? '' }}
+                        </td>
+                        <td width="5%" style="vertical-align: top;">{{ $org ? ':' : '' }}</td>
+                        <td width="35%%" style="vertical-align: top;">{{ $org->so_nama ?? '' }}</td>
+                        <td width="25%%" style="vertical-align: top;">{{ $org->so_departemen }}</td>
                         <td width="25%%" style="vertical-align: top;">{{ $org->prodi_alias }}</td>
                     </tr>
                 </tbody>

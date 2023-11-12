@@ -40,8 +40,8 @@
                             <th>#</th>
                             <th>Nama</th>
                             <th>Jabatan</th>
-                            <th>Organisasi</th>
                             <th>Departemen</th>
+                            <th>Organisasi</th>
                             <th>Action</th>
                         </tr>
                     </thead>

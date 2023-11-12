@@ -114,10 +114,8 @@ class SuratKeputusanOrganisasiController extends Controller
             return view('backend.surat_organisasi.document', [
                 'keputusan' => $surat,
                 'signature' => \App\Models\Signature::leftJoin('jenis_surats', 'signatures.js_id', '=', 'jenis_surats.js_id')->where('signatures.js_id', '=', $surat->js_id)->first(),
-                'organisasi' => SuratKeputusanOrganisasi::left('organisasis', 'surat_keputusan_organisasis.organisasi_id', '=', 'organisasis.organisasi_id')
-                    ->leftJoin('struktur_organisasis', 'surat_keputusan_organisasis.organisasi_id', '=', 'struktur_organisasis.organisasi_id')->whereIn('struktur_organisasis.so_nama', function ($query) {
-                        $query->from('mahasiswas')->leftJoin('prodis','mahasiswas.mhs_prodi','=','prodis.prodi_nama')->where('mahasiswas.nama', '=', 'struktur_organisasis.so_nama')->get();
-                    })->get()
+                'nama_organisasi' => \App\Models\Organisasi::where('organisasi_id', $surat->organisasi_id)->first(),
+                'organisasi' => \App\Models\Organisasi::leftJoin('struktur_organisasis','organisasis.organisasi_id','=','struktur_organisasis.organisasi_id')->where('organisasis.organisasi_id','=',$surat->organisasi_id)->get()
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());
@@ -205,10 +203,31 @@ class SuratKeputusanOrganisasiController extends Controller
                     'sko_approved' => auth()->guard('admin')->user()->name
                 ]);
 
-                \App\Models\Approval::where('js_id', $suratKeputusanOrganisasi->js_id)->update([
-                    'app_status' => $request->input('skk_disposisi'),
-                    'app_date' => \Carbon\Carbon::now()
-                ]);
+                if ($request->skk_disposisi == 'Accepted') {
+                    SuratKeputusanOrganisasi::where('skk_id', $suratKeputusanOrganisasi->sko_id)->update([
+                        'sko_approved_step' => $suratKeputusanOrganisasi->sko_approved_step + 1
+                    ]);
+
+                    \App\Models\Approval::where('js_id', $suratKeputusanOrganisasi->js_id)->update([
+                        'app_status' => $request->input('skk_disposisi'),
+                        'app_date' => \Carbon\Carbon::now()
+                    ]);
+
+                    $surat = \App\Models\JenisSurat::where('js_id', $suratKeputusanOrganisasi->js_id)->first();
+                    $code = $surat->js_code;
+                    $ordinal = $surat->js_ordinal;
+
+                    $this->generateNomor($suratKeputusanOrganisasi->sko_id, $ordinal, $code,  $suratKeputusanOrganisasi->created_at);
+                } else {
+                    SuratKeputusanOrganisasi::where('skk_id', $suratKeputusanOrganisasi->sko_id)->update([
+                        'sko_approved_step' => 1
+                    ]);
+
+                    \App\Models\Approval::where('js_id', $suratKeputusanOrganisasi->js_id)->update([
+                        'app_status' => $request->input('skk_disposisi'),
+                        'app_date' => \Carbon\Carbon::now()
+                    ]);
+                }
 
                 return redirect()->back()->with('success', 'Data ' . $suratKeputusanOrganisasi->sko_subject . ' telah di perbaru');
             } catch (\Illuminate\Database\QueryException $e) {
@@ -217,6 +236,30 @@ class SuratKeputusanOrganisasiController extends Controller
         } else {
             return redirect()->back()->with('failed', 'You not Have Authority!');
         }
+    }
+
+    public function generateNomor(string $idSurat, string $ordinal, string $code, string $reqTgl)
+    {
+        $tgl_surat = explode('-', $reqTgl);
+        $year = $tgl_surat[0];
+
+        $surat = SuratKeputusanOrganisasi::findOrfail($idSurat);
+        $lastCount = $surat->js_ordinal;
+        $count = $lastCount + 1;
+
+        if($ordinal == 0){
+            \App\Models\JenisSurat::where('js_id', $surat->js_id)->update(['js_ordinal' => $count]);
+        } else {
+            if ($ordinal >= 100) {
+                \App\Models\JenisSurat::where('js_id', $surat->js_id)->update(['js_ordinal' => 0]);
+            }
+            $plusOrdinal = $surat->js_ordinal + 1;
+            \App\Models\JenisSurat::where('js_id', $surat->js_id)->update(['js_ordinal' => $plusOrdinal]);
+        }
+
+        $nomor_surat = \App\Helper\Helper::generateNumber($code, $ordinal, $year);
+
+        return SuratKeputusanOrganisasi::where('sko_id', $idSurat)->update(['sko_no_surat' => $nomor_surat, 'sko_nomor_surat_old' => $nomor_surat]);
     }
 
     /**
