@@ -1,15 +1,6 @@
 @extends('auth.layout.app')
 
 @section('auth')
-    <style>
-        .toggle-password {
-            position: absolute;
-            right: 70px;
-            top: 45%;
-            transform: translateY(-70%);
-            cursor: pointer;
-        }
-    </style>
     <div class="card my-5 shadow-sm">
         <div class="card-body p-0">
             @if (session('loginError'))
@@ -42,7 +33,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <input type="password" name="password" class="form-control" id="password"
+                                <input type="password" name="password" class="form-control" id="passwordInput"
                                     placeholder="Password">
                                 <span id="togglePassword" class="toggle-password text-bg-dark"><i
                                         class="fa fa-eye"></i></span>
@@ -95,6 +86,41 @@
             error: function(xhr, status, error) {
                 // Penanganan kesalahan permintaan AJAX
             }
+        });
+    </script>
+
+    <style type="text/css">
+        #showHidePassword {
+            position: relative;
+        }
+
+        #togglePassword,
+        #togglePasswordConfirm {
+            position: absolute;
+            top: 44%;
+            right: 70px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/jquery/jquery.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#togglePassword i').click(function(event) {
+                event.preventDefault();
+                const passwordInput = $('#passwordInput');
+                const togglePassword = $('#togglePassword i');
+
+                if (passwordInput.attr('type') === 'text') {
+                    passwordInput.attr('type', 'password');
+                    togglePassword.removeClass('fa-eye-slash').addClass('fa-eye');
+                } else if (passwordInput.attr('type') === 'password') {
+                    passwordInput.attr('type', 'text');
+                    togglePassword.removeClass('fa-eye').addClass('fa-eye-slash');
+                }
+            });
         });
     </script>
 @endsection
