@@ -132,7 +132,8 @@ class SignatureController extends Controller
     public function destroy(Signature $signature)
     {
         try {
-            Signature::destroy($signature->sign_id);
+            $data = $signature->find(request()->segment(3));
+            Signature::destroy($data->sign_id);
 
             return redirect()->back()->with('success', 'Deleted Successfully!');
         } catch (\Illuminate\Database\QueryException $e) {

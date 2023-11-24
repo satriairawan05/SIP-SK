@@ -137,7 +137,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         try {
-            User::destroy($user->id);
+            $data = $user->find(request()->segment(3));
+            User::destroy($data->id);
 
             return redirect('user')->with('success', 'Deleted Account Successfully');
         } catch (\Illuminate\Database\QueryException $e) {

@@ -136,7 +136,8 @@ class StrukturOrganisasiController extends Controller
     public function destroy(StrukturOrganisasi $strukturOrganisasi)
     {
         try {
-            StrukturOrganisasi::destroy($strukturOrganisasi->id);
+            $data = $strukturOrganisasi->find(request()->segment(3));
+            StrukturOrganisasi::destroy($data->so_id);
 
             return redirect()->back()->with('success', 'Deleted Successfully!');
         } catch (\Illuminate\Database\QueryException $e) {

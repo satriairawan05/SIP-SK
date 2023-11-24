@@ -269,7 +269,8 @@ class SuratKeputusanOrganisasiController extends Controller
     {
         if ($suratKeputusanOrganisasi->sko_no_surat == null || $suratKeputusanOrganisasi->sko_no_surat_old == null) {
             try {
-                SuratKeputusanOrganisasi::destroy($suratKeputusanOrganisasi->sko_id);
+                $data = $suratKeputusanOrganisasi->find(request()->segment(3));
+                SuratKeputusanOrganisasi::destroy($data->sko_id);
                 return redirect()->to(route('sko.index'))->with('success', 'Deleted Successfully!');
             } catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->with('failed', $e->getMessage());

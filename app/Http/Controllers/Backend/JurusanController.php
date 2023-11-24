@@ -130,7 +130,8 @@ class JurusanController extends Controller
     public function destroy(Jurusan $jurusan)
     {
         try {
-            Jurusan::destroy($jurusan->jurusan_id);
+            $data = $jurusan->find(request()->segment(3));
+            Jurusan::destroy($data->jurusan_id);
 
             return redirect()->back()->with('success', 'Deleted Successfully');
         } catch (\Illuminate\Database\QueryException $e) {

@@ -132,7 +132,8 @@ class JenisSuratController extends Controller
     public function destroy(JenisSurat $jenisSurat)
     {
         try {
-            JenisSurat::destroy($jenisSurat->js_id);
+            $data = $jenisSurat->find(request()->segment(3));
+            JenisSurat::destroy($data->js_id);
 
             return redirect()->back()->with('success', 'Deleted Successfully!');
         } catch (\Illuminate\Database\QueryException $e) {
