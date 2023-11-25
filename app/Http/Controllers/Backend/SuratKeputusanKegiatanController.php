@@ -194,31 +194,33 @@ class SuratKeputusanKegiatanController extends Controller
                     'skk_approved' => auth()->guard('admin')->user()->name
                 ]);
 
+                $latestApproval = \App\Models\Approval::where('skk_id', $suratKeputusanKegiatan->skk_id)->latest('app_ordinal')->first();
                 if ($request->skk_disposisi == 'Accepted') {
-                    SuratKeputusanKegiatan::where('skk_id', $suratKeputusanKegiatan->sko_id)->update([
-                        'sko_approved_step' => $suratKeputusanKegiatan->sko_approved_step + 1
+                    if ($latestApproval->app_ordinal == $suratKeputusanKegiatan->skk_approved_step) {
+                        $stepData = $suratKeputusanKegiatan->skk_approved_step;
+
+                        $surat = \App\Models\JenisSurat::where('js_id', $suratKeputusanKegiatan->js_id)->first();
+                        $code = $surat->js_code;
+                        $ordinal = $surat->js_ordinal;
+
+                        $this->generateNomor($suratKeputusanKegiatan->sko_id, $ordinal, $code,  $suratKeputusanKegiatan->created_at);
+                    } else {
+                        $stepData = $suratKeputusanKegiatan->skk_approved_step + 1;
+                    }
+
+                    SuratKeputusanKegiatan::where('skk_id', $suratKeputusanKegiatan->skk_id)->update([
+                        'sko_approved_step' => $stepData
                     ]);
-
-                    \App\Models\Approval::where('js_id', $suratKeputusanKegiatan->js_id)->update([
-                        'app_status' => $request->input('skk_disposisi'),
-                        'app_date' => \Carbon\Carbon::now()
-                    ]);
-
-                    $surat = \App\Models\JenisSurat::where('js_id', $suratKeputusanKegiatan->js_id)->first();
-                    $code = $surat->js_code;
-                    $ordinal = $surat->js_ordinal;
-
-                    $this->generateNomor($suratKeputusanKegiatan->sko_id, $ordinal, $code,  $suratKeputusanKegiatan->created_at);
                 } else {
-                    SuratKeputusanKegiatan::where('skk_id', $suratKeputusanKegiatan->sko_id)->update([
+                    SuratKeputusanKegiatan::where('skk_id', $suratKeputusanKegiatan->skk_id)->update([
                         'sko_approved_step' => 1
                     ]);
-
-                    \App\Models\Approval::where('js_id', $suratKeputusanKegiatan->js_id)->update([
-                        'app_status' => $request->input('skk_disposisi'),
-                        'app_date' => \Carbon\Carbon::now()
-                    ]);
                 }
+
+                \App\Models\Approval::where('js_id', $suratKeputusanKegiatan->js_id)->update([
+                    'app_status' => $request->input('skk_disposisi'),
+                    'app_date' => \Carbon\Carbon::now()
+                ]);
 
                 return redirect()->back()->with('success', 'Data ' . $suratKeputusanKegiatan->skk_subject . ' telah di perbaru');
             } catch (\Illuminate\Database\QueryException $e) {
@@ -238,7 +240,7 @@ class SuratKeputusanKegiatanController extends Controller
         $lastCount = $surat->js_ordinal;
         $count = $lastCount + 1;
 
-        if($ordinal == 0){
+        if ($ordinal == 0) {
             \App\Models\JenisSurat::where('js_id', $surat->js_id)->update(['js_ordinal' => $count]);
         } else {
             if ($ordinal >= 100) {
