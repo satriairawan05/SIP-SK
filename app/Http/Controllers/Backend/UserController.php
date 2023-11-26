@@ -60,7 +60,7 @@ class UserController extends Controller
         try {
             $validated = Validator::make($request->all(), [
                 'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
                 'password' => ['required', 'string', 'min:3', 'confirmed']
             ]);
 
@@ -71,7 +71,7 @@ class UserController extends Controller
                     'password' => bcrypt($request->input('password')),
                 ]);
 
-                return redirect('user')->with('success', 'Added Account Successfully');
+                return redirect()->to(route('user.index'))->with('success', 'Added Account Successfully');
             } else {
                 return redirect('dashboard')->with('failed', $validated->getMessageBag());
             }
@@ -122,7 +122,7 @@ class UserController extends Controller
                     'password' => bcrypt($request->input('password')),
                 ]);
 
-                return redirect('user')->with('success', 'Updated Account Successfully');
+                return redirect()->to(route('user.index'))->with('success', 'Updated Account Successfully');
             } else {
                 return redirect('dashboard')->with('failed', $validated->getMessageBag());
             }
@@ -139,7 +139,7 @@ class UserController extends Controller
         try {
             User::destroy($user->id);
 
-            return redirect('user')->with('success', 'Deleted Account Successfully');
+            return redirect()->to(route('user.index'))->with('success', 'Deleted Account Successfully');
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());
         }
