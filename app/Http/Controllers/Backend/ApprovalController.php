@@ -58,11 +58,10 @@ class ApprovalController extends Controller
             $validated = Validator::make($request->all(), [
                 'app_ordinal' => ['required', 'string'],
                 'user_id' => ['required', 'string'],
-                'js_id' => ['required', 'string'],
             ]);
 
             if (!$validated->fails()) {
-                $surat = \App\Models\JenisSurat::where('js_jenis', $request->js_jenis)->first();
+                $surat = \App\Models\JenisSurat::where('js_jenis', $request->input('js_jenis'))->first();
 
                 Approval::create([
                     'user_id' => $request->input('user_id'),
@@ -104,7 +103,6 @@ class ApprovalController extends Controller
             $validated = Validator::make($request->all(), [
                 'app_ordinal' => ['required', 'string'],
                 'user_id' => ['required', 'string'],
-                'js_id' => ['required', 'string'],
             ]);
 
             if (!$validated->fails()) {
