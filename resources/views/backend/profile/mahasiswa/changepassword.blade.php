@@ -32,6 +32,7 @@
             <div class="card-body">
                 <form action="{{ route('mahasiswa.changepassword_update', $mahasiswa->mhs_id) }}" method="post">
                     @csrf
+                    @method('put')
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="password">Password<sup class="text-danger">*</sup></label>
