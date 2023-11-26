@@ -140,7 +140,8 @@ class OrganisasiController extends Controller
     public function destroy(Organisasi $organisasi)
     {
         try {
-            Organisasi::destroy($organisasi->organisasi_id);
+            $data = $organisasi->find(request()->segment(3));
+            Organisasi::destroy($data->organisasi_id);
 
             return redirect()->back()->with('success', 'Deleted Successfully!');
         } catch(\Illuminate\Database\QueryException $e){

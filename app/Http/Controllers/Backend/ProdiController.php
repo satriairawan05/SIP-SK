@@ -142,7 +142,8 @@ class ProdiController extends Controller
     public function destroy(Prodi $prodi)
     {
         try {
-            Prodi::destroy($prodi->prodi_id);
+            $data = $prodi->find(request()->segment(3));
+            Prodi::destroy($data->prodi_id);
 
             return redirect()->back()->with('success', 'Deleted Successfully!');
         } catch (\Illuminate\Database\QueryException $e) {

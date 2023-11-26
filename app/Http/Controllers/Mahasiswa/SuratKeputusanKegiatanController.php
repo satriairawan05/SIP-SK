@@ -188,7 +188,8 @@ class SuratKeputusanKegiatanController extends Controller
     {
         if ($suratKeputusanKegiatan->skk_no_surat == null || $suratKeputusanKegiatan->skk_no_surat_old == null) {
             try {
-                SuratKeputusanKegiatan::destroy($suratKeputusanKegiatan->skk_id);
+                $data = $suratKeputusanKegiatan->find(request()->segment(3));
+                SuratKeputusanKegiatan::destroy($data->skk_id);
 
                 return redirect()->to(route('skk.index'))->with('success', 'Deleted Successfully!');
             } catch(\Illuminate\Database\QueryException $e){

@@ -140,7 +140,8 @@ class GroupController extends Controller
     public function destroy(Group $group)
     {
         if (auth()->guard('admin')->user()->group_id == 1) {
-            Group::where('group_id', $group->group_id)->delete();
+            $data = $group->find(request()->segment(3));
+            Group::where('group_id', $data->group_id)->delete();
 
             $pages = \App\Models\Page::all();
             foreach ($pages as $page) {

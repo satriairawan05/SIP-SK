@@ -183,7 +183,8 @@ class MahasiswaController extends Controller
     public function destroy(Mahasiswa $mahasiswa)
     {
         try {
-            Mahasiswa::destroy($mahasiswa->mhs_id);
+            $data = $mahasiswa->find(request()->segment(3));
+            Mahasiswa::destroy($data->mhs_id);
 
             return redirect()->back()->with('success', 'Deleted Successfully!');
         } catch (\Illuminate\Database\QueryException $e) {

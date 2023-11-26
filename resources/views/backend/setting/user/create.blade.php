@@ -61,7 +61,7 @@
                                 class="form-control form-control-sm @error('password')
                             is-invalid
                         @enderror"
-                                name="password" id="password" placeholder="Enter password" required>
+                                name="password" id="passwordInput" placeholder="Enter password" required>
                             <span id="togglePassword" class="toggle-password text-bg-dark"><i class="fa fa-eye"></i></span>
                             @error('password')
                                 <div class="invalid-feedback">
@@ -72,7 +72,7 @@
                         <div class="form-group col-6">
                             <label for="password-confirm">Confirm Password<sup class="text-danger">*</sup></label>
                             <input type="password" name="password_confirmation" class="form-control form-control-sm"
-                                id="password-confirm" placeholder="Enter password" required>
+                                id="passwordConfirm" placeholder="Enter password" required>
                             <span id="togglePasswordConfirm" class="toggle-password text-bg-dark"><i
                                     class="fa fa-eye"></i></span>
                         </div>
@@ -88,4 +88,53 @@
             </div>
         </div>
     </div>
+
+    <style type="text/css">
+        #showHidePassword {
+            position: relative;
+        }
+
+        #togglePassword,
+        #togglePasswordConfirm {
+            position: absolute;
+            top: 75%;
+            right: 20px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/jquery/jquery.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#togglePassword i').click(function(event) {
+                event.preventDefault();
+                const passwordInput = $('#passwordInput');
+                const togglePassword = $('#togglePassword i');
+
+                if (passwordInput.attr('type') === 'text') {
+                    passwordInput.attr('type', 'password');
+                    togglePassword.removeClass('fa-eye-slash').addClass('fa-eye');
+                } else if (passwordInput.attr('type') === 'password') {
+                    passwordInput.attr('type', 'text');
+                    togglePassword.removeClass('fa-eye').addClass('fa-eye-slash');
+                }
+            });
+
+            $('#togglePasswordConfirm i').click(function(event) {
+                event.preventDefault();
+                const passwordConfirmInput = $('#passwordConfirm');
+                const toggleConfirmPassword = $('#togglePasswordConfirm i');
+
+                if (passwordConfirmInput.attr('type') === 'text') {
+                    passwordConfirmInput.attr('type', 'password');
+                    toggleConfirmPassword.removeClass('fa-eye-slash').addClass('fa-eye');
+                } else if (passwordConfirmInput.attr('type') === 'password') {
+                    passwordConfirmInput.attr('type', 'text');
+                    toggleConfirmPassword.removeClass('fa-eye').addClass('fa-eye-slash');
+                }
+            });
+        });
+    </script>
 @endsection
