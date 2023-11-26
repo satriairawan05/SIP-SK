@@ -24,6 +24,7 @@
             <div class="card-body">
                 <form action="{{ route('jenis_surat.update', $surat->js_id) }}" method="post">
                     @csrf
+                    @method('put')
                     <div class="row">
                         <div class="form-group col-4">
                             <label for="js_jenis">Jenis <sup class="text-danger">*</sup></label>

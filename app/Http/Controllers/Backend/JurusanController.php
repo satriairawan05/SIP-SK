@@ -52,6 +52,7 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         try {
             $validated = Validator::make($request->all(), [
                 'jurusan_nama' => ['required', 'string'],
@@ -109,7 +110,7 @@ class JurusanController extends Controller
             ]);
 
             if (!$validated->fails()) {
-                Jurusan::where('jurusan_id', $jurusan->jurusan_id)->udate([
+                Jurusan::where('jurusan_id', $jurusan->jurusan_id)->update([
                     'jurusan_nama' => $request->input('jurusan_name'),
                     'jurusan_alias' => $request->input('jurusan_alias'),
                     'jurusan_code' => $request->input('jurusan_code') ? $request->input('jurusan_code') : null,
