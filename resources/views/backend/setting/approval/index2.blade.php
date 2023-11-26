@@ -67,12 +67,12 @@
                                 <td>
                                     <button type="submit" class="btn btn-sm btn-warning"><i
                                             class="fas fa-edit"></i></button>
-                            
+
                                         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                             data-target="#exampleModal" id="#myBtn">
                                             <i class="fas fa-trash"></i>
                                         </button>
-                                  
+
                                 </td>
                             </tr>
 
@@ -138,7 +138,7 @@
                                 </td>
                                 <td>
                                     <input type="number" name="app_ordinal" id="app_ordinal" min="1"
-                                        max="6" value="{{ old('app_ordinal') }}">
+                                        max="6" step="1" value="{{ old('app_ordinal') }}">
                                 </td>
                                 <td>
                                     <button type="submit" class="btn btn-sm btn-success"><i
