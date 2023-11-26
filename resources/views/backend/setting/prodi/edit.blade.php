@@ -24,6 +24,7 @@
             <div class="card-body">
                 <form action="{{ route('prodi.update', $prodi->prodi_id) }}" method="post">
                     @csrf
+                    @method('put')
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="prodi_name">Name <sup class="text-danger">*</sup></label>
