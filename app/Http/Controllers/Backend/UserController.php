@@ -32,7 +32,6 @@ class UserController extends Controller
             return view('backend.setting.user.index', [
                 'name' => $this->name,
                 'users' => $user,
-                'pages' => $this->get_access($this->name, auth()->guard('admin')->user()->group_id)
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());

@@ -67,12 +67,12 @@
                                 <td>
                                     <button type="submit" class="btn btn-sm btn-warning"><i
                                             class="fas fa-edit"></i></button>
-                                    @if ($delete == 1)
+                            
                                         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                             data-target="#exampleModal" id="#myBtn">
                                             <i class="fas fa-trash"></i>
                                         </button>
-                                    @endif
+                                  
                                 </td>
                             </tr>
 
