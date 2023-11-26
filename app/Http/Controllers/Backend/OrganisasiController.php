@@ -64,8 +64,8 @@ class OrganisasiController extends Controller
                     'organisasi_nama' => $request->input('organisasi_nama'),
                     'organisasi_status' => $request->input('organisasi_status'),
                     'organisasi_periode' => $request->input('organisasi_periode'),
-                    'organisasi_affiliate' => $request->input('organisasi_affiliate') ? $request->input('organisasi_affiliate') : null,
-                    'prodi_id' => $request->input('prodi_id') ? $request->input('prodi_id') : null,
+                    'organisasi_affiliate' => $request->input('organisasi_affiliate') == "on" ? true : false,
+                    'prodi_id' => $request->input('organisasi_affiliate') == "on" ? $request->input('prodi_id') : null,
                 ]);
 
 
@@ -119,8 +119,8 @@ class OrganisasiController extends Controller
                     'organisasi_nama' => $request->input('organisasi_nama'),
                     'organisasi_status' => $request->input('organisasi_status'),
                     'organisasi_periode' => $request->input('organisasi_periode'),
-                    'organisasi_affiliate' => $request->input('organisasi_affiliate') ? $request->input('organisasi_affiliate') : null,
-                    'prodi_id' => $request->input('prodi_id') ? $request->input('prodi_id') : null,
+                    'organisasi_affiliate' => $request->input('organisasi_affiliate') == "on" ? true : false,
+                    'prodi_id' => $request->input('organisasi_affiliate') == "on" ? $request->input('prodi_id') : null,
                 ]);
 
                 return redirect()->to(route('organisasi.index'))->with('success', 'Updated Successfully!');
