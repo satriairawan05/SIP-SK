@@ -60,7 +60,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <div class="col-6">
                             <label for="skk_menimbang">Menimbang <sup class="text-danger">*</sup></label>
                             <textarea class="ckeditor form-control" name="skk_menimbang" id="skk_menimbang" cols="50" rows="10">{{ old('skk_menimbang', $keputusan->skk_menimbang) }}</textarea>
@@ -145,7 +145,7 @@
                             <label for="skk_tembusan">Tembusan<sup class="text-danger">*</sup></label>
                             <textarea class="ckeditor form-control" name="skk_tembusan" id="skk_tembusan" cols="50" rows="10">{{ old('skk_tembusan', $keputusan->skk_tembusan) }}</textarea>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
                             <a href="{{ route('skks.index') }}" class="btn btn-sm btn-info mx-2"><i
