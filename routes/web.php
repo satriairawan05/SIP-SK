@@ -32,7 +32,7 @@ Route::middleware('guest')->group(function () {
 
         // Change Password
         Route::get('/change_password/{mahasiswa}/password', [\App\Http\Controllers\Auth\LoginController::class, 'showChangePasswordMahasiswaForm'])->name('mahasiswa.changepassword');
-        Route::put('/change_password/{mahasiswa}', [\App\Http\Controllers\Auth\Controller::class, 'ChangePasswordMahasiswa'])->name('mahasiswa.changepassword_update');
+        Route::put('/change_password/{mahasiswa}', [\App\Http\Controllers\Auth\LoginController::class, 'ChangePasswordMahasiswa'])->name('mahasiswa.changepassword_update');
 
         // Dashboard Mahasiswa
         Route::get('/', fn () => view('mahasiswa.home', [
