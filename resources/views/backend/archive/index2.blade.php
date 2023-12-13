@@ -22,6 +22,24 @@
                 </div>
             @endif
             <div class="card-body">
+                <form action="{{ route('arc.index', ['js_id' => $surat->js_id]) }}" method="get" class="form-inline">
+                    @csrf
+                    @php
+                        $years = [['year' => '2023'], ['year' => '2024'], ['year' => '2025'], ['year' => '2026'], ['year' => '2027'], ['year' => '2028'], ['year' => '2029'], ['year' => '2030']];
+                    @endphp
+                    <input type="hidden" name="js_id" value="{{ $surat->js_id }}">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-end">
+                            <select class="form-select form-control mr-2" name="year" aria-label="Select Year">
+                                @foreach ($years as $year)
+                                    <option value="{{ $year['year'] }}"
+                                        {{ old('year') == $year['year'] ? 'selected' : '' }}>{{ $year['year'] }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
                 @if ($surat->js_id == 1)
                     <table class="align-items-center table-flush table" id="dataTable">
                         <thead class="thead-light">
