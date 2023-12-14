@@ -8,15 +8,15 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset('ruang-admin/vendor/select2/dist/js/select2.min.js') }}"></script>
 <script src="{{ asset('ruang-admin/js/time.min.js') }}"></script>
-<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+{{-- <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('my-editor');
-</script>
+</script> --}}
 <script>
     $(document).ready(function() {
         $('#dataTable').DataTable(); // ID From dataTable
         $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-        $('.ckeditor').ckeditor();
+        // $('.ckeditor').ckeditor();
     });
 </script>
 
