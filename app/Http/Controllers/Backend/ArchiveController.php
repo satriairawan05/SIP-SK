@@ -27,18 +27,32 @@ class ArchiveController extends Controller
                     'surat' => \App\Models\JenisSurat::all(),
                 ]);
             } else {
-                if ($request->js_id == 1 && $request->year) {
+                if ($request->js_id == 1) {
+                    if ($request->js_id == 1 && $request->year) {
+                        return view('mahasiswa.archive.index2', [
+                            'name' => $this->name,
+                            'surat' => \App\Models\JenisSurat::where('js_id', $request->js_id)->first(),
+                            'organisasi' => \App\Models\SuratKeputusanOrganisasi::whereNotNull('sko_no_surat')->whereYear('created_at', $request->year)->get()
+                        ]);
+                    }
                     return view('mahasiswa.archive.index2', [
                         'name' => $this->name,
                         'surat' => \App\Models\JenisSurat::where('js_id', $request->js_id)->first(),
-                        'organisasi' => \App\Models\SuratKeputusanOrganisasi::whereNotNull('sko_no_surat')->whereYear('created_at', $request->year)->get()
+                        'organisasi' => \App\Models\SuratKeputusanOrganisasi::whereNotNull('sko_no_surat')->get()
                     ]);
                 }
-                if ($request->js_id == 2 && $request->year) {
+                if ($request->js_id == 2) {
+                    if ($request->js_id == 2 && $request->year) {
+                        return view('mahasiswa.archive.index2', [
+                            'name' => $this->name,
+                            'surat' => \App\Models\JenisSurat::where('js_id', $request->js_id)->first(),
+                            'kegiatan' => \App\Models\SuratKeputusanKegiatan::whereNotNull('skk_no_surat')->whereYear('created_at', $request->year)->get()
+                        ]);
+                    }
                     return view('mahasiswa.archive.index2', [
                         'name' => $this->name,
                         'surat' => \App\Models\JenisSurat::where('js_id', $request->js_id)->first(),
-                        'kegiatan' => \App\Models\SuratKeputusanKegiatan::whereNotNull('skk_no_surat')->whereYear('created_at', $request->year)->get()
+                        'kegiatan' => \App\Models\SuratKeputusanKegiatan::whereNotNull('skk_no_surat')->get()
                     ]);
                 }
             }
