@@ -17,6 +17,29 @@ class ArchiveController extends Controller
     }
 
     /**
+     * viewByJenisSurat
+     *
+     * @param  mixed $reqJs
+     * @return void
+     */
+    private function viewByJenisSurat($reqJs)
+    {
+        if ($reqJs == 1) {
+            return view('mahasiswa.archive.index2', [
+                'name' => $this->name,
+                'surat' => \App\Models\JenisSurat::where('js_id', $reqJs)->first(),
+                'organisasi' => \App\Models\SuratKeputusanOrganisasi::whereNotNull('sko_no_surat')->get()
+            ]);
+        } else {
+            return view('mahasiswa.archive.index2', [
+                'name' => $this->name,
+                'surat' => \App\Models\JenisSurat::where('js_id', $reqJs)->first(),
+                'kegiatan' => \App\Models\SuratKeputusanKegiatan::whereNotNull('skk_no_surat')->get()
+            ]);
+        }
+    }
+
+    /**
      * viewByJenisSuratAndYear
      *
      * @param  mixed $reqJs
@@ -59,20 +82,12 @@ class ArchiveController extends Controller
                 }
             } else {
                 if ($request->js_id == 1) {
-                    return view('mahasiswa.archive.index2', [
-                        'name' => $this->name,
-                        'surat' => \App\Models\JenisSurat::where('js_id', $request->js_id)->first(),
-                        'organisasi' => \App\Models\SuratKeputusanOrganisasi::whereNotNull('sko_no_surat')->get()
-                    ]);
+                    $this->viewByJenisSurat($request->js_id);
                     if ($request->js_id == 1 && $request->year) {
                         $this->viewByJenisSuratAndYear($request->js_id, $request->year);
                     }
                 } else {
-                    return view('mahasiswa.archive.index2', [
-                        'name' => $this->name,
-                        'surat' => \App\Models\JenisSurat::where('js_id', $request->js_id)->first(),
-                        'kegiatan' => \App\Models\SuratKeputusanKegiatan::whereNotNull('skk_no_surat')->get()
-                    ]);
+                    $this->viewByJenisSurat($request->js_id);
                     if ($request->js_id == 2 && $request->year) {
                         $this->viewByJenisSuratAndYear($request->js_id, $request->year);
                     }
