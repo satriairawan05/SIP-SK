@@ -44,24 +44,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($surat as $s)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $s->js_jenis }}</td>
-                                <td>{{ $s->js_kode }}</td>
-                                <td>{{ $s->js_nomor }}</td>
-                                <td>
-                                    <a href="{{ route('jenis_surat.edit', $s->js_id) }}" class="btn btn-sm btn-warning"><i
-                                            class="fas fa-edit"></i></a>
-                                    <form action="{{ route('jenis_surat.destroy', $s->js_id) }}" method="post"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                        @if (count($surat) == 2)
+                            @foreach ($surat as $s)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $s->js_jenis }}</td>
+                                    <td>{{ $s->js_kode }}</td>
+                                    <td>{{ $s->js_nomor }}</td>
+                                    <td>
+                                        <a href="{{ route('jenis_surat.edit', $s->js_id) }}"
+                                            class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                        <form action="{{ route('jenis_surat.destroy', $s->js_id) }}" method="post"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
