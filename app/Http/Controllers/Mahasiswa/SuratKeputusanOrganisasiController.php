@@ -58,16 +58,16 @@ class SuratKeputusanOrganisasiController extends Controller
             $validated = Validator::make($request->all(), [
                 'sko_subject' => ['required', 'string'],
                 'sko_tgl_surat' => ['required', 'date'],
-                'sko_menimbang' => ['required', 'string'],
-                'sko_mengingat' => ['required', 'string'],
-                'sko_memperhatikan' => ['required', 'string'],
-                'sko_menetapkan' => ['required', 'string'],
-                'sko_kesatu' => ['required', 'string'],
-                'sko_kedua' => ['required', 'string'],
-                'sko_ketiga' => ['required', 'string'],
-                'sko_keempat' => ['required', 'string'],
-                'sko_kelima' => ['required', 'string'],
-                'sko_tembusan' => ['required', 'string'],
+                // 'sko_menimbang' => ['required', 'string'],
+                // 'sko_mengingat' => ['required', 'string'],
+                // 'sko_memperhatikan' => ['required', 'string'],
+                // 'sko_menetapkan' => ['required', 'string'],
+                // 'sko_kesatu' => ['required', 'string'],
+                // 'sko_kedua' => ['required', 'string'],
+                // 'sko_ketiga' => ['required', 'string'],
+                // 'sko_keempat' => ['required', 'string'],
+                // 'sko_kelima' => ['required', 'string'],
+                // 'sko_tembusan' => ['required', 'string'],
             ]);
 
             if (!$validated->fails()) {
@@ -75,16 +75,16 @@ class SuratKeputusanOrganisasiController extends Controller
                 SuratKeputusanOrganisasi::create([
                     'sko_subject' => $request->input('sko_subject'),
                     'sko_tgl_surat' => $request->input('sko_tgl_surat'),
-                    'sko_menimbang' => $request->input('sko_menimbang'),
-                    'sko_mengingat' => $request->input('sko_mengingat'),
-                    'sko_memperhatikan' => $request->input('sko_memperhatikan'),
-                    'sko_menetapkan' => $request->input('sko_menetapkan'),
-                    'sko_kesatu' => $request->input('sko_kesatu'),
-                    'sko_kedua' => $request->input('sko_kedua'),
-                    'sko_ketiga' => $request->input('sko_ketiga'),
-                    'sko_keempat' => $request->input('sko_keempat'),
-                    'sko_kelima' => $request->input('sko_kelima'),
-                    'sko_tembusan' => $request->input('sko_tembusan'),
+                    // 'sko_menimbang' => $request->input('sko_menimbang'),
+                    // 'sko_mengingat' => $request->input('sko_mengingat'),
+                    // 'sko_memperhatikan' => $request->input('sko_memperhatikan'),
+                    // 'sko_menetapkan' => $request->input('sko_menetapkan'),
+                    // 'sko_kesatu' => $request->input('sko_kesatu'),
+                    // 'sko_kedua' => $request->input('sko_kedua'),
+                    // 'sko_ketiga' => $request->input('sko_ketiga'),
+                    // 'sko_keempat' => $request->input('sko_keempat'),
+                    // 'sko_kelima' => $request->input('sko_kelima'),
+                    // 'sko_tembusan' => $request->input('sko_tembusan'),
                     'sko_uuid' => \Illuminate\Support\Str::uuid()->toString(),
                     'sko_created' => auth()->guard('mahasiswa')->user()->name,
                     'js_id' => $jenisSurat->js_id,
@@ -92,9 +92,9 @@ class SuratKeputusanOrganisasiController extends Controller
                     'sko_approved_step' => 1
                 ]);
 
-                return redirect()->to(route('sko.index'))->with('success', 'Added Successfully!');
+                return redirect()->to(route('skos.index'))->with('success', 'Added Successfully!');
             } else {
-                return redirect()->to(route('sko.index'))->with('failed', $validated->getMessageBag());
+                return redirect()->to(route('skos.index'))->with('failed', $validated->getMessageBag());
             }
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
@@ -153,39 +153,39 @@ class SuratKeputusanOrganisasiController extends Controller
             $validated = Validator::make($request->all(), [
                 'sko_subject' => ['required', 'string'],
                 'sko_tgl_surat' => ['required', 'date'],
-                'sko_menimbang' => ['required', 'string'],
-                'sko_mengingat' => ['required', 'string'],
-                'sko_memperhatikan' => ['required', 'string'],
-                'sko_menetapkan' => ['required', 'string'],
-                'sko_kesatu' => ['required', 'string'],
-                'sko_kedua' => ['required', 'string'],
-                'sko_ketiga' => ['required', 'string'],
-                'sko_keempat' => ['required', 'string'],
-                'sko_tembusan' => ['required', 'string'],
+                // 'sko_menimbang' => ['required', 'string'],
+                // 'sko_mengingat' => ['required', 'string'],
+                // 'sko_memperhatikan' => ['required', 'string'],
+                // 'sko_menetapkan' => ['required', 'string'],
+                // 'sko_kesatu' => ['required', 'string'],
+                // 'sko_kedua' => ['required', 'string'],
+                // 'sko_ketiga' => ['required', 'string'],
+                // 'sko_keempat' => ['required', 'string'],
+                // 'sko_tembusan' => ['required', 'string'],
             ]);
 
             if (!$validated->fails()) {
                 SuratKeputusanOrganisasi::where('sko_id', $suratKeputusanOrganisasi->sko_id)->update([
                     'sko_subject' => $request->input('sko_subject'),
                     'sko_tgl_surat' => $request->input('sko_tgl_surat'),
-                    'sko_menimbang' => $request->input('sko_menimbang'),
-                    'sko_mengingat' => $request->input('sko_mengingat'),
-                    'sko_memperhatikan' => $request->input('sko_memperhatikan'),
-                    'sko_menetapkan' => $request->input('sko_menetapkan'),
-                    'sko_kesatu' => $request->input('sko_kesatu'),
-                    'sko_kedua' => $request->input('sko_kedua'),
-                    'sko_ketiga' => $request->input('sko_ketiga'),
-                    'sko_keempat' => $request->input('sko_keempat'),
-                    'sko_kelima' => $request->input('sko_kelima'),
-                    'sko_tembusan' => $request->input('sko_tembusan'),
+                    // 'sko_menimbang' => $request->input('sko_menimbang'),
+                    // 'sko_mengingat' => $request->input('sko_mengingat'),
+                    // 'sko_memperhatikan' => $request->input('sko_memperhatikan'),
+                    // 'sko_menetapkan' => $request->input('sko_menetapkan'),
+                    // 'sko_kesatu' => $request->input('sko_kesatu'),
+                    // 'sko_kedua' => $request->input('sko_kedua'),
+                    // 'sko_ketiga' => $request->input('sko_ketiga'),
+                    // 'sko_keempat' => $request->input('sko_keempat'),
+                    // 'sko_kelima' => $request->input('sko_kelima'),
+                    // 'sko_tembusan' => $request->input('sko_tembusan'),
                     'sko_updated' =>auth()->guard('mahasiswa')->user()->name,
                     'organisasi_id' => $request->input('organisasi_id'),
                     'sko_approved_step' => 1
                 ]);
 
-                return redirect()->to(route('sko.index'))->with('success', 'Updated Successfully!');
+                return redirect()->to(route('skos.index'))->with('success', 'Updated Successfully!');
             } else {
-                return redirect()->to(route('sko.index'))->with('failed', $validated->getMessageBag());
+                return redirect()->to(route('skos.index'))->with('failed', $validated->getMessageBag());
             }
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
