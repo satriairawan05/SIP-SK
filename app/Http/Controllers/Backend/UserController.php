@@ -73,7 +73,7 @@ class UserController extends Controller
 
                 return redirect()->to(route('user.index'))->with('success', 'Added Account Successfully');
             } else {
-                return redirect('dashboard')->with('failed', $validated->getMessageBag());
+                return redirect()->back()->with('failed', $validated->getMessageBag());
             }
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());
@@ -124,7 +124,7 @@ class UserController extends Controller
 
                 return redirect()->to(route('user.index'))->with('success', 'Updated Account Successfully');
             } else {
-                return redirect('dashboard')->with('failed', $validated->getMessageBag());
+                return redirect()->back()->with('failed', $validated->getMessageBag());
             }
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());

@@ -53,26 +53,27 @@
                                     </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm" name="sign_nama"
-                                            value="{{ old('sign_nama', $sign->sign_nama) }}" placeholder="Enter Name">
+                                            value="{{ old('sign_nama', $sign->sign_nama) }}" required
+                                            placeholder="Enter Name">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm" name="sign_jabatan"
-                                            value="{{ old('sign_jabatan', $sign->sign_jabatan) }}"
+                                            value="{{ old('sign_jabatan', $sign->sign_jabatan) }}" required
                                             placeholder="Enter Position">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm" name="sign_nip"
-                                            value="{{ old('sign_nip', $sign->sign_nip) }}" placeholder="Enter Nip">
+                                            value="{{ old('sign_nip', $sign->sign_nip) }}" required placeholder="Enter Nip">
                                     </td>
                                     <td>
                                         <button type="submit" class="btn btn-sm btn-warning"><i
                                                 class="fas fa-edit"></i></button>
-                                    
-                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
-                                                data-target="#exampleModal" id="#myBtn">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                    
+
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                                            data-target="#exampleModal" id="#myBtn">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+
                                     </td>
                                 </tr>
                             </form>
@@ -126,15 +127,15 @@
                                         class="form-control form-control-sm" name="js_jenis">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control form-control-sm" name="sign_nama"
+                                    <input type="text" class="form-control form-control-sm" name="sign_nama" required
                                         value="{{ old('sign_nama') }}" placeholder="Enter Name">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control form-control-sm" name="sign_jabatan"
+                                    <input type="text" class="form-control form-control-sm" name="sign_jabatan" required
                                         value="{{ old('sign_jabatan') }}" placeholder="Enter Position">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control form-control-sm" name="sign_nip"
+                                    <input type="text" class="form-control form-control-sm" name="sign_nip" required
                                         value="{{ old('sign_nip') }}" placeholder="Enter Nip">
                                 </td>
                                 <td>

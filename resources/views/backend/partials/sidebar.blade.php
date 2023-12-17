@@ -1,5 +1,19 @@
+@php
+    $approval = App\Models\Approval::where(
+        'user_id',auth()->guard('admin')->user()->id
+    )->first();
+    if ($approval) {
+        $skksCount = App\Models\SuratKeputusanKegiatan::where('skk_approved_step', $approval->user_id)->count();
+        $skosCount = App\Models\SuratKeputusanOrganisasi::where('sko_approved_step', $approval->user_id)->count();
+    } else {
+        $skksCount = App\Models\SuratKeputusanKegiatan::count();
+        $skosCount = App\Models\SuratKeputusanOrganisasi::count();
+    }
+@endphp
+
 <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-    <a class="sidebar-brand bg-gradient-success d-flex align-items-center justify-content-center" href="{{ auth()->guard('admin')->check()? route('dashboard'): route('home') }}">
+    <a class="sidebar-brand bg-gradient-success d-flex align-items-center justify-content-center"
+        href="{{ auth()->guard('admin')->check()? route('dashboard'): route('home') }}">
         <div class="sidebar-brand-icon">
             <img src="{{ asset('ruang-admin/img/logo/logo.png') }}" class="shadow shadow-lg">
         </div>
@@ -36,6 +50,9 @@
             aria-expanded="true" aria-controls="collapseOrganisasi">
             <i class="far fa-fw fa-envelope"></i>
             <span>SK Organisasi</span>
+            @if ($skosCount > 0)
+                <span class="badge rounded-pill badge-success">{{ $skosCount }}</span>
+            @endif
         </a>
         <div id="collapseOrganisasi" class="collapse" aria-labelledby="headingBootstrap"
             data-parent="#accordionSidebar">
@@ -43,7 +60,8 @@
                 <h6 class="collapse-header">SK Organisasi</h6>
                 <a class="collapse-item" href="{{ route('struktur_organisasi.index') }}">Struktur Organisasi</a>
                 <a class="collapse-item" href="{{ route('organisasi.index') }}">Organisasi</a>
-                <a class="collapse-item" href="{{ route('sko.index') }}">Surat Keputusan</a>
+                <a class="collapse-item" href="{{ route('sko.index') }}">Surat Keputusan
+                </a>
             </div>
         </div>
     </li>
@@ -52,11 +70,15 @@
             aria-expanded="true" aria-controls="collapseKegiatan">
             <i class="far fa-fw fa-envelope"></i>
             <span>SK Kegiatan</span>
+            @if ($skksCount > 0)
+                <span class="badge rounded-pill badge-success">{{ $skksCount }}</span>
+            @endif
         </a>
         <div id="collapseKegiatan" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
             <div class="collapse-inner rounded bg-white py-2">
                 <h6 class="collapse-header">SK Kegiatan</h6>
-                <a class="collapse-item" href="{{ route('skk.index') }}">Surat Keputusan</a>
+                <a class="collapse-item" href="{{ route('skk.index') }}">Surat Keputusan
+                </a>
             </div>
         </div>
     </li>
@@ -67,7 +89,7 @@
         </a>
     </li>
     <hr class="sidebar-divider">
-    @if (auth()->guard('admin')->check())
+    @if (auth()->guard('admin')->user()->id == 1)
         <div class="sidebar-heading">
             Configuration
         </div>
