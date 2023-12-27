@@ -82,14 +82,14 @@ class ArchiveController extends Controller
                 }
             } else {
                 if ($request->js_id == 1) {
-                    $this->viewByJenisSurat($request->js_id);
+                    return $this->viewByJenisSurat($request->js_id);
                     if ($request->js_id == 1 && $request->year) {
-                        $this->viewByJenisSuratAndYear($request->js_id, $request->year);
+                        return $this->viewByJenisSuratAndYear($request->js_id, $request->year);
                     }
                 } else {
-                    $this->viewByJenisSurat($request->js_id);
+                    return $this->viewByJenisSurat($request->js_id);
                     if ($request->js_id == 2 && $request->year) {
-                        $this->viewByJenisSuratAndYear($request->js_id, $request->year);
+                        return $this->viewByJenisSuratAndYear($request->js_id, $request->year);
                     }
                 }
             }
