@@ -18,6 +18,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Total Mahasiswa</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $mahasiswa }}</div>
+                        <a href="{{ route('mahasiswa.index') }}">klik disini untuk melihat tampilan </a>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-users fa-2x text-primary"></i>
@@ -34,6 +35,7 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">Total Organisasi</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $organisasi }}</div>
+                        <a href="{{ route('organisasi.index') }}">klik disini untuk melihat tampilan</a>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-users-cog fa-2x text-primary"></i>
@@ -48,8 +50,25 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-uppercase mb-1">Total Surat Menunggu Persetujuan</div>
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">Total SKO  Menunggu Persetujuan </div>
                         <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $wait }}</div>
+                        <a href="{{ route('sko.index') }}">klik disini untuk melihat surat</a>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-envelope fa-2x text-info"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">Total SKK Menunggu Persetujuan</div>
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $wait }}</div>
+                        <a href="{{ route('skk.index') }}">klik disini untuk melihat surat</a>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-envelope fa-2x text-info"></i>

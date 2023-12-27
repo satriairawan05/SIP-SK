@@ -10,7 +10,7 @@ class ArchiveController extends Controller
     /**
      * Constructor for ArchiveController.
      */
-    public function __construct(public $name = 'Archive')
+    public function __construct(public $name = 'Penyimpanan SK')
     {
         //
     }

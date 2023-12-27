@@ -27,7 +27,7 @@
     </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
-        Registration
+        Pembuatan Surat
     </div>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('sko.create') }}">
@@ -43,7 +43,7 @@
     </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
-        Bank File
+        SK Menunggu Persetujuan
     </div>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrganisasi"
@@ -60,8 +60,7 @@
                 <h6 class="collapse-header">SK Organisasi</h6>
                 <a class="collapse-item" href="{{ route('struktur_organisasi.index') }}">Struktur Organisasi</a>
                 <a class="collapse-item" href="{{ route('organisasi.index') }}">Organisasi</a>
-                <a class="collapse-item" href="{{ route('sko.index') }}">Surat Keputusan
-                </a>
+                <a class="collapse-item" href="{{ route('sko.index') }}">Surat Keputusan</a>
             </div>
         </div>
     </li>
@@ -85,7 +84,7 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('archive.index') }}">
             <i class="fas fa-fw fa-archive"></i>
-            <span>Archive</span>
+            <span>Penyimpanan SK</span>
         </a>
     </li>
     <hr class="sidebar-divider">
@@ -97,11 +96,11 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
                 aria-expanded="true" aria-controls="collapsePage">
                 <i class="fas fa-fw fa-cogs"></i>
-                <span>Setting</span>
+                <span>Semua Data</span>
             </a>
             <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
                 <div class="collapse-inner rounded bg-white py-2">
-                    <h6 class="collapse-header">Setting</h6>
+                    <h6 class="collapse-header">Semua Data</h6>
                     <a class="collapse-item" href="{{ route('user.index') }}">User</a>
                     <a class="collapse-item" href="{{ route('mahasiswa.index') }}">Mahasiswa</a>
                     <a class="collapse-item" href="{{ route('prodi.index') }}">Program Studi</a>
