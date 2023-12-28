@@ -81,7 +81,7 @@ class SuratKeputusanKegiatanController extends Controller
                     'skk_keempat' => $request->input('skk_keempat'),
                     'skk_tembusan' => $request->input('skk_tembusan'),
                     'skk_uuid' => \Illuminate\Support\Str::uuid()->toString(),
-                    'skk_created' => auth()->guard('admin')->check() ? auth()->guard('admin')->user()->name : auth()->guard('mahasiswa')->user()->name,
+                    'skk_created' =>auth()->guard('admin')->user()->name,
                     'js_id' => $jenisSurat->js_id,
                     'skk_approved_step' => 1
                 ]);
@@ -168,7 +168,7 @@ class SuratKeputusanKegiatanController extends Controller
                     'skk_ketiga' => $request->input('skk_ketiga'),
                     'skk_keempat' => $request->input('skk_keempat'),
                     'skk_tembusan' => $request->input('skk_tembusan'),
-                    'skk_updated' => auth()->guard('admin')->check() ? auth()->guard('admin')->user()->name : auth()->guard('mahasiswa')->user()->name,
+                    'skk_updated' => auth()->guard('admin')->user()->name,
                     'skk_approved_step' => 1
                 ]);
 
