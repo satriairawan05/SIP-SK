@@ -86,9 +86,9 @@ class SuratKeputusanKegiatanController extends Controller
                     'skk_approved_step' => 1
                 ]);
 
-                return redirect()->to(route('skk.index'))->with('success', 'Added Successfully!');
+                return redirect()->to(route('skks.index'))->with('success', 'Added Successfully!');
             } else {
-                return redirect()->to(route('skk.index'))->with('failed', $validated->getMessageBag());
+                return redirect()->to(route('skks.index'))->with('failed', $validated->getMessageBag());
             }
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
@@ -172,9 +172,9 @@ class SuratKeputusanKegiatanController extends Controller
                     'skk_approved_step' => 1
                 ]);
 
-                return redirect()->to(route('skk.index'))->with('success', 'Updated Successfully!');
+                return redirect()->to(route('skks.index'))->with('success', 'Updated Successfully!');
             } else {
-                return redirect()->to(route('skk.index'))->with('failed', $validated->getMessageBag());
+                return redirect()->to(route('skks.index'))->with('failed', $validated->getMessageBag());
             }
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());

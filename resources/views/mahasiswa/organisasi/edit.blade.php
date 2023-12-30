@@ -24,6 +24,7 @@
             <div class="card-body">
                 <form action="{{ route('organisasis.update', $organisasi->organisasi_id) }}" method="post">
                     @csrf
+                    @method('put')
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="organisasi_nama">Nama <sup class="text-danger">*</sup></label>

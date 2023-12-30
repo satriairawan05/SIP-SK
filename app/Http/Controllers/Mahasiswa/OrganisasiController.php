@@ -109,6 +109,7 @@ class OrganisasiController extends Controller
      */
     public function update(Request $request, Organisasi $organisasi)
     {
+        dd($request->all());
         try {
             $validated = Validator::make($request->all(), [
                 'organisasi_nama' => ['required', 'string'],

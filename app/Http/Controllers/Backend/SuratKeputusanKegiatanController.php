@@ -81,7 +81,7 @@ class SuratKeputusanKegiatanController extends Controller
                     'skk_keempat' => $request->input('skk_keempat'),
                     'skk_tembusan' => $request->input('skk_tembusan'),
                     'skk_uuid' => \Illuminate\Support\Str::uuid()->toString(),
-                    'skk_created' =>auth()->guard('admin')->user()->name,
+                    'skk_created' => auth()->guard('admin')->user()->name,
                     'js_id' => $jenisSurat->js_id,
                     'skk_approved_step' => 1
                 ]);
