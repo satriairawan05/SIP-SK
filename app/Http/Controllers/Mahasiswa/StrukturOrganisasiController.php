@@ -25,7 +25,7 @@ class StrukturOrganisasiController extends Controller
         try {
             return view('mahasiswa.organisasi.struktur.index',[
                 'name' => $this->name,
-                'organisasi' => StrukturOrganisasi::leftJoin('organisasis','struktur_organisasis.organisasi_id','=','organisasis.organisasi_id')->get()
+                'organisasi' => StrukturOrganisasi::leftJoin('organisasis','struktur_organisasis.organisasi_id','=','organisasis.organisasi_id')->latest('struktur_organisasis.created_at')->get()
             ]);
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());

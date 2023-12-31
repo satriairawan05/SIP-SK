@@ -26,7 +26,7 @@ class ProdiController extends Controller
         try {
             return view('backend.setting.prodi.index', [
                 'name' => $this->name,
-                'prodi' => Prodi::leftJoin('jurusans', 'prodis.jurusan_id', '=', 'jurusans.jurusan_id')->get(),
+                'prodi' => Prodi::leftJoin('jurusans', 'prodis.jurusan_id', '=', 'jurusans.jurusan_id')->latest('prodis.created_at')->get(),
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());

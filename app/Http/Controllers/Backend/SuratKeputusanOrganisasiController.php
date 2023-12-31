@@ -25,7 +25,7 @@ class SuratKeputusanOrganisasiController extends Controller
         try {
             return view('backend.surat_organisasi.index', [
                 'name' => $this->name,
-                'organisasi' => SuratKeputusanOrganisasi::all()
+                'organisasi' => SuratKeputusanOrganisasi::latest()->get()
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());
