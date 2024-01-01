@@ -25,7 +25,7 @@ class JenisSuratController extends Controller
         try {
             return view('backend.setting.jenis_surat.index', [
                 'name' => $this->name,
-                'surat' => JenisSurat::all(),
+                'surat' => JenisSurat::latest()->get(),
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());

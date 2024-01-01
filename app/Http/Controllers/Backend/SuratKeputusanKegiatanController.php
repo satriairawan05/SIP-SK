@@ -25,7 +25,7 @@ class SuratKeputusanKegiatanController extends Controller
         try {
             return view('backend.surat_kegiatan.index', [
                 'name' => $this->name,
-                'kegiatan' => SuratKeputusanKegiatan::all(),
+                'kegiatan' => SuratKeputusanKegiatan::latest()->get(),
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());

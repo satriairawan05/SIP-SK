@@ -25,7 +25,7 @@ class OrganisasiController extends Controller
         try {
             return view('mahasiswa.organisasi.index', [
                 'name' => $this->name,
-                'organisasi' => Organisasi::leftJoin('prodis', 'organisasis.prodi_id', '=', 'prodis.prodi_id')->get()
+                'organisasi' => Organisasi::leftJoin('prodis', 'organisasis.prodi_id', '=', 'prodis.prodi_id')->latest('organisasis.created_at')->get()
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());
@@ -45,7 +45,6 @@ class OrganisasiController extends Controller
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
         }
-
     }
 
     /**

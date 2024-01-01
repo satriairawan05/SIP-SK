@@ -26,7 +26,7 @@ class SuratKeputusanOrganisasiController extends Controller
         try {
             return view('mahasiswa.surat_organisasi.index', [
                 'name' => $this->name,
-                'organisasi' => SuratKeputusanOrganisasi::all()
+                'organisasi' => SuratKeputusanOrganisasi::latest()->get()
             ]);
         } catch(\Illuminate\Database\QueryException $e){
             return redirect()->back()->with('failed', $e->getMessage());
@@ -202,7 +202,7 @@ class SuratKeputusanOrganisasiController extends Controller
                 $data = $suratKeputusanOrganisasi->find(request()->segment(3));
                 SuratKeputusanOrganisasi::destroy($data->sko_id);
 
-                return redirect()->to(route('sko.index'))->with('success', 'Deleted Successfully!');
+                return redirect()->to(route('skos.index'))->with('success', 'Deleted Successfully!');
             } catch(\Illuminate\Database\QueryException $e){
                 return redirect()->back()->with('failed', $e->getMessage());
             }

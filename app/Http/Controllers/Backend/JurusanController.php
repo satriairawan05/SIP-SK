@@ -26,7 +26,7 @@ class JurusanController extends Controller
         try {
             return view('backend.setting.jurusan.index', [
                 'name' => $this->name,
-                'jurusan' => Jurusan::all(),
+                'jurusan' => Jurusan::latest()->get(),
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());
