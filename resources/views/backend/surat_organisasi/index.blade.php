@@ -55,17 +55,33 @@
                                 <td>{{ $org->sko_disposisi ?? 'belum ada data' }}</td>
                                 <td>{{ $org->sko_created ?? 'belum ada data' }}</td>
                                 <td>{{ $org->sko_updated ?? 'belum ada data' }}</td>
-                                <td>{{ \Carbon\Carbon::parse($org->sko_last_print)->isoFormat('DD MMMM YYYY') ?? 'belum ada data' }}</td>
+                                <td>{{ \Carbon\Carbon::parse($org->sko_last_print)->isoFormat('DD MMMM YYYY') ?? 'belum ada data' }}
+                                </td>
                                 <td>
                                     <a href="{{ route('sko.show', $org->sko_id) }}" target="__blank"
                                         class="btn btn-sm btn-info"><i class="fas fa-print"></i></a>
-                                    @if (
-                                        \App\Models\Approval::where(
+                                    @php
+                                        $userApproval = \App\Models\Approval::where(
                                             'user_id',
-                                            auth()->guard('admin')->user()->id)->first() ==
-                                            auth()->guard('admin')->user()->id &&
-                                            $suratKeputusanOrganisasi->sko_approved_step ==
-                                                \App\Models\Approval::where('app_ordinal', $suratKeputusanOrganisasi->sko_approved_step)->whereNull('app_status')->first())
+                                            auth()
+                                                ->guard('admin')
+                                                ->user()->id,
+                                        )->first();
+                                        $matchingStep = $org->sko_approved_step;
+
+                                        $matchingApproval = \App\Models\Approval::where('app_ordinal', $matchingStep)
+                                            ->whereNull('app_status')
+                                            ->first();
+
+                                        $approvalMatches =
+                                            $userApproval &&
+                                            $userApproval->user_id ===
+                                                auth()
+                                                    ->guard('admin')
+                                                    ->user()->id &&
+                                            ($matchingApproval && $matchingApproval->app_ordinal === $matchingStep);
+                                    @endphp
+                                    @if ($approvalMatches)
                                         <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal"
                                             data-target="#exampleModal" id="#myBtn">
                                             <i class="fas fa-check-square"></i>
@@ -112,7 +128,7 @@
                                                             </div>
                                                             <div class="row">
                                                                 <label for="sko_remark">Remark</label>
-                                                                <textarea name="sko_remark" id="sko_remark" cols="20" rows="10">{{ old('sko_remark') }}</textarea>
+                                                                <textarea class="form-control" name="sko_remark" id="sko_remark" cols="20" rows="10">{{ old('sko_remark') }}</textarea>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

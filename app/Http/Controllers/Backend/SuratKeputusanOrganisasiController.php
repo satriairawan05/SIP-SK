@@ -84,7 +84,7 @@ class SuratKeputusanOrganisasiController extends Controller
                     'sko_kelima' => $request->input('sko_kelima'),
                     'sko_tembusan' => $request->input('sko_tembusan'),
                     'sko_uuid' => \Illuminate\Support\Str::uuid()->toString(),
-                    'sko_created' => auth()->guard('admin')->check() ? auth()->guard('admin')->user()->name : auth()->guard('mahasiswa')->user()->name,
+                    'sko_created' =>auth()->guard('admin')->user()->name,
                     'js_id' => $jenisSurat->js_id,
                     'organisasi_id' => $request->input('organisasi_id'),
                     'sko_approved_step' => 1
@@ -166,6 +166,8 @@ class SuratKeputusanOrganisasiController extends Controller
                 SuratKeputusanOrganisasi::where('sko_id', $suratKeputusanOrganisasi->sko_id)->update([
                     'sko_subject' => $request->input('sko_subject'),
                     'sko_tgl_surat' => $request->input('sko_tgl_surat'),
+                    'sko_no_surat' => $request->input('sko_no_surat'),
+                    'sko_no_surat_old' => $request->input('sko_no_surat'),
                     'sko_menimbang' => $request->input('sko_menimbang'),
                     'sko_mengingat' => $request->input('sko_mengingat'),
                     'sko_memperhatikan' => $request->input('sko_memperhatikan'),
@@ -176,7 +178,7 @@ class SuratKeputusanOrganisasiController extends Controller
                     'sko_keempat' => $request->input('sko_keempat'),
                     'sko_kelima' => $request->input('sko_kelima'),
                     'sko_tembusan' => $request->input('sko_tembusan'),
-                    'sko_updated' => auth()->guard('admin')->check() ? auth()->guard('admin')->user()->name : auth()->guard('mahasiswa')->user()->name,
+                    'sko_updated' =>auth()->guard('admin')->user()->name,
                     'organisasi_id' => $request->input('organisasi_id'),
                     'sko_approved_step' => 1
                 ]);
@@ -195,50 +197,71 @@ class SuratKeputusanOrganisasiController extends Controller
      */
     public function updateApproval(Request $request, SuratKeputusanOrganisasi $suratKeputusanOrganisasi)
     {
-        if (\App\Models\Approval::where('user_id', auth()->guard('admin')->user()->id)->first() == auth()->guard('admin')->user()->id && $suratKeputusanOrganisasi->sko_approved_step == \App\Models\Approval::where('app_ordinal', $suratKeputusanOrganisasi->sko_approved_step)->whereNull('app_status')->first()) {
-            try {
-                SuratKeputusanOrganisasi::where('skk_id', $suratKeputusanOrganisasi->sko_id)->update([
-                    'sko_remark' => $request->input('sko_remark'),
-                    'sko_disposisi' => $request->input('sko_disposisi'),
-                    'sko_approved' => auth()->guard('admin')->user()->name
-                ]);
+        try {
+            SuratKeputusanOrganisasi::where('sko_id', $suratKeputusanOrganisasi->sko_id)->update([
+                'sko_remark' => $request->input('sko_remark'),
+                'sko_disposisi' => $request->input('sko_disposisi'),
+                'sko_approved' => auth()->guard('admin')->user()->name
+            ]);
 
-                $latestApproval = \App\Models\Approval::where('sko_id', $suratKeputusanOrganisasi->sko_id)->latest('app_ordinal')->first();
-                if ($request->skk_disposisi == 'Accepted') {
-                    if ($latestApproval->app_ordinal == $suratKeputusanOrganisasi->sko_approved_step) {
-                        $stepData = $suratKeputusanOrganisasi->sko_approved_step;
+            $latestApproval = \App\Models\Approval::where('user_id', auth()->guard('admin')->user()->id)->latest('app_ordinal')->first();
+            if ($request->skk_disposisi == 'Accepted') {
+                if ($latestApproval->app_ordinal == $suratKeputusanOrganisasi->sko_approved_step) {
+                    $stepData = $suratKeputusanOrganisasi->sko_approved_step;
 
-                        $surat = \App\Models\JenisSurat::where('js_id', $suratKeputusanOrganisasi->js_id)->first();
-                        $code = $surat->js_code;
-                        $ordinal = $surat->js_ordinal;
+                    $surat = \App\Models\JenisSurat::where('js_id', $suratKeputusanOrganisasi->js_id)->first();
+                    $code = $surat->js_code;
+                    $ordinal = $surat->js_ordinal;
 
-                        $this->generateNomor($suratKeputusanOrganisasi->sko_id, $ordinal, $code,  $suratKeputusanOrganisasi->created_at);
+                    $this->generateNomor($suratKeputusanOrganisasi->sko_id, $ordinal, $code,  $suratKeputusanOrganisasi->created_at);
 
-                    } else {
-                        $stepData = $suratKeputusanOrganisasi->sko_approved_step;
-                    }
-
-                    SuratKeputusanOrganisasi::where('skk_id', $suratKeputusanOrganisasi->sko_id)->update([
-                        'sko_approved_step' => $stepData
-                    ]);
                 } else {
-                    SuratKeputusanOrganisasi::where('skk_id', $suratKeputusanOrganisasi->sko_id)->update([
-                        'sko_approved_step' => 1
-                    ]);
+                    $stepData = $suratKeputusanOrganisasi->sko_approved_step;
                 }
 
-                \App\Models\Approval::where('js_id', $suratKeputusanOrganisasi->js_id)->update([
-                    'app_status' => $request->input('skk_disposisi'),
-                    'app_date' => \Carbon\Carbon::now()
+                SuratKeputusanOrganisasi::where('sko_id', $suratKeputusanOrganisasi->sko_id)->update([
+                    'sko_approved_step' => $stepData
                 ]);
-
-                return redirect()->back()->with('success', 'Data ' . $suratKeputusanOrganisasi->sko_subject . ' telah di perbaru');
-            } catch (\Illuminate\Database\QueryException $e) {
-                return redirect()->back()->with('failed', $e->getMessage());
+            } else {
+                SuratKeputusanOrganisasi::where('sko_id', $suratKeputusanOrganisasi->sko_id)->update([
+                    'sko_approved_step' => 1
+                ]);
             }
-        } else {
-            return redirect()->back()->with('failed', 'You not Have Authority!');
+
+            \App\Models\Approval::where('js_id', $suratKeputusanOrganisasi->js_id)->update([
+                'app_status' => $request->input('sko_disposisi'),
+                'app_date' => \Carbon\Carbon::now()
+            ]);
+
+            return redirect()->back()->with('success', 'Data ' . $suratKeputusanOrganisasi->sko_subject . ' telah di perbaru');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
+
+        // $userApproval = \App\Models\Approval::where(
+        //     'user_id',
+        //     auth()
+        //         ->guard('admin')
+        //         ->user()->id,
+        // )->first();
+        // $matchingStep = $suratKeputusanOrganisasi->sko_approved_step;
+
+        // $matchingApproval = \App\Models\Approval::where('app_ordinal', $matchingStep)
+        //     ->whereNull('app_status')
+        //     ->first();
+
+        // $approvalMatches =
+        //     $userApproval &&
+        //     $userApproval->user_id ===
+        //         auth()
+        //             ->guard('admin')
+        //             ->user()->id &&
+        //     ($matchingApproval && $matchingApproval->app_ordinal === $matchingStep);
+        // if ($approvalMatches) {
+
+        // } else {
+        //     return redirect()->back()->with('failed', 'You not Have Authority!');
+        // }
     }
 
     public function generateNomor(string $idSurat, string $ordinal, string $code, string $reqTgl)
