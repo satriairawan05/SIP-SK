@@ -42,51 +42,47 @@
                     </thead>
                     <tbody>
                         @foreach ($approval as $app)
-                            <tr>
-                                <td>
-                                    <input type="text" name="js_jenis" id="js_jenis" value="{{ $surat->js_jenis }}"
-                                        class="form-control form-control-sm" readonly>
-                                </td>
-                                <td>
-                                    <select name="user_id" class="form-control form-control-sm" id="user_id">
-                                        @foreach ($user as $u)
-                                            @if (old('user_id', $app->user_id) == $u->id)
-                                                <option value="{{ $u->id }}" name="user_id" selected>
-                                                    {{ $u->name }}</option>
-                                            @else
-                                                <option value="{{ $u->id }}" name="user_id">
-                                                    {{ $u->name }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="number" name="app_ordinal" id="app_ordinal" min="1" max="6"
-                                        value="{{ old('app_ordinal', $app->app_ordinal) }}">
-                                </td>
-                                <td>
-                                    <button type="submit" class="btn btn-sm btn-warning"><i
-                                            class="fas fa-edit"></i></button>
-
+                            <form action="{{ route('approval.update', $app->app_ordinal) }}" method="post">
+                                @csrf
+                                @method('put')
+                                <tr>
+                                    <td>
+                                        <input type="text" name="js_jenis" id="js_jenis" value="{{ $surat->js_jenis }}"
+                                            class="form-control form-control-sm" readonly>
+                                    </td>
+                                    <td>
+                                        <select name="user_id" class="form-control form-control-sm" id="user_id">
+                                            @foreach ($user as $u)
+                                                @if (old('user_id', $app->user_id) == $u->id)
+                                                    <option value="{{ $u->id }}" name="user_id" selected>
+                                                        {{ $u->name }}</option>
+                                                @else
+                                                    <option value="{{ $u->id }}" name="user_id">
+                                                        {{ $u->name }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="app_ordinal" id="app_ordinal" min="1"
+                                            max="6" value="{{ old('app_ordinal', $app->app_ordinal) }}">
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-sm btn-warning"><i
+                                                class="fas fa-edit"></i></button>
                                         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                             data-target="#exampleModal" id="#myBtn">
                                             <i class="fas fa-trash"></i>
                                         </button>
-
-                                </td>
-                            </tr>
-
+                                    </td>
+                                </tr>
+                            </form>
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-<<<<<<< Updated upstream
                                             <h5 class="modal-title" id="exampleModalLabel">Delete Data
-=======
-                                            <h5 class="modal-title" id="exampleModalLabel">Delete
-                                            
->>>>>>> Stashed changes
                                             </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>

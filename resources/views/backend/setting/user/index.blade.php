@@ -53,11 +53,13 @@
                                 <td>
                                     <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-warning"><i
                                             class="fas fa-user-edit"></i></a>
+                                    @if($user->id != 1)
                                     <form action="{{ route('user.destroy', $user->id) }}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-sm btn-danger"><i class="fas fa-user-minus"></i></button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
