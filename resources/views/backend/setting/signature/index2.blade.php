@@ -66,8 +66,8 @@
                                             value="{{ old('sign_nip', $sign->sign_nip) }}" required placeholder="Enter Nip">
                                     </td>
                                     <td>
-                                        <button type="submit" class="btn btn-sm btn-warning"><i
-                                                class="fas fa-edit"></i></button>
+                                        {{-- <button type="submit" class="btn btn-sm btn-warning"><i
+                                                class="fas fa-edit"></i></button> --}}
 
                                         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                             data-target="#exampleModal" id="#myBtn">
