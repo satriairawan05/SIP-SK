@@ -68,8 +68,8 @@
                                             max="6" value="{{ old('app_ordinal', $app->app_ordinal) }}">
                                     </td>
                                     <td>
-                                        <button type="submit" class="btn btn-sm btn-warning"><i
-                                                class="fas fa-edit"></i></button>
+                                        {{-- <button type="submit" class="btn btn-sm btn-warning"><i
+                                                class="fas fa-edit"></i></button> --}}
                                         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                             data-target="#exampleModal" id="#myBtn">
                                             <i class="fas fa-trash"></i>
