@@ -129,8 +129,7 @@ class ApprovalController extends Controller
     public function destroy(Approval $approval)
     {
         try {
-            $data = $approval->find(request()->segment(3));
-            Approval::destroy($data->app_id);
+            Approval::destroy($approval->app_id);
 
             return redirect()->back()->with('success', 'Deleted Successfully!');
         } catch (\Illuminate\Database\QueryException $e) {
