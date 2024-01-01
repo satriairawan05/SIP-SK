@@ -58,6 +58,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
+            // dd($request->all());
             $validated = Validator::make($request->all(), [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
@@ -137,9 +138,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         try {
-            User::destroy($user->id);
+            if($user->id != 1){
+                User::destroy($user->id);
 
-            return redirect()->to(route('user.index'))->with('success', 'Deleted Account Successfully');
+                return redirect()->to(route('user.index'))->with('success', 'Deleted Account Successfully');
+            }
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('failed', $e->getMessage());
         }

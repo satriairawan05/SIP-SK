@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Approval extends Model
 {
     use HasFactory;
+
+    protected $table = 'approvals';
+
+    protected $primaryKey = 'app_id';
 }

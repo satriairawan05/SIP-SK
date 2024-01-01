@@ -164,7 +164,7 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="form-group col-5">
+                        <div class="form-group col-4">
                             <label for="mhs_tahun_masuk">Tahun Masuk <sup class="text-danger">*</sup></label>
                             <input type="text"
                                 class="form-control form-control-sm @error('mhs_tahun_masuk')

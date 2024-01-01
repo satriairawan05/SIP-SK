@@ -80,7 +80,7 @@
                                 @foreach ($prodi as $p)
                                     @if (old('mhs_prodi') == $p->prodi_nama)
                                         <option value="{{ $p->prodi_nama }}" name="mhs_prodi" selected>
-                                            {{ $p->prodi_name }}</option>
+                                            {{ $p->prodi_nama }}</option>
                                     @else
                                         <option value="{{ $p->prodi_nama }}" name="mhs_prodi">
                                             {{ $p->prodi_nama }}</option>
@@ -149,7 +149,7 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="form-group col-5">
+                        <div class="form-group col-4">
                             <label for="mhs_alamat">Alamat <sup class="text-danger">*</sup></label>
                             <input type="text"
                                 class="form-control form-control-sm @error('mhs_alamat')
@@ -163,21 +163,7 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="form-group col-5">
-                            <label for="mhs_alamat">Alamat <sup class="text-danger">*</sup></label>
-                            <input type="text"
-                                class="form-control form-control-sm @error('mhs_alamat')
-                            is-invalid
-                        @enderror"
-                                name="mhs_alamat" id="mhs_alamat" value="{{ old('mhs_alamat') }}"
-                                placeholder="Enter address ex: Jl. Samratulangi" required>
-                            @error('mhs_alamat')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="form-group col-5">
+                        <div class="form-group col-4">
                             <label for="mhs_tahun_masuk">Tahun Masuk <sup class="text-danger">*</sup></label>
                             <input type="text"
                                 class="form-control form-control-sm @error('mhs_tahun_masuk')

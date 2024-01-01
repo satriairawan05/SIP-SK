@@ -23,7 +23,7 @@ class MahasiswaController extends Controller
     public function index()
     {
         try {
-            $mahasiswa = Mahasiswa::where('mhs_id', auth()->guard('mahasiswa')->user()->mhs_id)->latest()->get();
+            $mahasiswa = Mahasiswa::latest()->get();
 
             return view('backend.setting.mahasiswa.index', [
                 'name' => $this->name,
@@ -62,6 +62,7 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         try {
             $validated = \Illuminate\Support\Facades\Validator::make($request->all(), [
                 'mhs_nama' => ['required', 'string'],
@@ -75,7 +76,7 @@ class MahasiswaController extends Controller
             ]);
 
             if (!$validated->fails()) {
-                $prodi = \App\Models\Prodi::where('prodi_name', $request->input('mhs_prodi'))->first();
+                $prodi = \App\Models\Prodi::where('prodi_nama', $request->input('mhs_prodi'))->first();
                 $jenjang = $prodi->prodi_jenjang;
 
                 Mahasiswa::create([
@@ -151,7 +152,7 @@ class MahasiswaController extends Controller
             ]);
 
             if (!$validated->fails()) {
-                $prodi = \App\Models\Prodi::where('prodi_name', $request->input('mhs_prodi'))->first();
+                $prodi = \App\Models\Prodi::where('prodi_nama', $request->input('mhs_prodi'))->first();
                 $jenjang = $prodi->prodi_jenjang;
 
                 Mahasiswa::where('mhs_id', $mahasiswa->mhs_id)->update([
