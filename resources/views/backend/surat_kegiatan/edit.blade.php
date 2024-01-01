@@ -61,6 +61,12 @@
                         </div>
                     </div>
                     <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="skk_no_surat">Nomor Surat</label>
+                            <input type="text" name="skk_no_surat" id="skk_no_surat" class="form-control form-control-sm" placeholder="Masukan Nomor Surat">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <div class="col-6">
                             <label for="skk_menimbang">Menimbang <sup class="text-danger">*</sup></label>
                             <textarea class="ckeditor form-control" name="skk_menimbang" id="skk_menimbang" cols="50" rows="10">{{ old('skk_menimbang', $keputusan->skk_menimbang) }}</textarea>
