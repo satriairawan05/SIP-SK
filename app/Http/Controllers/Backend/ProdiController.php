@@ -53,32 +53,28 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        if ($this->create == 1) {
-            try {
-                $validated = Validator::make($request->all(), [
-                    'prodi_nama' => ['required', 'string'],
-                    'prodi_alias' => ['required', 'string'],
-                    'jurusan_id' => ['required', 'string'],
+        try {
+            $validated = Validator::make($request->all(), [
+                'prodi_nama' => ['required', 'string'],
+                'prodi_alias' => ['required', 'string'],
+                'jurusan_id' => ['required', 'string'],
+            ]);
+
+            if (!$validated->fails()) {
+                Prodi::create([
+                    'prodi_nama' => $request->input('prodi_nama'),
+                    'prodi_alias' => $request->input('prodi_alias'),
+                    'jurusan_id' => $request->input('jurusan_id'),
+                    'prodi_code' => $request->input('prodi_code') ?? null,
+                    'prodi_jenjang' => $request->input('prodi_jenjang') ?? null,
                 ]);
 
-                if (!$validated->fails()) {
-                    Prodi::create([
-                        'prodi_nama' => $request->input('prodi_nama'),
-                        'prodi_alias' => $request->input('prodi_alias'),
-                        'jurusan_id' => $request->input('jurusan_id'),
-                        'prodi_code' => $request->input('prodi_code') ?? null,
-                        'prodi_jenjang' => $request->input('prodi_jenjang') ?? null,
-                    ]);
-
-                    return redirect()->to(route('prodi.index'))->with('success', 'Added Successfully');
-                } else {
-                    return redirect()->to(route('prodi.index'))->with('failed', $validated->getMessageBag());
-                }
-            } catch (\Illuminate\Database\QueryException $e) {
-                return redirect()->back()->with('failed', $e->getMessage());
+                return redirect()->to(route('prodi.index'))->with('success', 'Added Successfully');
+            } else {
+                return redirect()->to(route('prodi.index'))->with('failed', $validated->getMessageBag());
             }
-        } else {
-            return redirect()->back()->with('failed', 'You not Have Authority');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('failed', $e->getMessage());
         }
     }
 
