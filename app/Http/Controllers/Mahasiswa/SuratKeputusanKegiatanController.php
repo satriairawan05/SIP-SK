@@ -191,7 +191,7 @@ class SuratKeputusanKegiatanController extends Controller
                 $data = $suratKeputusanKegiatan->find(request()->segment(3));
                 SuratKeputusanKegiatan::destroy($data->skk_id);
 
-                return redirect()->to(route('skk.index'))->with('success', 'Deleted Successfully!');
+                return redirect()->to(route('skks.index'))->with('success', 'Deleted Successfully!');
             } catch(\Illuminate\Database\QueryException $e){
                 return redirect()->back()->with('failed', $e->getMessage());
             }
