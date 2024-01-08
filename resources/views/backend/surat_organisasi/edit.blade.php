@@ -84,6 +84,15 @@
                         <input type="text" name="sko_no_surat" id="sko_no_surat" class="form-control form-control-sm" placeholder="Masukan Nomor Surat">
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="sko_no_surat">Nomor Surat</label>
+                        <select name="status" class="form-select status" required id="status"
+                        <option value="Ditolak"
+                        {{ $approval }}
+                    </div>
+                </div>
+                
                 {{-- <div class="row mb-3">
                         <div class="col-6">
                             <label for="sko_menimbang">Menimbang <sup class="text-danger">*</sup></label>

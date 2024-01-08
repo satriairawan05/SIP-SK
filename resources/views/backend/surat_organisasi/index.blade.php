@@ -29,9 +29,9 @@
                     {{ session('failed') }}
                 </div>
             @endif
-            <div class="card-header d-flex justify-content-end">
+            {{-- <div class="card-header d-flex justify-content-end"> 
                 <a href="{{ route('sko.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
-            </div>
+            </div> --}}
             <div class="card-body">
                 <table class="align-items-center table-flush table" id="dataTable">
                     <thead class="thead-light">
@@ -143,13 +143,12 @@
                                         </div>
                                         <!-- Modal -->
                                     @endif
-                                    <a href="{{ route('sko.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
-                                            class="fas fa-edit"></i></a>
-                                    <form action="{{ route('sko.destroy', $org->sko_id) }}" method="post"
+                                    <a href="{{ route('sko.edit', $org->sko_id) }}" class="btn btn-sm btn-primary"><i></i>Detail</a>
+                                    {{-- <form action="{{ route('sko.destroy', $org->sko_id) }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button> --}}
                                     </form>
                                 </td>
                             </tr>
