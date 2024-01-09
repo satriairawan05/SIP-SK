@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Sistem Informasi Surat Keputusan Politeknik Pertanian Negeri Samarinda">
     <meta name="author" content="Deuwi Satriya Irawan">
-    <title>{{ env('APP_NAME') }} | Print SK</title>
+    <title>{{ env('APP_NAME') }} | Print SK </title>
     <link href="{{ asset('ruang-admin/img/logo/logo.png') }}" rel="icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -46,6 +46,7 @@
 
 <body>
     <div class="container">
+    <center>
         <table class="mt-2">
             <thead>
                 <tr>
@@ -66,6 +67,7 @@
                 </tr>
             </thead>
         </table>
+    </center>
         <span class="tebal mt-2"></span>
         <span style="display: block; border-bottom: 1px solid #000;" class="mt-1"></span>
         <div style="text-align: center;" class="mt-3"><b class="text-uppercase fs-5">Keputusan</b></div>

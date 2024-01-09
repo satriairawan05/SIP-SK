@@ -46,32 +46,36 @@
 
 <body>
     <div class="container">
-        <table class="mt-2">
-            <thead>
-                <tr>
-                    <td><img src="{{ asset('ruang-admin/img/logo_politani.png') }}" alt="Cover"
-                            style="width: 135px; height: 135px;" class="mx-2"></td>
-                    <td align="center">
-                        <font size="4" class="mt-0">Kementrian Pendidikan, Kebudayaan, Riset dan Teknologi
-                        </font><br>
-                        <font size="5" class="mt-0"><b>Politeknik Pertanian Negeri Samarinda</b></font><br>
-                        <font size="1" class="mt-0" class="fs-2">Kampus Gunung Panjang Jl. Samratulangi
-                            Samarinda 75131
-                            Telepon.0541-260421, Fax.0541-260680</font><br>
-                        <font size="1" class="mt-0" class="fs-2">email: <u>info@politanisamarinda.ac.id</u>
-                            dan
-                            <u>politanismd@gmail.com</u> www.politanisamarinda.ac.id
-                        </font>
-                    </td>
-                </tr>
-            </thead>
-        </table>
+        <center>
+            <table class="mt-2">
+                <thead>
+                    <tr>
+                        <td><img src="{{ asset('ruang-admin/img/logo_politani.png') }}" alt="Cover"
+                                style="width: 135px; height: 135px;" class="mx-2"></td>
+                        <td align="center">
+                            <font size="4" class="mt-0">Kementrian Pendidikan, Kebudayaan, Riset dan Teknologi
+                            </font><br>
+                            <font size="5" class="mt-0"><b>Politeknik Pertanian Negeri Samarinda</b></font><br>
+                            <font size="1" class="mt-0" class="fs-2">Kampus Gunung Panjang Jl. Samratulangi
+                                Samarinda 75131
+                                Telepon.0541-260421, Fax.0541-260680</font><br>
+                            <font size="1" class="mt-0" class="fs-2">email:
+                                <u>info@politanisamarinda.ac.id</u>
+                                dan
+                                <u>politanismd@gmail.com</u> www.politanisamarinda.ac.id
+                            </font>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </center>
         <span class="tebal mt-2"></span>
         <span style="display: block; border-bottom: 1px solid #000;" class="mt-1"></span>
         <div style="text-align: center;" class="mt-3"><b class="text-uppercase fs-5">Keputusan</b></div>
         <div style="text-align: center;"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian Negeri
                 Samarinda</b></div>
-        <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: {{ $keputusan->sko_no_surat ?? '' }}</b></div>
+        <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: {{ $keputusan->sko_no_surat ?? '' }}</b>
+        </div>
         <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">Tentang</b></div>
         <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">{!! $keputusan->sko_subject !!}</b></div>
         <div style="text-align: center;" class="mt-1"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian
