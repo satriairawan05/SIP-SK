@@ -58,8 +58,8 @@
                                 <td>{{ \Carbon\Carbon::parse($kgt->skk_last_print)->isoFormat('DD MMMM YYYY') ?? 'belum ada data' }}
                                 </td>
                                 <td>
-                                    <button type="button" onclick="return printDoc('{{ $kgt->skk_id }}')"
-                                        class="btn btn-sm btn-secondary"><i class="fa fa-print"></i></button>
+                                    <a type="button" href="{{ route('skk.show', $kgt->skk_id) }}" target="__blank"
+                                        class="btn btn-sm btn-secondary"><i class="fa fa-print"></i></a>
                                     @php
                                         $userApproval = \App\Models\Approval::where(
                                             'user_id',
