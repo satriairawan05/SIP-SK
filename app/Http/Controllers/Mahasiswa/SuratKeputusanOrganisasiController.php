@@ -131,10 +131,11 @@ class SuratKeputusanOrganisasiController extends Controller
     {
         if ($suratKeputusanOrganisasi->sko_no_surat == null || $suratKeputusanOrganisasi->sko_no_surat_old == null) {
             try {
-                return view('mahasiswa.surat_organisasi.edit', [
+                $sko = $suratKeputusanOrganisasi->find(request()->segment(3));
+                return view('backend.surat_organisasi.edit', [
                     'name' => $this->name,
-                    'keputusan' => $suratKeputusanOrganisasi->find(request()->segment(3)),
-                    'organisasi' => \App\Models\Organisasi::all()
+                    'keputusan' => $sko,
+                    'organisasi' => \App\Models\Organisasi::where('organisasi_id',$sko->organisasi_id)->first()
                 ]);
             } catch(\Illuminate\Database\QueryException $e){
                 return redirect()->back()->with('failed', $e->getMessage());

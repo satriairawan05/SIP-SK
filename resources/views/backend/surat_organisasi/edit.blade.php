@@ -1,64 +1,71 @@
 @extends('backend.layout.app')
 
 @section('app')
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">{{ $name }}</h1>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('sko.index') }}">{{ $name }}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Edit</li>
-    </ol>
-</div>
-<div class="row mb-3">
-    <div class="card col-12">
-        @if (session('failed'))
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <h6><i class="fas fa-exclamation-triangle"></i><b> Failed!</b></h6>
-            {{ session('failed') }}
-        </div>
-        @endif
-        <div class="card-body">
-            <form action="{{ route('sko.update', $keputusan->sko_id) }}" method="post">
-                @csrf
-                @method('put')
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <label for="sko_subject">Subject <sup class="text-danger">*</sup></label>
-                        <input type="text" class="form-control form-control-sm @error('sko_subject')
-                            is-invalid
-                        @enderror" name="sko_subject" id="sko_subject" value="{{ old('sko_subject', $keputusan->sko_subject) }}" placeholder="Enter Subject" required>
-                        @error('sko_subject')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="col-6" id="simple-date">
-                        <label for="sko_tgl_surat">Tanggal Surat <sup class="text-danger">*</sup></label>
-                        <div class="input-group date">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                            </div>
-                            <input type="date" class="form-control form-control-sm @error('sko_tgl_surat')
-                            is-invalid
-                        @enderror" value="{{ old('sko_tgl_surat', date('Y-m-d')) }}" name="sko_tgl_surat" id="sko_tgl_surat" required>
-                        </div>
-                        @error('sko_tgl_surat')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{ $name }}</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('sko.index') }}">{{ $name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+        </ol>
+    </div>
+    <div class="row mb-3">
+        <div class="card col-12">
+            @if (session('failed'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h6><i class="fas fa-exclamation-triangle"></i><b> Failed!</b></h6>
+                    {{ session('failed') }}
                 </div>
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <label for="organisasi_id">Organisasi <sup class="text-danger">*</sup></label>
-                        <td>:</td>
-                        <td> {{ $keputusan->organisasi_id }}</td>
-                        {{--<select name="organisasi_id" class="form-control form-control-sm select2-single-placeholder" id="organisasi_id">
+            @endif
+            <div class="card-body">
+                <form action="{{ route('sko.update', $keputusan->sko_id) }}" method="post">
+                    @csrf
+                    @method('put')
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="sko_subject">Subject <sup class="text-danger">*</sup></label>
+                            <input type="text"
+                                class="form-control form-control-sm @error('sko_subject')
+                            is-invalid
+                        @enderror"
+                                name="sko_subject" id="sko_subject"
+                                value="{{ old('sko_subject', $keputusan->sko_subject) }}" placeholder="Enter Subject"
+                                required>
+                            @error('sko_subject')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-6" id="simple-date">
+                            <label for="sko_tgl_surat">Tanggal Surat <sup class="text-danger">*</sup></label>
+                            <div class="input-group date">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                <input type="date"
+                                    class="form-control form-control-sm @error('sko_tgl_surat')
+                            is-invalid
+                        @enderror"
+                                    value="{{ old('sko_tgl_surat', date('Y-m-d')) }}" name="sko_tgl_surat"
+                                    id="sko_tgl_surat" required>
+                            </div>
+                            @error('sko_tgl_surat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="organisasi_id">Organisasi <sup class="text-danger">*</sup></label>
+                            <td>:</td>
+                            <td> {{ $organisasi->organisasi_nama }}</td>
+                            {{-- <select name="organisasi_id" class="form-control form-control-sm select2-single-placeholder" id="organisasi_id">
                             <option value="">Select Organisasi</option>
                             @foreach ($organisasi as $p)
                             @if (old('organisasi_id', $keputusan->organisasi_id) == $p->organisasi_id)
@@ -70,21 +77,43 @@
                             @endif
                             @endforeach
                         </select> --}}
-                
-                        @error('organisasi_id')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+
+                            @error('organisasi_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <label for="sko_no_surat">Nomor Surat</label>
-                        <input type="text" name="sko_no_surat" id="sko_no_surat" class="form-control form-control-sm" placeholder="Masukan Nomor Surat">
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="sko_no_surat">Nomor Surat</label>
+                            <input type="text" name="sko_no_surat" id="sko_no_surat" class="form-control form-control-sm"
+                                placeholder="Masukan Nomor Surat">
+                        </div>
                     </div>
-                </div>
-                {{-- <div class="row mb-3">
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="sko_remak">Comment</label>
+                            <textarea name="sko_remark" id="sko_remark" cols="30" rows="10" class="form-control form-control-lg ckeditor"></textarea>
+                        </div>
+                        <div class="col-6">
+                            <label for="sko_disposisi">Status</label>
+                            @php
+                                $status = [['status' => 'Belum Lengkap'],['status' => 'Lengkap'],['status' => 'Tolak']];
+                            @endphp
+                            <select class="form-select" aria-label="Default select example">
+                                @foreach ($status as $s)
+                                    @if (old('sk_disposisi') == $s['status'])
+                                        <option value="{{ old('sk_disposisi',$s['status']) }}" selected>{{ $s['status'] }}</option>
+                                    @else
+                                        <option value="{{ old('sk_disposisi',$s['status']) }}">{{ $s['status'] }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    {{-- <div class="row mb-3">
                         <div class="col-6">
                             <label for="sko_menimbang">Menimbang <sup class="text-danger">*</sup></label>
                             <textarea class="ckeditor form-control" name="sko_menimbang" id="sko_menimbang" cols="50" rows="10">{{ old('sko_menimbang', $keputusan->sko_menimbang) }}</textarea>
@@ -177,16 +206,17 @@
         <div class="col-6">
             <label for="sko_tembusan">Tembusan<sup class="text-danger">*</sup></label>
             <textarea class="ckeditor form-control" name="sko_tembusan" id="sko_tembusan" cols="50" rows="10">{{ old('sko_tembusan', $keputusan->sko_tembusan) }}</textarea>
-        </div> 
+        </div>
     </div> --}}
-    <div class="row">
-        <div class="col-12 d-flex justify-content-center">
-            <a href="{{ route('sko.index') }}" class="btn btn-sm btn-info mx-2"><i class="fas fa-reply-all"></i></a>
-            <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <a href="{{ route('sko.index') }}" class="btn btn-sm btn-info mx-2"><i
+                                    class="fas fa-reply-all"></i></a>
+                            <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    </form>
-</div>
-</div>
-</div>
 @endsection

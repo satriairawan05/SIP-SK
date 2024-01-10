@@ -1,51 +1,35 @@
-<!doctype html>
-<html lang="en">
+<style type="text/css">
+    :root {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Sistem Informasi Surat Keputusan Politeknik Pertanian Negeri Samarinda">
-    <meta name="author" content="Deuwi Satriya Irawan">
-    <title>{{ env('APP_NAME') }} | Print SK</title>
-    <link href="{{ asset('ruang-admin/img/logo/logo.png') }}" rel="icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <style type="text/css">
-        :root {
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 0;
-            padding: 0;
+    .tebal {
+        display: block;
+        border-bottom: 5px solid #000;
+    }
+
+    .page-break {
+        page-break-before: always;
+        page-break-after: always;
+    }
+
+    .page-break-before {
+        page-break-before: always;
+    }
+
+    .page-break-after {
+        page-break-after: always;
+    }
+
+    @media print {
+        @page {
+            size: F4;
         }
-
-        .tebal {
-            display: block;
-            border-bottom: 5px solid #000;
-        }
-
-        .page-break {
-            page-break-before: always;
-            page-break-after: always;
-        }
-
-        .page-break-before {
-            page-break-before: always;
-        }
-
-        .page-break-after {
-            page-break-after: always;
-        }
-
-        @media print {
-            @page {
-                size: F4;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
+    }
+</style>
+<div class="container">
     <center>
         <table class="mt-2">
             <thead>
@@ -68,104 +52,99 @@
             </thead>
         </table>
     </center>
-        <span class="tebal mt-2"></span>
-        <span style="display: block; border-bottom: 1px solid #000;" class="mt-1"></span>
-        <div style="text-align: center;" class="mt-3"><b class="text-uppercase fs-5">Keputusan</b></div>
-        <div style="text-align: center;"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian Negeri
-                Samarinda</b></div>
-        <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: {{ $keputusan->sko_no_surat ?? '' }}</b></div>
-        <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">Tentang</b></div>
-        <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">{!! $keputusan->skk_subject !!}</b></div>
-        <div style="text-align: center;" class="mt-1"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian
-                Negeri</b></div>
-        <table style="text-align: justify;">
-            <tbody>
-                <tr>
-                    <td width="10%" style="vertical-align: top;" class="mt-2">Menimbang</td>
-                    <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_menimbang !!}</td>
-                </tr>
-                <tr>
-                    <td width="10%" style="vertical-align: top;">Mengingat</td>
-                    <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_mengingat !!}</td>
-                </tr>
-                <tr>
-                    <td width="10%" style="vertical-align: top;">Memperhatikan</td>
-                    <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_memperhatikan !!}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div style="text-align: center;" class="my-2"><b class="text-uppercase fs-5">Memutuskan</b></div>
-        <table style="text-align: justify;">
-            <tbody>
-                <tr>
-                    <td width="10%" style="vertical-align: top;">Menetapkan</td>
-                    <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_menetapkan !!}</td>
-                </tr>
-                <tr>
-                    <td width="10%" style="vertical-align: top; word-wrap: break-word;">Kesatu</td>
-                    <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_kesatu !!}</td>
-                </tr>
-                <tr>
-                    <td width="10%" style="vertical-align: top; word-wrap: break-word;">Kedua</td>
-                    <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_kedua !!}</td>
-                </tr>
-                <tr>
-                    <td width="10%" style="vertical-align: top; word-wrap: break-word;">Ketiga</td>
-                    <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_ketiga !!}</td>
-                </tr>
-                <tr>
-                    <td width="10%" style="vertical-align: top; word-wrap: break-word;">Keempat</td>
-                    <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_keempat !!}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-6">
-            </div>
-            <div class="col-6">
-                <p style="text-align: left;" class="mb-0">Ditetapkan di : Samarinda</p>
-                <p style="text-align: left;" class="mb-0">Pada tanggal :
-                    {{ \Carbon\Carbon::parse($keputusan->skk_tgl_surat)->isoformat('D MMMM YYYY') }}</p>
-            </div>
+    <span class="tebal mt-2"></span>
+    <span style="display: block; border-bottom: 1px solid #000;" class="mt-1"></span>
+    <div style="text-align: center;" class="mt-3"><b class="text-uppercase fs-5">Keputusan</b></div>
+    <div style="text-align: center;"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian Negeri
+            Samarinda</b></div>
+    <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: {{ $keputusan->sko_no_surat ?? '' }}</b>
+    </div>
+    <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">Tentang</b></div>
+    <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">{!! $keputusan->skk_subject !!}</b></div>
+    <div style="text-align: center;" class="mt-1"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian
+            Negeri</b></div>
+    <table style="text-align: justify;">
+        <tbody>
+            <tr>
+                <td width="10%" style="vertical-align: top;" class="mt-2">Menimbang</td>
+                <td width="5%" style="vertical-align: top;">:</td>
+                <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_menimbang !!}</td>
+            </tr>
+            <tr>
+                <td width="10%" style="vertical-align: top;">Mengingat</td>
+                <td width="5%" style="vertical-align: top;">:</td>
+                <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_mengingat !!}</td>
+            </tr>
+            <tr>
+                <td width="10%" style="vertical-align: top;">Memperhatikan</td>
+                <td width="5%" style="vertical-align: top;">:</td>
+                <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_memperhatikan !!}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="text-align: center;" class="my-2"><b class="text-uppercase fs-5">Memutuskan</b></div>
+    <table style="text-align: justify;">
+        <tbody>
+            <tr>
+                <td width="10%" style="vertical-align: top;">Menetapkan</td>
+                <td width="5%" style="vertical-align: top;">:</td>
+                <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_menetapkan !!}</td>
+            </tr>
+            <tr>
+                <td width="10%" style="vertical-align: top; word-wrap: break-word;">Kesatu</td>
+                <td width="5%" style="vertical-align: top;">:</td>
+                <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_kesatu !!}</td>
+            </tr>
+            <tr>
+                <td width="10%" style="vertical-align: top; word-wrap: break-word;">Kedua</td>
+                <td width="5%" style="vertical-align: top;">:</td>
+                <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_kedua !!}</td>
+            </tr>
+            <tr>
+                <td width="10%" style="vertical-align: top; word-wrap: break-word;">Ketiga</td>
+                <td width="5%" style="vertical-align: top;">:</td>
+                <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_ketiga !!}</td>
+            </tr>
+            <tr>
+                <td width="10%" style="vertical-align: top; word-wrap: break-word;">Keempat</td>
+                <td width="5%" style="vertical-align: top;">:</td>
+                <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_keempat !!}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-6">
         </div>
-        <div class="row mt-5">
-            <div class="col-6">
-            </div>
-            @if ($keputusan->skk_no_surat != null)
-                <div class="col-6">
-                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_jabatan }}, </p>
-                    <p style="text-align: left;" class="mb-0">Politeknik Pertanian Negeri Samarinda</p>
-                    <br>
-                    <br>
-                    <br>
-                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_nama }}</p>
-                    <p style="text-align: left;" class="mb-0">{{ $signature->sign_nip }}</p>
-                </div>
-            @endif
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <p style="text-align: left;" class="mb-0">Tembusan </p>
-                <p style="text-align: left;" class="mb-0">{!! $keputusan->skk_tembusan !!}</p>
-            </div>
-            <div class="col-6">
-            </div>
+        <div class="col-6">
+            <p style="text-align: left;" class="mb-0">Ditetapkan di : Samarinda</p>
+            <p style="text-align: left;" class="mb-0">Pada tanggal :
+                {{ \Carbon\Carbon::parse($keputusan->skk_tgl_surat)->isoformat('D MMMM YYYY') }}</p>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript">
-        window.print();
-    </script>
-</body>
-
-</html>
+    <div class="row mt-5">
+        <div class="col-6">
+        </div>
+        @if ($keputusan->skk_no_surat != null)
+            <div class="col-6">
+                <p style="text-align: left;" class="mb-0">{{ $signature->sign_jabatan }}, </p>
+                <p style="text-align: left;" class="mb-0">Politeknik Pertanian Negeri Samarinda</p>
+                <br>
+                <br>
+                <br>
+                <p style="text-align: left;" class="mb-0">{{ $signature->sign_nama }}</p>
+                <p style="text-align: left;" class="mb-0">{{ $signature->sign_nip }}</p>
+            </div>
+        @endif
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <p style="text-align: left;" class="mb-0">Tembusan </p>
+            <p style="text-align: left;" class="mb-0">{!! $keputusan->skk_tembusan !!}</p>
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+</script>

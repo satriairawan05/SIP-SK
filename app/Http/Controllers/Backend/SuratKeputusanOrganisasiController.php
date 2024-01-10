@@ -129,10 +129,11 @@ class SuratKeputusanOrganisasiController extends Controller
     {
         if ($suratKeputusanOrganisasi->sko_no_surat == null || $suratKeputusanOrganisasi->sko_no_surat_old == null) {
             try {
+                $sko = $suratKeputusanOrganisasi->find(request()->segment(3));
                 return view('backend.surat_organisasi.edit', [
                     'name' => $this->name,
-                    'keputusan' => $suratKeputusanOrganisasi->find(request()->segment(3)),
-                    'organisasi' => \App\Models\Organisasi::all()
+                    'keputusan' => $sko,
+                    'organisasi' => \App\Models\Organisasi::where('organisasi_id',$sko->organisasi_id)->first()
                 ]);
             } catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->with('failed', $e->getMessage());
@@ -168,6 +169,8 @@ class SuratKeputusanOrganisasiController extends Controller
                     'sko_tgl_surat' => $request->input('sko_tgl_surat'),
                     'sko_no_surat' => $request->input('sko_no_surat'),
                     'sko_no_surat_old' => $request->input('sko_no_surat'),
+                    'sko_disposisi' => $request->input('sko_disposisi'),
+                    'sko_remark' => $request->input('sko_remark'),
                     // 'sko_menimbang' => $request->input('sko_menimbang'),
                     // 'sko_mengingat' => $request->input('sko_mengingat'),
                     // 'sko_memperhatikan' => $request->input('sko_memperhatikan'),
