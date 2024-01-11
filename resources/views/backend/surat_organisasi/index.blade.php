@@ -29,7 +29,7 @@
                     {{ session('failed') }}
                 </div>
             @endif
-            {{-- <div class="card-header d-flex justify-content-end"> 
+            {{-- <div class="card-header d-flex justify-content-end">
                 <a href="{{ route('sko.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div> --}}
             <div class="card-body">
@@ -58,8 +58,8 @@
                                 <td>{{ \Carbon\Carbon::parse($org->sko_last_print)->isoFormat('DD MMMM YYYY') ?? 'belum ada data' }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('sko.show', $org->sko_id) }}" target="__blank"
-                                        class="btn btn-sm btn-info"><i class="fas fa-print"></i></a>
+                                    <a type="button" href="{{ route('sko.show',$org->sko_id) }}" target="__blank"
+                                        class="btn btn-sm btn-secondary"><i class="fa fa-print"></i></a>
                                     @php
                                         $userApproval = \App\Models\Approval::where(
                                             'user_id',
@@ -143,12 +143,13 @@
                                         </div>
                                         <!-- Modal -->
                                     @endif
-                                    <a href="{{ route('sko.edit', $org->sko_id) }}" class="btn btn-sm btn-primary"><i></i>Detail</a>
-                                    {{-- <form action="{{ route('sko.destroy', $org->sko_id) }}" method="post"
+                                    <a href="{{ route('sko.edit', $org->sko_id) }}" class="btn btn-sm btn-warning"><i
+                                            class="fas fa-edit"></i></a>
+                                    <form action="{{ route('sko.destroy', $org->sko_id) }}" method="post"
                                         class="d-inline">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button> --}}
+                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -159,3 +160,49 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script type="text/javascript">
+        const printDoc = (id) => {
+            const url = "{{ route('skks.show', ':id') }}";
+
+            $.get(url, function(data, status) {
+                const contents = data;
+                const frame1 = $('<iframe />', {
+                    name: 'frame1',
+                    css: {
+                        position: 'absolute',
+                        top: '-1000000px'
+                    }
+                });
+                $('body').append(frame1);
+                const frameDoc = frame1[0].contentDocument || frame1[0].contentWindow.document;
+                frameDoc.open();
+                frameDoc.write(`
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>{{ env('APP_NAME') }}</title>
+                <link href="{{ asset('ruang-admin/img/logo/logo.png') }}" rel="icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+            </head>
+            <body id='bodycontent'>
+                ${contents}
+            </body>
+            </html>
+        `);
+                frameDoc.close();
+
+                setTimeout(function() {
+                    window.frames['frame1'].focus();
+                    window.frames['frame1'].print();
+                    frame1.remove();
+                }, 1000);
+            });
+        };
+    </script>
+@endpush

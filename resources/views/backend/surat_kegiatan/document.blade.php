@@ -46,6 +46,7 @@
 
 <body>
     <div class="container">
+    <center>
         <table class="mt-2">
             <thead>
                 <tr>
@@ -66,6 +67,7 @@
                 </tr>
             </thead>
         </table>
+    </center>
         <span class="tebal mt-2"></span>
         <span style="display: block; border-bottom: 1px solid #000;" class="mt-1"></span>
         <div style="text-align: center;" class="mt-3"><b class="text-uppercase fs-5">Keputusan</b></div>

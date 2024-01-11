@@ -46,6 +46,7 @@
 
 <body>
     <div class="container">
+    <center>
         <table class="mt-2">
             <thead>
                 <tr>
@@ -66,12 +67,13 @@
                 </tr>
             </thead>
         </table>
+    </center>
         <span class="tebal mt-2"></span>
         <span style="display: block; border-bottom: 1px solid #000;" class="mt-1"></span>
         <div style="text-align: center;" class="mt-3"><b class="text-uppercase fs-5">Keputusan</b></div>
         <div style="text-align: center;"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian Negeri
                 Samarinda</b></div>
-        <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: 001/PL21/KM/2023</b></div>
+        <div style="text-align: center;"><b class="text-uppercase fs-5">Nomor: {{ $keputusan->sko_no_surat ?? '' }}</b></div>
         <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">Tentang</b></div>
         <div style="text-align: center;" class="mt-2"><b class="text-uppercase fs-5">{!! $keputusan->skk_subject !!}</b></div>
         <div style="text-align: center;" class="mt-1"><b class="text-uppercase fs-5">Direktur Politeknik Pertanian
@@ -81,17 +83,17 @@
                 <tr>
                     <td width="10%" style="vertical-align: top;" class="mt-2">Menimbang</td>
                     <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan?->skk_menimbang !!}</td>
+                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_menimbang !!}</td>
                 </tr>
                 <tr>
                     <td width="10%" style="vertical-align: top;">Mengingat</td>
                     <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan?->skk_mengingat !!}</td>
+                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_mengingat !!}</td>
                 </tr>
                 <tr>
                     <td width="10%" style="vertical-align: top;">Memperhatikan</td>
                     <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan?->skk_memperhatikan !!}</td>
+                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_memperhatikan !!}</td>
                 </tr>
             </tbody>
         </table>
@@ -101,28 +103,27 @@
                 <tr>
                     <td width="10%" style="vertical-align: top;">Menetapkan</td>
                     <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan?->skk_menetapkan !!}</td>
+                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_menetapkan !!}</td>
                 </tr>
                 <tr>
                     <td width="10%" style="vertical-align: top; word-wrap: break-word;">Kesatu</td>
                     <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan?->skk_kesatu !!}</td>
+                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_kesatu !!}</td>
                 </tr>
-                <div class="page-break-before"></div>
                 <tr>
                     <td width="10%" style="vertical-align: top; word-wrap: break-word;">Kedua</td>
                     <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan?->skk_kedua !!}</td>
+                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_kedua !!}</td>
                 </tr>
                 <tr>
                     <td width="10%" style="vertical-align: top; word-wrap: break-word;">Ketiga</td>
                     <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan?->skk_ketiga !!}</td>
+                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_ketiga !!}</td>
                 </tr>
                 <tr>
                     <td width="10%" style="vertical-align: top; word-wrap: break-word;">Keempat</td>
                     <td width="5%" style="vertical-align: top;">:</td>
-                    <td width="85%" style="vertical-align: top;">{!! $keputusan?->skk_keempat !!}</td>
+                    <td width="85%" style="vertical-align: top;">{!! $keputusan->skk_keempat !!}</td>
                 </tr>
             </tbody>
         </table>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->string('app_status')->nullable();
             $table->string('app_date')->nullable();
-            $table->string('app_ordinal')->nullable();
+            $table->integer('app_ordinal')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();
