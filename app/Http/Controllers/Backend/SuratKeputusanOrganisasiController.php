@@ -241,30 +241,30 @@ class SuratKeputusanOrganisasiController extends Controller
             return redirect()->back()->with('failed', $e->getMessage());
         }
 
-        // $userApproval = \App\Models\Approval::where(
-        //     'user_id',
-        //     auth()
-        //         ->guard('admin')
-        //         ->user()->id,
-        // )->first();
-        // $matchingStep = $suratKeputusanOrganisasi->sko_approved_step;
+        $userApproval = \App\Models\Approval::where(
+            'user_id',
+            auth()
+                ->guard('admin')
+                ->user()->id,
+        )->first();
+        $matchingStep = $suratKeputusanOrganisasi->sko_approved_step;
 
-        // $matchingApproval = \App\Models\Approval::where('app_ordinal', $matchingStep)
-        //     ->whereNull('app_status')
-        //     ->first();
+        $matchingApproval = \App\Models\Approval::where('app_ordinal', $matchingStep)
+            ->whereNull('app_status')
+            ->first();
 
-        // $approvalMatches =
-        //     $userApproval &&
-        //     $userApproval->user_id ===
-        //         auth()
-        //             ->guard('admin')
-        //             ->user()->id &&
-        //     ($matchingApproval && $matchingApproval->app_ordinal === $matchingStep);
-        // if ($approvalMatches) {
+        $approvalMatches =
+            $userApproval &&
+            $userApproval->user_id ===
+                auth()
+                    ->guard('admin')
+                    ->user()->id &&
+            ($matchingApproval && $matchingApproval->app_ordinal === $matchingStep);
+        if ($approvalMatches) {
 
-        // } else {
-        //     return redirect()->back()->with('failed', 'You not Have Authority!');
-        // }
+        } else {
+            return redirect()->back()->with('failed', 'You not Have Authority!');
+        }
     }
 
     public function generateNomor(string $idSurat, string $ordinal, string $code, string $reqTgl)
